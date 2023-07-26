@@ -36,6 +36,11 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           onPress={() => navigation.navigate('Login', {itemId: 1})}>
           <Text style={styles.logoutButtonText}>Logout</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.logoutButton}
+          onPress={() => navigation.navigate('Settings', {itemId: 1})}>
+          <Text style={styles.logoutButtonText}>Settings</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

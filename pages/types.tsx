@@ -5,6 +5,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 export type RootStackParamList = {
   Home: undefined;
   Login: {itemId: number};
+  Settings: {itemId: number};
   Details: {itemId: number};
   About: {itemId: number};
   PrivacyPolicy: {itemId: number};
@@ -42,6 +43,11 @@ export type NotificationScreenNavigationProp = StackNavigationProp<
   'Notification'
 >;
 
+export type SettingsScreenNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Settings'
+>;
+
 // Define the screen route props types
 export type HomeScreenRouteProp = RouteProp<RootStackParamList, 'Home'>;
 export type LoginScreenRouteProp = RouteProp<RootStackParamList, 'Login'>;
@@ -56,3 +62,4 @@ export type NotificationScreenRouteProp = RouteProp<
   RootStackParamList,
   'Notification'
 >;
+export type SettingsScreenRouteProp = RouteProp<RootStackParamList, 'Settings'>;

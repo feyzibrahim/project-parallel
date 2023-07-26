@@ -3,6 +3,11 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import HomeScreen from './pages/HomeScreen';
 import LoginPage from './pages/auth/LoginPage';
+import SettingsScreen from './pages/SettingsScreen';
+import NotificationScreen from './pages/settings/NotificationScreen';
+import PrivacyPolicyScreen from './pages/settings/PrivacyPolicyScreen';
+import LanguageScreen from './pages/settings/LanguageScreen';
+import AboutScreen from './pages/settings/AboutScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,6 +23,31 @@ const App: React.FC = () => {
         <Stack.Screen
           name="Login"
           component={LoginPage}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Notification"
+          component={NotificationScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="PrivacyPolicy"
+          component={PrivacyPolicyScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Language"
+          component={LanguageScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="About"
+          component={AboutScreen}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

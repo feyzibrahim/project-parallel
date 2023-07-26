@@ -8,7 +8,7 @@ import {
   SafeAreaView,
   ScrollView,
 } from 'react-native';
-import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai';
+// import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai';
 
 const LoginPage: React.FC = () => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
@@ -39,7 +39,7 @@ const LoginPage: React.FC = () => {
             style={styles.passwordToggle}
             onPress={() => setIsPasswordVisible(prev => !prev)}>
             <Text style={styles.passwordToggleText}>
-              {isPasswordVisible ? <AiFillEye /> : <AiFillEyeInvisible />}
+              {isPasswordVisible ? 'Show' : 'Hide'}
             </Text>
           </TouchableOpacity>
         </View>
