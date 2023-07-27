@@ -6,9 +6,9 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import {HomeScreenNavigationProp} from './types';
+import {HomeScreenNavigationProp} from '../../navigations/types';
 import {DrawerNavigationProp} from '@react-navigation/drawer';
-import {RootStackParamList} from './types';
+import {RootStackParamList} from '../../navigations/types';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp &

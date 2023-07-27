@@ -6,21 +6,24 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import {AboutScreenNavigationProp} from './types';
+import {DetailsScreenNavigationProp} from '../../navigations/types';
 
-type AboutScreenProps = {
-  navigation: AboutScreenNavigationProp;
+type DetailsScreenProps = {
+  navigation: DetailsScreenNavigationProp;
 };
 
-const AboutScreen: React.FC<AboutScreenProps> = ({navigation}) => {
+const DetailsScreen: React.FC<DetailsScreenProps> = ({navigation}) => {
+  //   const {itemId} = route.params;
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>About Screen</Text>
+        <Text style={styles.headerText}>Details Screen</Text>
       </View>
       <View style={styles.content}>
-        <Text>This is a dummy about screen.</Text>
-        <Text>Feel free to customize it to show your app's information.</Text>
+        <Text>Item ID:</Text>
+        {/* <Text>Item ID: {itemId}</Text> */}
+        <Text>This is a dummy details screen.</Text>
       </View>
       <View style={styles.footer}>
         <TouchableOpacity
@@ -71,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AboutScreen;
+export default DetailsScreen;
