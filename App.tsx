@@ -1,61 +1,61 @@
-// import * as React from 'react';
-// import {NavigationContainer} from '@react-navigation/native';
-// import {createNativeStackNavigator} from '@react-navigation/native-stack';
-// import HomeScreen from './pages/HomeScreen';
-// import LoginPage from './pages/auth/LoginPage';
-// import SettingsScreen from './pages/SettingsScreen';
-// import NotificationScreen from './pages/settings/NotificationScreen';
-// import PrivacyPolicyScreen from './pages/settings/PrivacyPolicyScreen';
-// import LanguageScreen from './pages/settings/LanguageScreen';
-// import AboutScreen from './pages/settings/AboutScreen';
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import HomeScreen from './pages/HomeScreen';
+import LoginPage from './pages/auth/LoginPage';
+import SettingsScreen from './pages/SettingsScreen';
+import NotificationScreen from './pages/settings/NotificationScreen';
+import PrivacyPolicyScreen from './pages/settings/PrivacyPolicyScreen';
+import LanguageScreen from './pages/settings/LanguageScreen';
+import AboutScreen from './pages/settings/AboutScreen';
 
-// const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 
-// const App: React.FC = () => {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator initialRouteName="HomeScreen">
-//         <Stack.Screen
-//           name="HomeScreen"
-//           component={HomeScreen}
-//           options={{title: 'Home'}}
-//         />
-//         <Stack.Screen
-//           name="Login"
-//           component={LoginPage}
-//           options={{headerShown: false}}
-//         />
-//         <Stack.Screen
-//           name="Settings"
-//           component={SettingsScreen}
-//           options={{headerShown: false}}
-//         />
-//         <Stack.Screen
-//           name="Notification"
-//           component={NotificationScreen}
-//           options={{headerShown: false}}
-//         />
-//         <Stack.Screen
-//           name="PrivacyPolicy"
-//           component={PrivacyPolicyScreen}
-//           options={{headerShown: false}}
-//         />
-//         <Stack.Screen
-//           name="Language"
-//           component={LanguageScreen}
-//           options={{headerShown: false}}
-//         />
-//         <Stack.Screen
-//           name="About"
-//           component={AboutScreen}
-//           options={{headerShown: false}}
-//         />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// };
+const App: React.FC = () => {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="HomeScreen">
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{title: 'Home'}}
+        />
+        <Stack.Screen
+          name="Login"
+          component={LoginPage}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Notification"
+          component={NotificationScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="PrivacyPolicy"
+          component={PrivacyPolicyScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="Language"
+          component={LanguageScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="About"
+          component={AboutScreen}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
 
-// export default App;
+export default App;
 
 // import React from 'react';
 // import {NavigationContainer} from '@react-navigation/native';
@@ -99,23 +99,3 @@
 // };
 
 // export default App;
-
-import React, {useEffect, useRef} from 'react';
-import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {LogBox, Text, TextInput} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import Navigation from './src/navigations';
-
-const App = () => {
-  LogBox.ignoreAllLogs();
-
-  return (
-    <SafeAreaProvider>
-      <NavigationContainer>
-        <Navigation />
-      </NavigationContainer>
-    </SafeAreaProvider>
-  );
-};
-
-export default App;
