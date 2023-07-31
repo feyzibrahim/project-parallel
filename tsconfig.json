@@ -3,13 +3,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@app/components/": ["src/components/"],
-      "@app/constants/": ["src/constants/"],
-      "@app/assets/": ["src/assets/"],
-      "@app/screens/": ["src/screens/"],
-      "@app/navigations/": ["src/navigations/"],
-      "@app/store/": ["src/store/"],
-      "@app/logic/": ["src/logic/"]
+      "@app/components/*": ["src/components/*"],
+      "@app/constants/*": ["src/constants/*"],
+      "@app/assets/*": ["src/assets/*"],
+      "@app/screens/*": ["src/screens/*"],
+      "@app/navigations/*": ["src/navigations/*"],
+      "@app/store/*": ["src/store/*"],
+      "@app/services/*": ["src/services/*"],
+      "@app/logic/*": ["src/logic/*"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,

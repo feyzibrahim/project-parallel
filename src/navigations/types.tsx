@@ -3,6 +3,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 // Define the screen names as string literals
 export type RootStackParamList = {
+  BottomTab:undefined;
   Home: undefined;
   Login: {itemId: number};
   Settings: {itemId: number};
@@ -11,6 +12,8 @@ export type RootStackParamList = {
   PrivacyPolicy: {itemId: number};
   Language: {itemId: number};
   Notification: {itemId: number};
+  Report:undefined;
+  Result:undefined;
 };
 
 // Define the screen navigation props types
