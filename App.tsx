@@ -105,10 +105,10 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {LogBox, Text, TextInput} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import Navigation from './src/navigations';
-import { Provider } from 'react-redux';
+import {Provider} from 'react-redux';
 import rootReducer from './src/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { persistReducer, persistStore } from 'redux-persist';
+import {persistReducer, persistStore} from 'redux-persist';
 import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
 
 const persistConfig = {
@@ -131,15 +131,14 @@ export const store = configureStore({
 let persistor = persistStore(store);
 
 const App = () => {
-  
   LogBox.ignoreAllLogs();
 
   return (
     <SafeAreaProvider>
       <Provider store={store}>
-      <NavigationContainer>
-        <Navigation />
-      </NavigationContainer>
+        <NavigationContainer>
+          <Navigation />
+        </NavigationContainer>
       </Provider>
     </SafeAreaProvider>
   );

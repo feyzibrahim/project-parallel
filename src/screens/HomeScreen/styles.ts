@@ -6,11 +6,16 @@ const styles = StyleSheet.create({
       backgroundColor: '#fff',
     },
     header: {
-      paddingVertical: 20,
+      paddingVertical: 10,
       paddingHorizontal: 15,
       borderBottomWidth: 1,
       borderBottomColor: '#ccc',
-      alignItems: 'center',
+    },
+    subHeader: {
+      display: "flex",
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
     },
     headerText: {
       fontSize: 24,

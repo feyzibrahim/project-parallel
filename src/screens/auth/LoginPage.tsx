@@ -4,16 +4,23 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  StyleSheet,
   SafeAreaView,
   ScrollView,
 } from 'react-native';
 import styles from './styles';
 import ButtonComponent from '@app/components/ButtonComponent';
-// import {AiFillEye, AiFillEyeInvisible} from 'react-icons/ai';
+import {LoginScreenNavigationProp} from '../../navigations/types';
 
-const LoginPage: React.FC = () => {
+type LoginScreenProps = {
+  navigation: LoginScreenNavigationProp;
+};
+
+const LoginPage: React.FC<LoginScreenProps> = ({navigation}) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  const gotoHome = () => {
+    navigation.navigate('BottomTab');
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -46,7 +53,7 @@ const LoginPage: React.FC = () => {
           </TouchableOpacity>
         </View>
 
-        <ButtonComponent/>
+        <ButtonComponent gotoHome={gotoHome} />
       </ScrollView>
     </SafeAreaView>
   );

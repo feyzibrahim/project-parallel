@@ -1,13 +1,19 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
-import styles from './styles'
+import {View, Text, TouchableOpacity} from 'react-native';
+import React from 'react';
+import styles from './styles';
 
-const ButtonComponent = () => {
-  return (
-    <TouchableOpacity style={styles.buttonWrap}>
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-  )
+type GotoHomeFunction = () => void;
+
+interface ButtonComponentProps {
+  gotoHome: GotoHomeFunction;
 }
 
-export default ButtonComponent
+const ButtonComponent: React.FC<ButtonComponentProps> = ({gotoHome}) => {
+  return (
+    <TouchableOpacity style={styles.buttonWrap} onPress={gotoHome}>
+      <Text style={styles.buttonText}>Login</Text>
+    </TouchableOpacity>
+  );
+};
+
+export default ButtonComponent;
