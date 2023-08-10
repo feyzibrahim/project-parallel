@@ -6,12 +6,13 @@ type GotoHomeFunction = () => void;
 
 interface ButtonComponentProps {
   gotoHome: GotoHomeFunction;
+  buttonLabel: String
 }
 
-const ButtonComponent: React.FC<ButtonComponentProps> = ({gotoHome}) => {
+const ButtonComponent: React.FC<ButtonComponentProps> = ({gotoHome,buttonLabel}) => {
   return (
     <TouchableOpacity style={styles.buttonWrap} onPress={gotoHome}>
-      <Text style={styles.buttonText}>Login</Text>
+      <Text style={styles.buttonText}>{buttonLabel}</Text>
     </TouchableOpacity>
   );
 };

@@ -10,16 +10,40 @@ import {
 import styles from './styles';
 import ButtonComponent from '@app/components/ButtonComponent';
 import {LoginScreenNavigationProp} from '../../navigations/types';
+import {useDispatch} from 'react-redux';
+import {loginwithUsername} from '@app/store/slices/authSlice';
+import {AppDispatch} from '@app/store/index';
 
 type LoginScreenProps = {
   navigation: LoginScreenNavigationProp;
 };
 
+type FormType = {
+  username: String;
+  password: String;
+};
+
 const LoginPage: React.FC<LoginScreenProps> = ({navigation}) => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  const gotoHome = () => {
-    navigation.navigate('BottomTab');
+  const gotoHome = async () => {
+    const params: FormType = {
+      username: 'Test',
+      password: 'Faiz@1234',
+    };
+
+    const resultAction = await dispatch(loginwithUsername(params));
+    console.log('object',resultAction)
+    if (loginwithUsername.fulfilled.match(resultAction)) {
+      console.log(resultAction);
+      navigation.navigate('BottomTab');
+
+    } else {
+      const errorResult: any = resultAction?.payload;
+      console.log('errorResult=====', errorResult);
+    }
   };
 
   return (
@@ -53,7 +77,7 @@ const LoginPage: React.FC<LoginScreenProps> = ({navigation}) => {
           </TouchableOpacity>
         </View>
 
-        <ButtonComponent gotoHome={gotoHome} />
+        <ButtonComponent gotoHome={gotoHome} buttonLabel={'Login'} />
       </ScrollView>
     </SafeAreaView>
   );

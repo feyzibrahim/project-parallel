@@ -106,29 +106,7 @@ import {LogBox, Text, TextInput} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import Navigation from './src/navigations';
 import {Provider} from 'react-redux';
-import rootReducer from './src/store';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {persistReducer, persistStore} from 'redux-persist';
-import {configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
-
-const persistConfig = {
-  key: 'root',
-  version: 1,
-  storage: AsyncStorage,
-  blacklist: [],
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
-export const store = configureStore({
-  reducer: persistedReducer,
-  devTools: true,
-  middleware: getDefaultMiddleware({
-    serializableCheck: false,
-  }).concat(),
-});
-
-let persistor = persistStore(store);
+import store from './src/store';
 
 const App = () => {
   LogBox.ignoreAllLogs();
