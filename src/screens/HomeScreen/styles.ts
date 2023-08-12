@@ -41,15 +41,27 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     logoutButton: {
-      backgroundColor: '#FF6F6F',
+      backgroundColor: '#5538EE',
       borderRadius: 30,
-      paddingVertical: 12,
-      paddingHorizontal: 30,
+      paddingVertical: 8,
+      paddingHorizontal: 16,
+      marginRight: 10,
     },
     logoutButtonText: {
       color: '#fff',
       fontSize: 16,
       fontWeight: 'bold',
+    },
+    input: {
+      height: 50,
+      borderWidth: 1,
+      borderColor: '#ccc',
+      borderRadius: 5,
+      paddingHorizontal: 10,
+      fontSize: 16,
+    },
+    inputContainer: {
+      marginVertical: 20,
     },
   });
 

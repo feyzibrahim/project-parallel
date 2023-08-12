@@ -1,16 +1,18 @@
-import React, {useState} from 'react';
-import {View, Text, SafeAreaView, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
 import {
-  HomeScreenNavigationProp,
-  RootStackParamList,
-} from '../../navigations/types';
-import {DrawerNavigationProp} from '@react-navigation/drawer';
+  View,
+  Text,
+  SafeAreaView,
+  TouchableOpacity,
+  ScrollView,
+  TextInput,
+} from 'react-native';
+import {HomeScreenNavigationProp} from '../../navigations/types';
 import styles from './styles';
 import GameListBottomUp from '../GameListBottomUp/GameListBottomUp';
 
 type HomeScreenProps = {
-  navigation: HomeScreenNavigationProp &
-    DrawerNavigationProp<RootStackParamList>;
+  navigation: HomeScreenNavigationProp;
 };
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
@@ -24,37 +26,28 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     setGameListVisible(false);
   };
 
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: 'Dear 1:00 PM',
+      headerRight: () => (
+        <TouchableOpacity style={styles.logoutButton} onPress={openGameList}>
+          <Text style={styles.logoutButtonText}>Change</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <View style={styles.subHeader}>
-          <Text style={styles.headerText}>Dear 1:00PM</Text>
-          <TouchableOpacity style={styles.logoutButton} onPress={openGameList}>
-            <Text style={styles.logoutButtonText}>Change</Text>
-          </TouchableOpacity>
+      <ScrollView>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder="Customer"
+            placeholderTextColor="#888"
+          />
         </View>
-      </View>
-
-      <View style={styles.content}>
-        <Text style={styles.welcomeText}>Hello, User!</Text>
-        <Text style={styles.description}>
-          This is a dummy homepage for your app. You can customize it to show
-          relevant content and features.
-        </Text>
-      </View>
-
-      <View style={styles.footer}>
-        <TouchableOpacity
-          style={styles.logoutButton}
-          onPress={() => navigation.navigate('Login', {itemId: 1})}>
-          <Text style={styles.logoutButtonText}>Logout</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.logoutButton}
-          onPress={() => navigation.navigate('Settings', {itemId: 1})}>
-          <Text style={styles.logoutButtonText}>Settings</Text>
-        </TouchableOpacity>
-      </View>
+      </ScrollView>
 
       <GameListBottomUp isVisible={isGameListVisible} onClose={closeGameList} />
     </SafeAreaView>

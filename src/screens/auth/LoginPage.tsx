@@ -29,17 +29,17 @@ const LoginPage: React.FC<LoginScreenProps> = ({navigation}) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   const gotoHome = async () => {
+    navigation.navigate('BottomTab');
     const params: FormType = {
       username: 'Test',
       password: 'Faiz@1234',
     };
 
     const resultAction = await dispatch(loginwithUsername(params));
-    console.log('object',resultAction)
+    console.log('object', resultAction);
     if (loginwithUsername.fulfilled.match(resultAction)) {
       console.log(resultAction);
       navigation.navigate('BottomTab');
-
     } else {
       const errorResult: any = resultAction?.payload;
       console.log('errorResult=====', errorResult);
