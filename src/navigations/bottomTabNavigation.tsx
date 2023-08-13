@@ -20,7 +20,7 @@ const BottomTabNavigation = () => {
           options={{
             tabBarLabel: 'Book',
             tabBarLabelStyle: {fontSize: 12},
-            headerShown:false,
+            headerShown: false,
             tabBarIcon: ({color, size}) => (
               <Icon name="plus-circle" size={18} color={color} />
             ),
