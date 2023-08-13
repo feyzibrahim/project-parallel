@@ -65,10 +65,10 @@ const LoginPage: React.FC<LoginScreenProps> = ({navigation}) => {
     const resultAction = await dispatch(loginwithUsername(params));
     setIsLoading(false);
     if (loginwithUsername.fulfilled.match(resultAction)) {
-      Keyboard.dismiss();
-      ToastAndroid.show('Login Success', ToastAndroid.LONG);
       navigation.navigate('BottomTab');
+      Keyboard.dismiss();
       formik.resetForm();
+      // ToastAndroid.show('Login Success', ToastAndroid.LONG);
     } else {
       const errorResult: any = resultAction?.payload;
       Alert.alert(errorResult?.error);
