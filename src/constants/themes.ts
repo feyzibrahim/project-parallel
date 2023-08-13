@@ -19,6 +19,7 @@ export const COLORS = {
   lightBlueSHade: '#F7F9FA',
 
   grayShade: '#72777A',
+  grayshade1: '#E7E7FF'
 };
 
 export const SIZES = {
