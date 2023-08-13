@@ -31,8 +31,8 @@ const LoginPage: React.FC<LoginScreenProps> = ({navigation}) => {
   const gotoHome = async () => {
     navigation.navigate('BottomTab');
     const params: FormType = {
-      username: 'Test',
-      password: 'Faiz@1234',
+      username: 'dilu',
+      password: 'password',
     };
 
     const resultAction = await dispatch(loginwithUsername(params));

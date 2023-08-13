@@ -9,19 +9,16 @@ export const responseWidth = (value: number) => {
   return (width / 375) * value;
 };
 export const COLORS = {
-  primary: '#6750A4',
-  // secondary: '#',
+  primary: '#5538EE',
+  secondary: '#6B4EFF',
 
   white: '#FFFFFF',
   black: '#000000',
 
-  greyShade: '#49454F',
-  greyShade1: '#625B71',
-  greyShade2: '#D9D9D9',
-  blueShade: '#21005D',
-  blueShade1: '#1D192B',
-  blueShade2: '#1D1B20',
-  blueShade3: '#E8DEF8',
+  darkBlueShade: '#E7E7FF',
+  lightBlueSHade: '#F7F9FA',
+
+  grayShade: '#72777A',
 };
 
 export const SIZES = {
