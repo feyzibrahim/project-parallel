@@ -13,16 +13,16 @@ const BottomTabNavigation = () => {
 
   return (
     <>
-      <BottomTab.Navigator backBehavior={'history'} initialRouteName={'Home'}>
+      <BottomTab.Navigator backBehavior={'history'} initialRouteName={'Result'}>
         <BottomTab.Screen
           name={'Home'}
           component={HomeScreen}
           options={{
-            tabBarLabel: 'Home',
+            tabBarLabel: 'Book',
             tabBarLabelStyle: {fontSize: 12},
-            headerTitle: 'Dear 1:00 PM',
+            headerShown:false,
             tabBarIcon: ({color, size}) => (
-              <Icon name="plus-circle" size={size} color={color} />
+              <Icon name="plus-circle" size={18} color={color} />
             ),
           }}
         />
@@ -33,7 +33,7 @@ const BottomTabNavigation = () => {
             tabBarLabel: 'Report',
             tabBarLabelStyle: {fontSize: 12},
             tabBarIcon: ({color, size}) => (
-              <Icon name="plus-circle" size={size} color={color} />
+              <Icon name="paste" size={18} color={color} />
             ),
             headerShown: false,
           }}
@@ -43,7 +43,7 @@ const BottomTabNavigation = () => {
           component={ResultScreen}
           options={{
             tabBarIcon: ({color, size}) => (
-              <Icon name="plus-circle" size={size} color={color} />
+              <Icon name="star" size={18} color={color} />
             ),
             tabBarLabel: 'Result',
             tabBarLabelStyle: {fontSize: 12},
@@ -55,7 +55,7 @@ const BottomTabNavigation = () => {
           component={ProfileScreen}
           options={{
             tabBarIcon: ({color, size}) => (
-              <Icon name="plus-circle" size={size} color={color} />
+              <Icon name="person" size={18} color={color} />
             ),
             tabBarLabel: 'Profile',
             tabBarLabelStyle: {fontSize: 12},

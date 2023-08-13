@@ -10,6 +10,9 @@ import {
 import {HomeScreenNavigationProp} from '../../navigations/types';
 import styles from './styles';
 import GameListBottomUp from '../GameListBottomUp/GameListBottomUp';
+import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
+import HeaderComponent from '@app/components/HeaderComponent';
+import { COLORS } from '@app/constants/themes';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -19,13 +22,13 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const [isGameListVisible, setGameListVisible] = useState(false);
 
   const openGameList = () => {
+    console.log('object')
     setGameListVisible(true);
   };
 
   const closeGameList = () => {
     setGameListVisible(false);
   };
-
   const [selectedButton, setSelectedButton] = useState<number | null>(null);
   const [selectedButtonABC, setSelectedButtonABC] = useState<number | null>(
     null,
@@ -50,7 +53,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   }, [navigation]);
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaWrapper containerStyle={styles.container} statusbar={COLORS.darkBlueShade}>
+      <HeaderComponent  openGameList={openGameList}/>
       <ScrollView>
         <View style={styles.body}>
           {/* Customer Name */}
@@ -203,7 +207,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
       </ScrollView>
 
       <GameListBottomUp isVisible={isGameListVisible} onClose={closeGameList} />
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 };
 

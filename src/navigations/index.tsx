@@ -18,7 +18,7 @@ const Navigation: React.FC = () => {
   return (
     <React.Fragment>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="BottomTab"
         screenOptions={{headerShown: false, gestureEnabled: true}}>
         <Stack.Screen name='BottomTab' component={BottomTabNavigation}/>
         <Stack.Screen name="Login" component={LoginPage} />
