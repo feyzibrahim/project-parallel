@@ -19,19 +19,19 @@ const styles = StyleSheet.create({
     color:'#000'
   },
   inputContainer: {
-    marginVertical: 20,
+    marginVertical: 10,
   },
   input: {
     height: 50,
     borderWidth: 1,
     borderColor: '#ccc',
     borderRadius: 5,
-    paddingHorizontal: 10,
+    paddingHorizontal: 16,
     fontSize: 16,
   },
   passwordToggle: {
     position: 'absolute',
-    right: 10,
+    right: 20,
     top: 15,
   },
   passwordToggleText: {
