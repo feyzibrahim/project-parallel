@@ -18,10 +18,10 @@ const Navigation: React.FC = () => {
   return (
     <React.Fragment>
       <Stack.Navigator
-        initialRouteName="BottomTab"
+        initialRouteName="Login"
         screenOptions={{headerShown: false, gestureEnabled: true}}>
-        <Stack.Screen name='BottomTab' component={BottomTabNavigation}/>
         <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name='BottomTab' component={BottomTabNavigation}/>
         <Stack.Screen name="Settings" component={SettingsScreen} />
         <Stack.Screen name="Notification" component={NotificationScreen} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />

@@ -11,6 +11,7 @@ import {
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
+
 const ProfileScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
     <SafeAreaView style={styles.container}>
