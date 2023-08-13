@@ -13,8 +13,6 @@ type HomeScreenProps = {
 };
 
 const SettingsScreen: React.FC<HomeScreenProps> = ({navigation}) => {
-  // const navigation = useNavigation();
-
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
@@ -64,8 +62,8 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'center',
   },
   optionButton: {
     backgroundColor: '#FF6F6F',
