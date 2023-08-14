@@ -12,7 +12,7 @@ const ResultScreen = () => {
   const [isGameListVisible, setGameListVisible] = useState(false);
 
   const openGameList = () => {
-    console.log('object');
+    // console.log('object');
     setGameListVisible(true);
   };
 
@@ -35,3 +35,4 @@ const ResultScreen = () => {
 };
 
 export default ResultScreen;
+// Some major changes here just for pushing
