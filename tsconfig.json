@@ -10,7 +10,8 @@
       "@app/navigations/*": ["src/navigations/*"],
       "@app/store/*": ["src/store/*"],
       "@app/services/*": ["src/services/*"],
-      "@app/logic/*": ["src/logic/*"]
+      "@app/logic/*": ["src/logic/*"],
+      "include": ["src/components", "src/custom.d.ts"]
     },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
