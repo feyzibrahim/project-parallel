@@ -24,6 +24,12 @@ const styles = StyleSheet.create({
     // justifyContent: 'center',
     // padding: 20,
   },
+  UpperPart: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    marginVertical: 30,
+  },
   name: {
     fontSize: 24,
     fontWeight: 'bold',
@@ -54,6 +60,17 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 24,
+  },
+  middlePart: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: 20,
+  },
+  navigationText: {
+    color: COLORS.black,
+    fontWeight: '500',
+    fontSize: 15,
   },
   footer: {
     flex: 1,

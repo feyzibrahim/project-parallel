@@ -6,16 +6,14 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-import HeaderComponent from '@app/components/HeaderComponent';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import {HomeScreenNavigationProp} from '@app/navigations/types';
 
 import User from '@app/assets/icons/user.svg';
 import styles from './styles';
 import ButtonComponent from '@app/components/ButtonComponent';
-import {COLORS} from '@app/constants/themes';
-import ToggleSwitch from 'toggle-switch-react-native';
 import ToggleButton from '@app/components/ToggleButtonComponent';
 
 type HomeScreenProps = {
@@ -32,23 +30,24 @@ const ProfileScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         <TouchableOpacity></TouchableOpacity>
       </View>
       <View style={styles.content}>
-        <View
-          style={{flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}>
+        <View style={styles.UpperPart}>
           <User height={150} width={150} />
           <Text style={styles.name}>John Doe</Text>
         </View>
         <View style={styles.body}>
-          <ToggleButton/>
+          <ToggleButton label="Dark Mode" />
+          <ToggleButton label="Sample" />
+
           <TouchableOpacity
-            style={{}}
+            style={styles.middlePart}
             onPress={() => navigation.navigate('Settings', {itemId: 1})}>
-            <Text style={{}}>Settings</Text>
+            <Text style={styles.navigationText}>All settings</Text>
+            <Icon name="right" size={18} color={''} style={{marginRight: 10}} />
           </TouchableOpacity>
         </View>
-        <View
-          style={styles.footer}>
+        <View style={styles.footer}>
           <ButtonComponent
-            gotoHome={() =>console.log('CLicKEd LOgout====>')}
+            gotoHome={() => console.log('CLicKEd LOgout====>')}
             buttonLabel={'Log Out'}
             buttonTextStyle={styles.logoutButtonText}
             buttonWrapStyle={styles.logoutButton}
