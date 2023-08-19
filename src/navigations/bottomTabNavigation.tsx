@@ -14,7 +14,7 @@ const BottomTabNavigation = () => {
 
   return (
     <>
-      <BottomTab.Navigator backBehavior={'history'} initialRouteName={'Profile'}>
+      <BottomTab.Navigator backBehavior={'history'} initialRouteName={'Home'}>
         <BottomTab.Screen
           name={'Home'}
           component={HomeScreen}

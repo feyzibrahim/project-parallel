@@ -89,7 +89,7 @@ const LoginPage: React.FC<LoginScreenProps> = ({navigation}) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your username"
-            placeholderTextColor="#888"
+            placeholderTextColor="#000"
             onChangeText={formik.handleChange('username')}
             value={formik.values.username}
             autoFocus={true}
@@ -107,7 +107,7 @@ const LoginPage: React.FC<LoginScreenProps> = ({navigation}) => {
           <TextInput
             style={styles.input}
             placeholder="Enter your password"
-            placeholderTextColor="#888"
+            placeholderTextColor="#000"
             secureTextEntry={!isPasswordVisible}
             onChangeText={formik.handleChange('password')}
             value={formik.values.password}

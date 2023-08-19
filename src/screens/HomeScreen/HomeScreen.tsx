@@ -12,7 +12,7 @@ import styles from './styles';
 import GameListBottomUp from '../GameListBottomUp/GameListBottomUp';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import HeaderComponent from '@app/components/HeaderComponent';
-import { COLORS } from '@app/constants/themes';
+import {COLORS} from '@app/constants/themes';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -22,17 +22,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const [isGameListVisible, setGameListVisible] = useState(false);
 
   const openGameList = () => {
-    console.log('object')
+    console.log('object');
     setGameListVisible(true);
   };
 
   const closeGameList = () => {
     setGameListVisible(false);
   };
-  const [selectedButton, setSelectedButton] = useState<number | null>(null);
-  const [selectedButtonABC, setSelectedButtonABC] = useState<number | null>(
-    null,
-  );
+  const [selectedButton, setSelectedButton] = useState<number | null>(1);
+  const [selectedButtonABC, setSelectedButtonABC] = useState<number | null>(1);
 
   const handleButtonPress = (buttonNumber: number) => {
     setSelectedButton(buttonNumber);
@@ -53,8 +51,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   }, [navigation]);
 
   return (
-    <SafeAreaWrapper containerStyle={styles.container} statusbar={COLORS.darkBlueShade}>
-      <HeaderComponent  openGameList={openGameList}/>
+    <SafeAreaWrapper
+      containerStyle={styles.container}
+      statusbar={COLORS.darkBlueShade}>
+      <HeaderComponent openGameList={openGameList} />
       <ScrollView>
         <View style={styles.body}>
           {/* Customer Name */}

@@ -16,20 +16,20 @@ const ToggleButton = (props: ToggleProp) => {
     <View style={styles.buttonWrap}>
       <Text style={styles.ToggleText}>{label}</Text>
 
-      {/* <ToggleSwitch
-        isOn={false}
+      <ToggleSwitch
+        isOn={isEnabled}
         onColor={COLORS.black}
         offColor={COLORS.grayShade2}
         size="medium"
-        onToggle={isOn => console.log('changed to : ', isOn)}
-      /> */}
-      <Switch
+        onToggle={toggleSwitch}
+      />
+      {/* <Switch
         trackColor={{false: COLORS.grayShade2, true: COLORS.black}}
         thumbColor={COLORS.white}
         ios_backgroundColor="#3e3e3e"
         onValueChange={toggleSwitch}
         value={isEnabled}
-      />
+      /> */}
     </View>
   );
 };

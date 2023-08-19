@@ -1,12 +1,11 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  SafeAreaView,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/AntDesign';
+
 import {HomeScreenNavigationProp} from '../../navigations/types';
+import styles from './styles';
+
+import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -14,69 +13,41 @@ type HomeScreenProps = {
 
 const SettingsScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaWrapper containerStyle={styles.container} statusbar={'#F2F4F5'}>
       <View style={styles.header}>
-        <Text style={styles.headerText}>Settings</Text>
+        <View>
+          <Text style={styles.headerText}>Settings</Text>
+        </View>
+        <TouchableOpacity></TouchableOpacity>
       </View>
       <View style={styles.content}>
         <TouchableOpacity
           style={styles.optionButton}
           onPress={() => navigation.navigate('Notification', {itemId: 1})}>
           <Text style={styles.optionButtonText}>Notifications</Text>
+          <Icon name="right" size={18} color={''} style={{marginRight: 10}} />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.optionButton}
           onPress={() => navigation.navigate('PrivacyPolicy', {itemId: 2})}>
           <Text style={styles.optionButtonText}>Privacy</Text>
+          <Icon name="right" size={18} color={''} style={{marginRight: 10}} />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.optionButton}
           onPress={() => navigation.navigate('Language', {itemId: 1})}>
           <Text style={styles.optionButtonText}>Language</Text>
+          <Icon name="right" size={18} color={''} style={{marginRight: 10}} />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.optionButton}
           onPress={() => navigation.navigate('About', {itemId: 1})}>
           <Text style={styles.optionButtonText}>About</Text>
+          <Icon name="right" size={18} color={''} style={{marginRight: 10}} />
         </TouchableOpacity>
       </View>
-    </SafeAreaView>
+    </SafeAreaWrapper>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  header: {
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    alignItems: 'center',
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  content: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  optionButton: {
-    backgroundColor: '#FF6F6F',
-    borderRadius: 30,
-    paddingVertical: 12,
-    paddingHorizontal: 30,
-    marginBottom: 10,
-  },
-  optionButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-});
 
 export default SettingsScreen;
