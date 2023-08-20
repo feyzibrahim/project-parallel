@@ -12,7 +12,6 @@ const ResultScreen = () => {
   const [isGameListVisible, setGameListVisible] = useState(false);
 
   const openGameList = () => {
-    // console.log('object');
     setGameListVisible(true);
   };
 

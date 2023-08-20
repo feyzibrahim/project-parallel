@@ -40,6 +40,13 @@ const ProfileScreen: React.FC<HomeScreenProps> = ({navigation}) => {
 
           <TouchableOpacity
             style={styles.middlePart}
+            onPress={() => navigation.navigate('UserList')}>
+            <Text style={styles.navigationText}>User's List</Text>
+            <Icon name="right" size={18} color={''} style={{marginRight: 10}} />
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.middlePart}
             onPress={() => navigation.navigate('Settings', {itemId: 1})}>
             <Text style={styles.navigationText}>All settings</Text>
             <Icon name="right" size={18} color={''} style={{marginRight: 10}} />

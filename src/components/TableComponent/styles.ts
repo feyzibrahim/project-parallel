@@ -9,7 +9,7 @@ const styles =StyleSheet.create({
         tableHeader: {
           backgroundColor: COLORS.grayshade1,
           borderTopLeftRadius:10,
-          borderTopRightRadius: 10
+          borderTopRightRadius: 10,
         },
 })
 

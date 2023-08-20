@@ -1,20 +1,24 @@
-import {combineReducers, configureStore, getDefaultMiddleware} from '@reduxjs/toolkit';
+import {
+  combineReducers,
+  configureStore,
+  getDefaultMiddleware,
+} from '@reduxjs/toolkit';
 import authSlice from './slices/authSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistReducer} from 'redux-persist';
-
-// import { useLoginQuery } from './slices/authSlice';
+import gameSlice from './slices/gameSlice';
 
 const persistConfig = {
-    key: 'root',
-    version: 1,
-    storage: AsyncStorage,
-    blacklist: [],
-  };
+  key: 'root',
+  version: 1,
+  storage: AsyncStorage,
+  blacklist: [],
+};
 
 const rootReducer = combineReducers({
-    auth: authSlice
-    // [useLoginQuery.red]: useLoginQuery.reducer,
+  auth: authSlice,
+  // [useGameSliceQuery.reducerPath]: useGameSliceQuery.reducer,
+  game: gameSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

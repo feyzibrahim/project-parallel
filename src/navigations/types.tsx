@@ -15,6 +15,7 @@ export type RootStackParamList = {
   Profile: undefined;
   Report: undefined;
   Result: undefined;
+  UserList:undefined;
 };
 
 // Define the screen navigation props types
