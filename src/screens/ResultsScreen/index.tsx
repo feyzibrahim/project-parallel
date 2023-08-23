@@ -5,7 +5,7 @@ import styles from './styles';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import {COLORS} from '@app/constants/themes';
 import HeaderComponent from '@app/components/HeaderComponent';
-import GameListBottomUp from '../GameListBottomUp/GameListBottomUp';
+import GameListBottomUp from '../../components/GameListBottomUp/GameListBottomUp';
 import DateInputComponent from '@app/components/DateInputComponent';
 
 const ResultScreen = () => {

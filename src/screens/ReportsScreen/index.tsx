@@ -10,7 +10,7 @@ import styles from './styles';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import {COLORS} from '@app/constants/themes';
 import HeaderComponent from '@app/components/HeaderComponent';
-import GameListBottomUp from '../GameListBottomUp/GameListBottomUp';
+import GameListBottomUp from '../../components/GameListBottomUp/GameListBottomUp';
 import TableComponent from '@app/components/TableComponent';
 import {getGameBookings} from '@app/store/slices/gameSlice';
 
@@ -47,7 +47,7 @@ const ReportScreen = () => {
       <HeaderComponent openGameList={openGameList} />
       <View style={styles.container}>
         <Text style={styles.headerStyle}>Tables Demo View</Text>
-        <TableComponent tableData={bookingList}/>
+        <TableComponent tableData={bookingList} />
       </View>
       <GameListBottomUp isVisible={isGameListVisible} onClose={closeGameList} />
     </SafeAreaWrapper>

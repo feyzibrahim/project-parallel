@@ -9,10 +9,11 @@ import {
 } from 'react-native';
 import {HomeScreenNavigationProp} from '../../navigations/types';
 import styles from './styles';
-import GameListBottomUp from '../GameListBottomUp/GameListBottomUp';
+import GameListBottomUp from '../../components/GameListBottomUp/GameListBottomUp';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import HeaderComponent from '@app/components/HeaderComponent';
 import {COLORS} from '@app/constants/themes';
+import {GameThemes} from '@app/constants/constants';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -20,6 +21,8 @@ type HomeScreenProps = {
 
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const [isGameListVisible, setGameListVisible] = useState(false);
+  const [selectedButton, setSelectedButton] = useState<number | null>(1);
+  const [selectedButtonABC, setSelectedButtonABC] = useState<number | null>(1);
 
   const openGameList = () => {
     setGameListVisible(true);
@@ -28,8 +31,6 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const closeGameList = () => {
     setGameListVisible(false);
   };
-  const [selectedButton, setSelectedButton] = useState<number | null>(1);
-  const [selectedButtonABC, setSelectedButtonABC] = useState<number | null>(1);
 
   const handleButtonPress = (buttonNumber: number) => {
     setSelectedButton(buttonNumber);
@@ -38,22 +39,35 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     setSelectedButtonABC(buttonNumber);
   };
 
-  useEffect(() => {
-    navigation.setOptions({
-      headerTitle: 'Dear 1:00 PM',
-      headerRight: () => (
-        <TouchableOpacity style={styles.logoutButton} onPress={openGameList}>
-          <Text style={styles.logoutButtonText}>Change</Text>
-        </TouchableOpacity>
-      ),
-    });
-  }, [navigation]);
+  // useEffect(() => {
+  //   navigation.setOptions({
+  //     // headerTitle: 'Dear 1:00 PM',
+  //     headerRight: () => (
+  //       <TouchableOpacity style={styles.logoutButton} onPress={openGameList}>
+  //         <Text style={styles.logoutButtonText}>Change</Text>
+  //       </TouchableOpacity>
+  //     ),
+  //   });
+  // }, [navigation]);
+
+  const colorTheme = () => {
+    const primaryColors = GameThemes;
+    const backGroundColor =
+      primaryColors[Math.floor(Math.random() * primaryColors.length)];
+    return backGroundColor;
+  };
+  const Color = colorTheme();
 
   return (
     <SafeAreaWrapper
       containerStyle={styles.container}
-      statusbar={COLORS.darkBlueShade}>
-      <HeaderComponent openGameList={openGameList} />
+      statusbar={Color.primary}>
+      <HeaderComponent
+        openGameList={openGameList}
+        containerStyle={{backgroundColor: Color.primary}}
+        buttonStyle={{backgroundColor: Color.secondary}}
+        headerTextStyle={{color: Color.secondary}}
+      />
       <ScrollView>
         <View style={styles.body}>
           {/* Customer Name */}
@@ -73,7 +87,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             <TouchableOpacity
               style={[
                 styles.button,
-                selectedButton === 1 && styles.selectedButton,
+                {
+                  backgroundColor:
+                    selectedButton === 1 ? Color.secondary : Color.primary,
+                },
               ]}
               onPress={() => handleButtonPress(1)}>
               <Text
@@ -87,7 +104,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             <TouchableOpacity
               style={[
                 styles.button,
-                selectedButton === 2 && styles.selectedButton,
+                {
+                  backgroundColor:
+                    selectedButton === 2 ? Color.secondary : Color.primary,
+                },
               ]}
               onPress={() => handleButtonPress(2)}>
               <Text
@@ -101,7 +121,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             <TouchableOpacity
               style={[
                 styles.button,
-                selectedButton === 3 && styles.selectedButton,
+                {
+                  backgroundColor:
+                    selectedButton === 3 ? Color.secondary : Color.primary,
+                },
               ]}
               onPress={() => handleButtonPress(3)}>
               <Text
@@ -146,7 +169,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             <TouchableOpacity
               style={[
                 styles.buttonABC,
-                selectedButtonABC === 1 && styles.selectedButton,
+                {
+                  backgroundColor:
+                    selectedButton === 1 ? Color.secondary : Color.primary,
+                },
               ]}
               onPress={() => handleButtonPressABC(1)}>
               <Text
@@ -160,7 +186,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             <TouchableOpacity
               style={[
                 styles.buttonABC,
-                selectedButtonABC === 2 && styles.selectedButton,
+                {
+                  backgroundColor:
+                    selectedButton === 2 ? Color.secondary : Color.primary,
+                },
               ]}
               onPress={() => handleButtonPressABC(2)}>
               <Text
@@ -174,7 +203,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             <TouchableOpacity
               style={[
                 styles.buttonABC,
-                selectedButtonABC === 3 && styles.selectedButton,
+                {
+                  backgroundColor:
+                    selectedButton === 3 ? Color.secondary : Color.primary,
+                },
               ]}
               onPress={() => handleButtonPressABC(3)}>
               <Text
@@ -188,7 +220,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             <TouchableOpacity
               style={[
                 styles.buttonABC,
-                selectedButtonABC === 4 && styles.selectedButton,
+                {
+                  backgroundColor:
+                    selectedButton === 3 ? Color.secondary : Color.primary,
+                },
               ]}
               onPress={() => handleButtonPressABC(4)}>
               <Text

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
-import { RootStackParamList } from './types';
-
+import {RootStackParamList} from './types';
 
 import LoginPage from '@app/screens/LoginScreen/index';
 import SettingsScreen from '@app/screens/Settings/SettingsScreen';
@@ -22,7 +21,7 @@ const Navigation: React.FC = () => {
         initialRouteName="Login"
         screenOptions={{headerShown: false, gestureEnabled: true}}>
         <Stack.Screen name="Login" component={LoginPage} />
-        <Stack.Screen name='BottomTab' component={BottomTabNavigation}/>
+        <Stack.Screen name="BottomTab" component={BottomTabNavigation} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
         <Stack.Screen name="Notification" component={NotificationScreen} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
