@@ -32,7 +32,7 @@ const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
     getAvailableGames();
   }, []);
 
-  const colorTheme = () => {
+  const colorTheme = (id: number) => {
     const primaryColors = GameThemes;
     const backGroundColor =
       primaryColors[Math.floor(Math.random() * primaryColors.length)];
@@ -66,7 +66,7 @@ const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
       <View style={styles.content}>
         <Text style={styles.headerText}>Select Game</Text>
         {gameList?.map((item, index) => {
-          const bgCOLOR = colorTheme();
+          const bgCOLOR = colorTheme(item?.id);
           return (
             <TouchableOpacity
               key={index}

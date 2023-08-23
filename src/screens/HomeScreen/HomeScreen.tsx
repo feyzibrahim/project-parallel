@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import {HomeScreenNavigationProp} from '../../navigations/types';
 import styles from './styles';
+
 import GameListBottomUp from '../../components/GameListBottomUp/GameListBottomUp';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import HeaderComponent from '@app/components/HeaderComponent';
-import {COLORS} from '@app/constants/themes';
 import {GameThemes} from '@app/constants/constants';
 
 type HomeScreenProps = {
@@ -23,9 +23,15 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const [isGameListVisible, setGameListVisible] = useState(false);
   const [selectedButton, setSelectedButton] = useState<number | null>(1);
   const [selectedButtonABC, setSelectedButtonABC] = useState<number | null>(1);
+  const [screenTheme, setScreenTheme] = useState<any>('');
+
+  useEffect(() => {
+    colorTheme();
+  }, []);
 
   const openGameList = () => {
     setGameListVisible(true);
+    colorTheme();
   };
 
   const closeGameList = () => {
@@ -54,19 +60,20 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     const primaryColors = GameThemes;
     const backGroundColor =
       primaryColors[Math.floor(Math.random() * primaryColors.length)];
-    return backGroundColor;
+    setScreenTheme(backGroundColor);
+    // return backGroundColor;
   };
-  const Color = colorTheme();
+  // const screenTheme = colorTheme();
 
   return (
     <SafeAreaWrapper
       containerStyle={styles.container}
-      statusbar={Color.primary}>
+      statusbar={screenTheme.primary}>
       <HeaderComponent
         openGameList={openGameList}
-        containerStyle={{backgroundColor: Color.primary}}
-        buttonStyle={{backgroundColor: Color.secondary}}
-        headerTextStyle={{color: Color.secondary}}
+        containerStyle={{backgroundColor: screenTheme.primary}}
+        buttonStyle={{backgroundColor: screenTheme.secondary}}
+        headerTextStyle={{color: screenTheme.secondary}}
       />
       <ScrollView>
         <View style={styles.body}>
@@ -89,7 +96,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 styles.button,
                 {
                   backgroundColor:
-                    selectedButton === 1 ? Color.secondary : Color.primary,
+                    selectedButton === 1
+                      ? screenTheme.secondary
+                      : screenTheme.primary,
                 },
               ]}
               onPress={() => handleButtonPress(1)}>
@@ -106,7 +115,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 styles.button,
                 {
                   backgroundColor:
-                    selectedButton === 2 ? Color.secondary : Color.primary,
+                    selectedButton === 2
+                      ? screenTheme.secondary
+                      : screenTheme.primary,
                 },
               ]}
               onPress={() => handleButtonPress(2)}>
@@ -123,7 +134,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 styles.button,
                 {
                   backgroundColor:
-                    selectedButton === 3 ? Color.secondary : Color.primary,
+                    selectedButton === 3
+                      ? screenTheme.secondary
+                      : screenTheme.primary,
                 },
               ]}
               onPress={() => handleButtonPress(3)}>
@@ -171,7 +184,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 styles.buttonABC,
                 {
                   backgroundColor:
-                    selectedButton === 1 ? Color.secondary : Color.primary,
+                    selectedButtonABC === 1
+                      ? screenTheme.secondary
+                      : screenTheme.primary,
                 },
               ]}
               onPress={() => handleButtonPressABC(1)}>
@@ -188,7 +203,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 styles.buttonABC,
                 {
                   backgroundColor:
-                    selectedButton === 2 ? Color.secondary : Color.primary,
+                    selectedButtonABC === 2
+                      ? screenTheme.secondary
+                      : screenTheme.primary,
                 },
               ]}
               onPress={() => handleButtonPressABC(2)}>
@@ -205,7 +222,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 styles.buttonABC,
                 {
                   backgroundColor:
-                    selectedButton === 3 ? Color.secondary : Color.primary,
+                    selectedButtonABC === 3
+                      ? screenTheme.secondary
+                      : screenTheme.primary,
                 },
               ]}
               onPress={() => handleButtonPressABC(3)}>
@@ -222,7 +241,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 styles.buttonABC,
                 {
                   backgroundColor:
-                    selectedButton === 3 ? Color.secondary : Color.primary,
+                    selectedButtonABC === 4
+                      ? screenTheme.secondary
+                      : screenTheme.primary,
                 },
               ]}
               onPress={() => handleButtonPressABC(4)}>
