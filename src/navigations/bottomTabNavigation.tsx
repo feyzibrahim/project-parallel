@@ -2,18 +2,19 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from './types';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import Icon from 'react-native-vector-icons/Octicons';
+
 import HomeScreen from '@app/screens/HomeScreen/HomeScreen';
 import ReportScreen from '@app/screens/ReportsScreen';
 import ResultScreen from '@app/screens/ResultsScreen';
 import ProfileScreen from '@app/screens/ProfileScreen/ProfileScreen';
-import Icon from 'react-native-vector-icons/Octicons';
 
 const BottomTabNavigation = () => {
   const BottomTab = createBottomTabNavigator<RootStackParamList>();
 
   return (
     <>
-      <BottomTab.Navigator backBehavior={'history'} initialRouteName={'Result'}>
+      <BottomTab.Navigator backBehavior={'history'} initialRouteName={'Home'}>
         <BottomTab.Screen
           name={'Home'}
           component={HomeScreen}

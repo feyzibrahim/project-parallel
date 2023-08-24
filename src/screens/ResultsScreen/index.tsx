@@ -1,18 +1,22 @@
 import React, {useState} from 'react';
 
-import {View, Text, ScrollView} from 'react-native';
+import {Text, ScrollView, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import {COLORS} from '@app/constants/themes';
 import HeaderComponent from '@app/components/HeaderComponent';
-import GameListBottomUp from '../GameListBottomUp/GameListBottomUp';
+import GameListBottomUp from '../../components/GameListBottomUp/GameListBottomUp';
 import DateInputComponent from '@app/components/DateInputComponent';
+import {HomeScreenNavigationProp} from '@app/navigations/types';
+import Icon from 'react-native-vector-icons/Octicons';
 
-const ResultScreen = () => {
+type HomeScreenProps = {
+  navigation: HomeScreenNavigationProp;
+};
+const ResultScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const [isGameListVisible, setGameListVisible] = useState(false);
 
   const openGameList = () => {
-    console.log('object');
     setGameListVisible(true);
   };
 
@@ -30,8 +34,16 @@ const ResultScreen = () => {
         <DateInputComponent />
       </ScrollView>
       <GameListBottomUp isVisible={isGameListVisible} onClose={closeGameList} />
+      <TouchableOpacity
+        style={styles.floatingButton}
+        onPress={() => {
+          navigation.navigate('ResultAddScreen');
+        }}>
+        <Icon name="plus" size={18} color={'#ffffff'} />
+      </TouchableOpacity>
     </SafeAreaWrapper>
   );
 };
 
 export default ResultScreen;
+// Some major changes here just for pushing

@@ -18,7 +18,11 @@ export const COLORS = {
   darkBlueShade: '#E7E7FF',
   lightBlueSHade: '#F7F9FA',
 
+  redShade: '#FF5247',
+
   grayShade: '#72777A',
+  grayshade1: '#E7E7FF',
+  grayShade2: '#F2F4F5',
 };
 
 export const SIZES = {

@@ -11,7 +11,7 @@ import ShareToWhatsapp from '../WhatsappShareComponent';
 
 const DateInputComponent = () => {
   const [date, setDate] = useState(null);
-  const [calender, setCalender] = useState(true);
+  const [calender, setCalender] = useState(false);
 
   const onDateChange = (date: any) => {
     setDate(date.toString());

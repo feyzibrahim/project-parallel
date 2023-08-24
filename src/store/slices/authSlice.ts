@@ -53,6 +53,21 @@ export const loginwithUsername = createAsyncThunk(
   },
 );
 
+export const userList = createAsyncThunk(
+  'auth/userList',
+  async (params: any, {rejectWithValue}) => {
+    const api = await getAxiosInstance();
+    try {
+      const response = await api.get('api/admin/users');
+      console.log(response)
+      return response?.data;
+    } catch (error: any) {
+      console.log(error)
+      return rejectWithValue(error.response.data);
+    }
+  },
+);
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
