@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
   headerText: {
     color: COLORS.black,
-    fontSize: 25,
+    fontSize: 20,
   },
   container: {
     flex: 1,

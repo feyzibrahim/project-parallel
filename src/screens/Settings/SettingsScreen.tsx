@@ -7,18 +7,17 @@ import styles from './styles';
 
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 
-type HomeScreenProps = {
+type NavigationScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
 
-const SettingsScreen: React.FC<HomeScreenProps> = ({navigation}) => {
+const SettingsScreen: React.FC<NavigationScreenProps> = ({navigation}) => {
   return (
     <SafeAreaWrapper containerStyle={styles.container} statusbar={'#F2F4F5'}>
       <View style={styles.header}>
         <View>
           <Text style={styles.headerText}>Settings</Text>
         </View>
-        <TouchableOpacity></TouchableOpacity>
       </View>
       <View style={styles.content}>
         <TouchableOpacity

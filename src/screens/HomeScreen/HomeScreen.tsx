@@ -19,7 +19,7 @@ type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
 
-const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
+const HomeScreen: React.FC<HomeScreenProps> = () => {
   const [isGameListVisible, setGameListVisible] = useState(false);
   const [selectedButton, setSelectedButton] = useState<number | null>(1);
   const [selectedButtonABC, setSelectedButtonABC] = useState<number | null>(1);
@@ -171,7 +171,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 styles.buttonABC,
                 {
                   backgroundColor:
-                    selectedButton === 1 ? Color.secondary : Color.primary,
+                    selectedButtonABC === 1 ? Color.secondary : Color.primary,
                 },
               ]}
               onPress={() => handleButtonPressABC(1)}>
@@ -188,7 +188,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 styles.buttonABC,
                 {
                   backgroundColor:
-                    selectedButton === 2 ? Color.secondary : Color.primary,
+                    selectedButtonABC === 2 ? Color.secondary : Color.primary,
                 },
               ]}
               onPress={() => handleButtonPressABC(2)}>
@@ -205,7 +205,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 styles.buttonABC,
                 {
                   backgroundColor:
-                    selectedButton === 3 ? Color.secondary : Color.primary,
+                    selectedButtonABC === 3 ? Color.secondary : Color.primary,
                 },
               ]}
               onPress={() => handleButtonPressABC(3)}>
@@ -222,7 +222,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 styles.buttonABC,
                 {
                   backgroundColor:
-                    selectedButton === 3 ? Color.secondary : Color.primary,
+                    selectedButtonABC === 4 ? Color.secondary : Color.primary,
                 },
               ]}
               onPress={() => handleButtonPressABC(4)}>

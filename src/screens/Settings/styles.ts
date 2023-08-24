@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   headerText: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
   },
   content: {

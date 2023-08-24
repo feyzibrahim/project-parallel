@@ -14,7 +14,7 @@ import {
 import {useDispatch} from 'react-redux';
 import {loginwithUsername} from '@app/store/slices/authSlice';
 import {AppDispatch} from '@app/store/index';
-import {LoginScreenNavigationProp} from '../../navigations/types';
+import {HomeScreenNavigationProp} from '../../navigations/types';
 import Icon from 'react-native-vector-icons/Feather';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
@@ -24,8 +24,8 @@ import styles from './styles';
 import ButtonComponent from '@app/components/ButtonComponent';
 import {COLORS} from '@app/constants/themes';
 
-type LoginScreenProps = {
-  navigation: LoginScreenNavigationProp;
+type HomeScreenProps = {
+  navigation: HomeScreenNavigationProp;
 };
 
 type FormType = {
@@ -33,7 +33,7 @@ type FormType = {
   password: string;
 };
 
-const LoginPage: React.FC<LoginScreenProps> = ({navigation}) => {
+const LoginPage: React.FC<HomeScreenProps> = ({navigation}) => {
   const dispatch = useDispatch<AppDispatch>();
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);

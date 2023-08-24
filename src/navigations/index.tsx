@@ -11,6 +11,7 @@ import LanguageScreen from '@app/screens/SettingsOptions/LanguageScreen';
 import AboutScreen from '@app/screens/SettingsOptions/AboutScreen';
 import BottomTabNavigation from './bottomTabNavigation';
 import Userlist from '@app/screens/UserList';
+import ResultAddScreen from '@app/screens/ResultAddScreen';
 
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -28,6 +29,7 @@ const Navigation: React.FC = () => {
         <Stack.Screen name="Language" component={LanguageScreen} />
         <Stack.Screen name="About" component={AboutScreen} />
         <Stack.Screen name="UserList" component={Userlist} />
+        <Stack.Screen name="ResultAddScreen" component={ResultAddScreen} />
       </Stack.Navigator>
     </React.Fragment>
   );
