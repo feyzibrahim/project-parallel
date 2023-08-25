@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
-  SafeAreaView,
   TouchableOpacity,
   ScrollView,
   TextInput,
@@ -12,7 +11,6 @@ import styles from './styles';
 import GameListBottomUp from '../../components/GameListBottomUp/GameListBottomUp';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import HeaderComponent from '@app/components/HeaderComponent';
-import {COLORS} from '@app/constants/themes';
 import {GameThemes} from '@app/constants/constants';
 
 type HomeScreenProps = {
@@ -39,17 +37,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     setSelectedButtonABC(buttonNumber);
   };
 
-  // useEffect(() => {
-  //   navigation.setOptions({
-  //     // headerTitle: 'Dear 1:00 PM',
-  //     headerRight: () => (
-  //       <TouchableOpacity style={styles.logoutButton} onPress={openGameList}>
-  //         <Text style={styles.logoutButtonText}>Change</Text>
-  //       </TouchableOpacity>
-  //     ),
-  //   });
-  // }, [navigation]);
-
   const colorTheme = () => {
     const primaryColors = GameThemes;
     const backGroundColor =
@@ -72,11 +59,11 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         <View style={styles.body}>
           {/* Customer Name */}
 
-          <Text>Customer</Text>
+          {/* <Text>Customer</Text> */}
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.input}
-              placeholder="Customer"
+              placeholder="Choose Customer"
               placeholderTextColor="#888"
             />
           </View>
@@ -140,24 +127,17 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
           {/* Number, Count, B Count textInputs */}
 
           <View style={styles.horizontalRow}>
-            <View style={[styles.inputContainer, styles.inputWidth33]}>
+            <View style={[styles.inputContainer, styles.inputWidth50]}>
               <TextInput
                 style={styles.input}
                 placeholder="Number"
                 placeholderTextColor="#888"
               />
             </View>
-            <View style={[styles.inputContainer, styles.inputWidth33]}>
+            <View style={[styles.inputContainer, styles.inputWidth50]}>
               <TextInput
                 style={styles.input}
                 placeholder="Count"
-                placeholderTextColor="#888"
-              />
-            </View>
-            <View style={[styles.inputContainer, styles.inputWidth33]}>
-              <TextInput
-                style={styles.input}
-                placeholder="B Count"
                 placeholderTextColor="#888"
               />
             </View>
@@ -165,80 +145,228 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
 
           {/* A, B, C, All buttons */}
 
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={[
-                styles.buttonABC,
-                {
-                  backgroundColor:
-                    selectedButtonABC === 1 ? Color.secondary : Color.primary,
-                },
-              ]}
-              onPress={() => handleButtonPressABC(1)}>
-              <Text
+          {selectedButton === 1 && (
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
                 style={[
-                  styles.buttonText,
-                  selectedButtonABC === 1 && styles.selectedButtonText,
-                ]}>
-                A
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.buttonABC,
-                {
-                  backgroundColor:
-                    selectedButtonABC === 2 ? Color.secondary : Color.primary,
-                },
-              ]}
-              onPress={() => handleButtonPressABC(2)}>
-              <Text
+                  styles.buttonABC,
+                  {
+                    backgroundColor:
+                      selectedButtonABC === 1 ? Color.secondary : Color.primary,
+                  },
+                ]}
+                onPress={() => handleButtonPressABC(1)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButtonABC === 1 && styles.selectedButtonText,
+                  ]}>
+                  A
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
                 style={[
-                  styles.buttonText,
-                  selectedButtonABC === 2 && styles.selectedButtonText,
-                ]}>
-                B
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.buttonABC,
-                {
-                  backgroundColor:
-                    selectedButtonABC === 3 ? Color.secondary : Color.primary,
-                },
-              ]}
-              onPress={() => handleButtonPressABC(3)}>
-              <Text
+                  styles.buttonABC,
+                  {
+                    backgroundColor:
+                      selectedButtonABC === 2 ? Color.secondary : Color.primary,
+                  },
+                ]}
+                onPress={() => handleButtonPressABC(2)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButtonABC === 2 && styles.selectedButtonText,
+                  ]}>
+                  B
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
                 style={[
-                  styles.buttonText,
-                  selectedButtonABC === 3 && styles.selectedButtonText,
-                ]}>
-                C
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.buttonABC,
-                {
-                  backgroundColor:
-                    selectedButtonABC === 4 ? Color.secondary : Color.primary,
-                },
-              ]}
-              onPress={() => handleButtonPressABC(4)}>
-              <Text
+                  styles.buttonABC,
+                  {
+                    backgroundColor:
+                      selectedButtonABC === 3 ? Color.secondary : Color.primary,
+                  },
+                ]}
+                onPress={() => handleButtonPressABC(3)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButtonABC === 3 && styles.selectedButtonText,
+                  ]}>
+                  C
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
                 style={[
-                  styles.buttonText,
-                  selectedButtonABC === 4 && styles.selectedButtonText,
-                ]}>
-                All
-              </Text>
-            </TouchableOpacity>
-          </View>
+                  styles.buttonABC,
+                  {
+                    backgroundColor:
+                      selectedButtonABC === 4 ? Color.secondary : Color.primary,
+                  },
+                ]}
+                onPress={() => handleButtonPressABC(4)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButtonABC === 4 && styles.selectedButtonText,
+                  ]}>
+                  All
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {selectedButton === 2 && (
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.buttonABC,
+                  {
+                    backgroundColor:
+                      selectedButtonABC === 1 ? Color.secondary : Color.primary,
+                  },
+                ]}
+                onPress={() => handleButtonPressABC(1)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButtonABC === 1 && styles.selectedButtonText,
+                  ]}>
+                  AB
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.buttonABC,
+                  {
+                    backgroundColor:
+                      selectedButtonABC === 2 ? Color.secondary : Color.primary,
+                  },
+                ]}
+                onPress={() => handleButtonPressABC(2)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButtonABC === 2 && styles.selectedButtonText,
+                  ]}>
+                  BC
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.buttonABC,
+                  {
+                    backgroundColor:
+                      selectedButtonABC === 3 ? Color.secondary : Color.primary,
+                  },
+                ]}
+                onPress={() => handleButtonPressABC(3)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButtonABC === 3 && styles.selectedButtonText,
+                  ]}>
+                  AC
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.buttonABC,
+                  {
+                    backgroundColor:
+                      selectedButtonABC === 4 ? Color.secondary : Color.primary,
+                  },
+                ]}
+                onPress={() => handleButtonPressABC(4)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButtonABC === 4 && styles.selectedButtonText,
+                  ]}>
+                  All
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {selectedButton === 3 && (
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity
+                style={[
+                  styles.buttonSpecial,
+                  {
+                    backgroundColor:
+                      selectedButtonABC === 1 ? Color.secondary : Color.primary,
+                  },
+                ]}
+                onPress={() => handleButtonPressABC(1)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButtonABC === 1 && styles.selectedButtonText,
+                  ]}>
+                  DEAR
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[
+                  styles.buttonSpecial,
+                  {
+                    backgroundColor:
+                      selectedButtonABC === 2 ? Color.secondary : Color.primary,
+                  },
+                ]}
+                onPress={() => handleButtonPressABC(2)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButtonABC === 2 && styles.selectedButtonText,
+                  ]}>
+                  BOX
+                </Text>
+              </TouchableOpacity>
+            </View>
+          )}
 
           {/* Count and Amount */}
         </View>
       </ScrollView>
+
+      <View style={styles.bottomInputBoxes}>
+        <View style={styles.horizontalRow}>
+          <View style={styles.bottomContainer}>
+            <TextInput
+              style={styles.inputBottom}
+              placeholder="Count"
+              placeholderTextColor="#888"
+            />
+          </View>
+          <View style={styles.bottomContainer}>
+            <TextInput
+              style={styles.inputBottom}
+              placeholder="D Amount"
+              placeholderTextColor="#888"
+            />
+          </View>
+          <View style={styles.bottomContainer}>
+            <TextInput
+              style={styles.inputBottom}
+              placeholder="C Amount"
+              placeholderTextColor="#888"
+            />
+          </View>
+          <TouchableOpacity
+            style={[
+              styles.buttonBottom,
+              {
+                backgroundColor: Color.secondary,
+              },
+            ]}
+            onPress={() => handleButtonPress(3)}>
+            <Text style={[styles.bottomButtonText]}>Book</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
 
       <GameListBottomUp isVisible={isGameListVisible} onClose={closeGameList} />
     </SafeAreaWrapper>

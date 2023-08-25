@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {View, TextInput, Button, ScrollView} from 'react-native';
 import styles from './styles';
+import ButtonComponent from '@app/components/ButtonComponent';
 
 const LotteryForm: React.FC = () => {
   const [first, setFirst] = useState('');
@@ -78,7 +79,8 @@ const LotteryForm: React.FC = () => {
           />
           <Button title="Add Numbers" onPress={handleAddNumber} />
         </View>
-        <Button title="Submit" onPress={handleSubmit} />
+        {/* <Button title="Submit" onPress={handleSubmit} /> */}
+        <ButtonComponent gotoHome={handleSubmit} buttonLabel={'Submit'} />
       </ScrollView>
     </View>
   );

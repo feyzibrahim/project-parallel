@@ -35,7 +35,18 @@ const ProfileScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             <TouchableOpacity
               style={styles.middlePart}
               onPress={() => navigation.navigate('UserList')}>
-              <Text style={styles.navigationText}>User's List</Text>
+              <Text style={styles.navigationText}>Distributer List</Text>
+              <Icon
+                name="right"
+                size={18}
+                color={''}
+                style={{marginRight: 10}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.middlePart}
+              onPress={() => navigation.navigate('UserList')}>
+              <Text style={styles.navigationText}>Game Settings</Text>
               <Icon
                 name="right"
                 size={18}
@@ -47,7 +58,7 @@ const ProfileScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             <TouchableOpacity
               style={styles.middlePart}
               onPress={() => navigation.navigate('Settings', {itemId: 1})}>
-              <Text style={styles.navigationText}>All settings</Text>
+              <Text style={styles.navigationText}>Settings</Text>
               <Icon
                 name="right"
                 size={18}

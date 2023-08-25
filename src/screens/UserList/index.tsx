@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/AntDesign';
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
+
 const Userlist: React.FC<HomeScreenProps> = ({navigation}) => {
   const dispatch = useDispatch<AppDispatch>();
   const [user, setUser] = useState<any>([]);

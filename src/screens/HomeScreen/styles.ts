@@ -1,25 +1,12 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  logoutButton: {
-    backgroundColor: '#5538EE',
-    borderRadius: 30,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    marginRight: 10,
-  },
-  logoutButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
   body: {
     paddingHorizontal: 20,
-    paddingTop: 20,
   },
   inputContainer: {
     marginVertical: 20,
@@ -33,6 +20,9 @@ const styles = StyleSheet.create({
   },
   inputWidth33: {
     width: '30%',
+  },
+  inputWidth50: {
+    width: '47%',
   },
   horizontalRow: {
     display: 'flex',
@@ -65,6 +55,39 @@ const styles = StyleSheet.create({
     minWidth: '22%',
     borderRadius: 5,
     backgroundColor: '#E7E7FF',
+  },
+  buttonSpecial: {
+    paddingVertical: 12,
+    minWidth: '48%',
+    borderRadius: 5,
+    // backgroundColor: '#E7E7FF',
+  },
+  bottomInputBoxes: {
+    backgroundColor: '#F2F4F5',
+    paddingHorizontal: 20,
+  },
+  bottomContainer: {
+    marginVertical: 10,
+  },
+  inputBottom: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    fontSize: 14,
+    backgroundColor: '#ffffff',
+    // width: '30%',
+  },
+  buttonBottom: {
+    paddingVertical: 12,
+    minWidth: '20%',
+    borderRadius: 5,
+    marginVertical: 10,
+  },
+  bottomButtonText: {
+    fontSize: 14,
+    textAlign: 'center',
+    color: '#ffffff',
   },
 });
 
