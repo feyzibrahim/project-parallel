@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-import {Text, ScrollView, TouchableOpacity} from 'react-native';
+import {ScrollView, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import {COLORS} from '@app/constants/themes';

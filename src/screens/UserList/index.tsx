@@ -1,13 +1,18 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {View, Text, FlatList, TouchableOpacity} from 'react-native';
 
 import styles from './styles';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '@app/store/index';
 import {userList} from '@app/store/slices/authSlice';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
+import {HomeScreenNavigationProp} from '@app/navigations/types';
+import Icon from 'react-native-vector-icons/AntDesign';
 
-const Userlist = () => {
+type HomeScreenProps = {
+  navigation: HomeScreenNavigationProp;
+};
+const Userlist: React.FC<HomeScreenProps> = ({navigation}) => {
   const dispatch = useDispatch<AppDispatch>();
   const [user, setUser] = useState<any>([]);
 
@@ -37,7 +42,7 @@ const Userlist = () => {
   };
 
   return (
-    <SafeAreaWrapper  statusbar={'#F2F4F5'}>
+    <SafeAreaWrapper statusbar={'#F2F4F5'}>
       <View style={styles.header}>
         <View>
           <Text style={styles.headerText}>Users</Text>
@@ -50,6 +55,13 @@ const Userlist = () => {
           keyExtractor={item => item._id}
         />
       </View>
+      <TouchableOpacity
+        style={styles.floatingButton}
+        onPress={() => {
+          navigation.navigate('UserAddList');
+        }}>
+        <Icon name="adduser" size={18} color={'#ffffff'} />
+      </TouchableOpacity>
     </SafeAreaWrapper>
   );
 };
