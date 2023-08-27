@@ -49,7 +49,11 @@ const ReportScreen = () => {
         <Text style={styles.headerStyle}>Tables Demo View</Text>
         <TableComponent tableData={bookingList} />
       </View>
-      <GameListBottomUp isVisible={isGameListVisible} onClose={closeGameList} />
+      <GameListBottomUp
+        isVisible={isGameListVisible}
+        onClose={closeGameList}
+        onPressGame={() => {}}
+      />
     </SafeAreaWrapper>
   );
 };

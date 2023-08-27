@@ -24,25 +24,45 @@ const SettingsScreen: React.FC<NavigationScreenProps> = ({navigation}) => {
           style={styles.optionButton}
           onPress={() => navigation.navigate('Notification', {itemId: 1})}>
           <Text style={styles.optionButtonText}>Notifications</Text>
-          <Icon name="right" size={18} color={''} style={{marginRight: 10}} />
+          <Icon
+            name="right"
+            size={18}
+            color={'#000'}
+            style={{marginRight: 10}}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.optionButton}
           onPress={() => navigation.navigate('PrivacyPolicy', {itemId: 2})}>
           <Text style={styles.optionButtonText}>Privacy</Text>
-          <Icon name="right" size={18} color={''} style={{marginRight: 10}} />
+          <Icon
+            name="right"
+            size={18}
+            color={'#000'}
+            style={{marginRight: 10}}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.optionButton}
           onPress={() => navigation.navigate('Language', {itemId: 1})}>
           <Text style={styles.optionButtonText}>Language</Text>
-          <Icon name="right" size={18} color={''} style={{marginRight: 10}} />
+          <Icon
+            name="right"
+            size={18}
+            color={'#000'}
+            style={{marginRight: 10}}
+          />
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.optionButton}
           onPress={() => navigation.navigate('About', {itemId: 1})}>
           <Text style={styles.optionButtonText}>About</Text>
-          <Icon name="right" size={18} color={''} style={{marginRight: 10}} />
+          <Icon
+            name="right"
+            size={18}
+            color={'#000'}
+            style={{marginRight: 10}}
+          />
         </TouchableOpacity>
       </View>
     </SafeAreaWrapper>

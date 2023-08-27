@@ -2,7 +2,7 @@ import React, {useEffect, useState, useMemo} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 import Modal from 'react-native-modal';
 import {AppDispatch} from '@app/store/index';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {getGameList} from '@app/store/slices/gameSlice';
 import {GameThemes} from '@app/constants/constants';
 import styles from './styles';
@@ -10,6 +10,7 @@ import styles from './styles';
 type GameListBottomUpProps = {
   isVisible: boolean;
   onClose: () => void;
+  onPressGame: Function;
 };
 
 type Competition = {
@@ -24,6 +25,7 @@ type Competition = {
 const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
   isVisible,
   onClose,
+  onPressGame,
 }) => {
   const dispatch = useDispatch<AppDispatch>();
   const [gameList, setGameList] = useState<Competition[]>([]);
@@ -32,11 +34,9 @@ const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
     getAvailableGames();
   }, []);
 
-  const colorTheme = () => {
+  const colorTheme = (index: number) => {
     const primaryColors = GameThemes;
-    const backGroundColor =
-      primaryColors[Math.floor(Math.random() * primaryColors.length)];
-    return backGroundColor;
+    return primaryColors[index];
   };
 
   const getAvailableGames = async () => {
@@ -66,19 +66,20 @@ const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
       <View style={styles.content}>
         <Text style={styles.headerText}>Select Game</Text>
         {gameList?.map((item, index) => {
-          const bgCOLOR = colorTheme();
+          const bgCOLOR = colorTheme(index);
           return (
             <TouchableOpacity
               key={index}
-              style={{...styles.card, backgroundColor: bgCOLOR.primary}}
-              onPress={() => {}}>
+              style={{...styles.card, backgroundColor: bgCOLOR?.primary}}
+              onPress={() => onPressGame({game: item, theme: bgCOLOR})}>
               <View style={styles.cardFlex}>
                 <View>
-                  <Text style={{...styles.cardTitle, color: bgCOLOR.secondary}}>
+                  <Text
+                    style={{...styles.cardTitle, color: bgCOLOR?.secondary}}>
                     {item?.gameName}
                   </Text>
                   <Text
-                    style={{...styles.cardDetails, color: bgCOLOR.secondary}}>
+                    style={{...styles.cardDetails, color: bgCOLOR?.secondary}}>
                     {item?.location}
                   </Text>
                 </View>

@@ -21,10 +21,12 @@ import {getAxiosInstance} from '../../api/api';
 // Define a type for the slice state
 type GameState = {
   token: string;
+  game: Array<any>;
 };
 
 const initialState: GameState = {
   token: '',
+  game: [],
 };
 
 export const getGameList = createAsyncThunk(
@@ -59,13 +61,13 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    // setToken: (state, action) => {
-    //   state.token = action?.payload;
-    // },
+    setGame: (state, action) => {
+        state.game = action?.payload;
+      },
   },
   extraReducers: builder => {},
 });
 
-// export const {setToken} = authSlice.actions;
+export const {setGame} = gameSlice.actions;
 
 export default gameSlice.reducer;

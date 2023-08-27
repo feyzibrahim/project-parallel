@@ -7,15 +7,17 @@ export type Props = {
   containerStyle?: ViewStyle;
   headerTextStyle?: TextStyle;
   buttonStyle?: ViewStyle;
+  user?: string;
 };
 
 const HeaderComponent = (props: Props) => {
-  const {openGameList, containerStyle, headerTextStyle, buttonStyle} = props;
+  const {openGameList, containerStyle, headerTextStyle, buttonStyle, user} =
+    props;
 
   return (
     <View style={[styles.container, containerStyle]}>
       <View>
-        <Text style={[styles.headerText, headerTextStyle]}>Dear 1:00 PM</Text>
+        <Text style={[styles.headerText, headerTextStyle]}>{user}</Text>
       </View>
       <TouchableOpacity
         style={[styles.logoutButton, buttonStyle]}

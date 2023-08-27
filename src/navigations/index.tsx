@@ -13,6 +13,7 @@ import BottomTabNavigation from './bottomTabNavigation';
 import Userlist from '@app/screens/UserList';
 import ResultAddScreen from '@app/screens/ResultAddScreen';
 import UserAddList from '@app/screens/UserAddList';
+import GameSettingsScreen from '@app/screens/GameSettingsScreen';
 
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -20,7 +21,7 @@ const Navigation: React.FC = () => {
   return (
     <React.Fragment>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="BottomTab"
         screenOptions={{headerShown: false, gestureEnabled: true}}>
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="BottomTab" component={BottomTabNavigation} />
@@ -32,6 +33,10 @@ const Navigation: React.FC = () => {
         <Stack.Screen name="UserList" component={Userlist} />
         <Stack.Screen name="ResultAddScreen" component={ResultAddScreen} />
         <Stack.Screen name="UserAddList" component={UserAddList} />
+        <Stack.Screen
+          name="GameSettingsScreen"
+          component={GameSettingsScreen}
+        />
       </Stack.Navigator>
     </React.Fragment>
   );
