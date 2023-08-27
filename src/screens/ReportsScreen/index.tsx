@@ -46,7 +46,7 @@ const ReportScreen = () => {
     <SafeAreaWrapper statusbar={COLORS.darkBlueShade}>
       <HeaderComponent openGameList={openGameList} />
       <View style={styles.container}>
-        <Text style={styles.headerStyle}>Tables Demo View</Text>
+        <Text style={styles.headerStyle}>Today Bookings</Text>
         <TableComponent tableData={bookingList} />
       </View>
       <GameListBottomUp

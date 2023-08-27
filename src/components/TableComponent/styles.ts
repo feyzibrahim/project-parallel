@@ -1,16 +1,19 @@
-import { StyleSheet } from "react-native";
-import { COLORS } from "@app/constants/themes";
+import {StyleSheet} from 'react-native';
+import {COLORS} from '@app/constants/themes';
 
-const styles =StyleSheet.create({
-        tableContainer: {
-        //   padding: 15,
-        marginTop:15
-        },
-        tableHeader: {
-          backgroundColor: COLORS.grayshade1,
-          borderTopLeftRadius:10,
-          borderTopRightRadius: 10,
-        },
-})
+const styles = StyleSheet.create({
+  tableContainer: {
+    //   padding: 15,
+    marginTop: 15,
+  },
+  tableHeader: {
+    backgroundColor: COLORS.grayshade1,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
+  },
+  tableTitle: {
+    fontSize: 12,
+  },
+});
 
-export default styles
+export default styles;
