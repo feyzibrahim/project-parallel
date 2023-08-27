@@ -2,26 +2,6 @@ import {StyleSheet} from 'react-native';
 import {COLORS} from '@app/constants/themes';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 10,
-    backgroundColor: COLORS.white,
-  },
-  gameList: {
-    paddingHorizontal: 15,
-    paddingTop: 20,
-  },
-  header: {
-    backgroundColor: COLORS.grayShade2,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingVertical: 20,
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
   card: {
     backgroundColor: '#FFFFFF',
     borderRadius: 8,
@@ -50,6 +30,17 @@ const styles = StyleSheet.create({
   cardDetails: {
     fontSize: 16,
     color: '#666',
+  },
+  buttonWrap: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 10,
+  },
+  ToggleText: {
+    color: COLORS.black,
+    fontSize: 15,
+    fontWeight: '400',
   },
 });
 export default styles;

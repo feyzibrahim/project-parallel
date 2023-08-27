@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     paddingBottom: 30,
     paddingHorizontal: 16,
+    marginTop: 10,
   },
   logoutButton: {
     backgroundColor: 'transparent',
