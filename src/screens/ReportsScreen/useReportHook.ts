@@ -2,9 +2,9 @@ import {useState, useEffect} from 'react';
 import {GameThemes} from '@app/constants/constants';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '@app/store/index';
-import {getGameList, setGame} from '@app/store/slices/gameSlice';
+import {getGameBookings} from '@app/store/slices/gameSlice';
 
-const useHomeHook = () => {
+const useReportHook = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   const [isGameListVisible, setGameListVisible] = useState(false);
@@ -12,24 +12,31 @@ const useHomeHook = () => {
   const [selectedButtonABC, setSelectedButtonABC] = useState<number | null>(1);
   const [screenTheme, setScreenTheme] = useState<any>('');
   const [gameDetail, setGameDetail] = useState<any>('');
-  const [customer, setCustomer] = useState('');
-  const [ticketNumber, setTicketNumber] = useState('');
-  const [ticketCount, setTicketCount] = useState('');
+  const [bookingList, setBookingList] = useState<any>([]);
+
+  const TableHeaders = [
+    'Name',
+    'LSK',
+    'Number',
+    'Count',
+    '₹₹ - C',
+    '₹₹ - D',
+    '',
+  ];
 
   useEffect(() => {
-    getAvailableGames();
+    getGameBooking();
     colorTheme();
   }, []);
 
-  const getAvailableGames = async () => {
-    const resultAction = await dispatch(getGameList(null));
-    if (getGameList.fulfilled.match(resultAction)) {
-      await dispatch(setGame(resultAction?.payload));
-
-      // console.log('GAME Listed=====', resultAction?.payload);
+  const getGameBooking = async () => {
+    const resultAction = await dispatch(getGameBookings(null));
+    if (getGameBookings.fulfilled.match(resultAction)) {
+      setBookingList(resultAction?.payload);
+      // console.log('Bookings Listed=====', resultAction?.payload);
     } else {
       const errorResult: any = resultAction?.payload;
-      console.log('GAME Listed===ERROR=====', errorResult);
+      console.log('Bookings Listed===ERROR=====', errorResult);
     }
   };
 
@@ -60,6 +67,7 @@ const useHomeHook = () => {
   const onPressGame = (game: any) => {
     setGameDetail(game);
     setGameListVisible(false);
+    console.log(game, ';;;;;;');
   };
 
   return {
@@ -68,14 +76,13 @@ const useHomeHook = () => {
     selectedButtonABC,
     screenTheme,
     gameDetail,
+    bookingList,
     openGameList,
     closeGameList,
     handleButtonPress,
     handleButtonPressABC,
     onPressGame,
-    setCustomer,
-    setTicketNumber,
-    setTicketCount,
+    TableHeaders,
   };
 };
-export default useHomeHook;
+export default useReportHook;
