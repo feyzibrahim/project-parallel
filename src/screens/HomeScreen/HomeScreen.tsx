@@ -23,7 +23,15 @@ type HomeScreenProps = {
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   const {game} = useSelector((state: any) => state?.game);
 
-  const TableHeaders = ['LSK', 'Number', 'Count', '₹₹ - D', '₹₹ - C', '#'];
+  const TableHeaders = [
+    '',
+    'LSK',
+    'Number',
+    '  Count',
+    '₹₹ - D',
+    '₹₹ - C',
+    '#',
+  ];
 
   const {
     isGameListVisible,
@@ -39,6 +47,9 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     setCustomer,
     setTicketCount,
     setTicketNumber,
+    listData,
+    removeTicket,
+    onSaveButton
   } = useHomeHook();
 
   return (
@@ -82,7 +93,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               placeholderTextColor="#888"
               onChangeText={val => {
                 setCustomer(val);
-                console.log(val);
               }}
             />
           </View>
@@ -169,6 +179,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={styles.input}
                 placeholder="Number"
                 placeholderTextColor="#888"
+                keyboardType='number-pad'
                 maxLength={
                   selectedButton == 1 ? 1 : selectedButton == 2 ? 2 : 3
                 }
@@ -181,6 +192,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               <TextInput
                 style={styles.input}
                 placeholder="Count"
+                keyboardType='number-pad'
                 placeholderTextColor="#888"
                 onChangeText={value => {
                   setTicketCount(value);
@@ -202,7 +214,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(1)}>
+                onPress={() => handleButtonPressABC({number: 1, lsk: 'A'})}>
                 <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   A
                 </Text>
@@ -216,7 +228,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(2)}>
+                onPress={() => handleButtonPressABC({number: 2, lsk: 'B'})}>
                 <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   B
                 </Text>
@@ -230,7 +242,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(3)}>
+                onPress={() => handleButtonPressABC({number: 3, lsk: 'C'})}>
                 <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   C
                 </Text>
@@ -244,7 +256,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(4)}>
+                onPress={() => handleButtonPressABC({number: 4, lsk: 'All'})}>
                 <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   All
                 </Text>
@@ -262,7 +274,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(1)}>
+                onPress={() => handleButtonPressABC({number: 1, lsk: 'AB'})}>
                 <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   AB
                 </Text>
@@ -276,7 +288,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(2)}>
+                onPress={() => handleButtonPressABC({number: 2, lsk: 'BC'})}>
                 <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   BC
                 </Text>
@@ -290,7 +302,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(3)}>
+                onPress={() => handleButtonPressABC({number: 3, lsk: 'AC'})}>
                 <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   AC
                 </Text>
@@ -304,7 +316,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(4)}>
+                onPress={() => handleButtonPressABC({number: 4, lsk: 'All'})}>
                 <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   All
                 </Text>
@@ -322,7 +334,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(1)}>
+                onPress={() => handleButtonPressABC({number: 1, lsk: 'DEAR'})}>
                 <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   DEAR
                 </Text>
@@ -336,14 +348,18 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                       : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(2)}>
+                onPress={() => handleButtonPressABC({number: 1, lsk: 'BOX'})}>
                 <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   BOX
                 </Text>
               </TouchableOpacity>
             </View>
           )}
-          <TableComponent tableData={[]} tableHeaders={TableHeaders} />
+          <TableComponent
+            tableData={listData}
+            tableHeaders={TableHeaders}
+            onPressDelete={() => removeTicket(listData)}
+          />
         </View>
       </ScrollView>
       {/* Count and Amount */}
@@ -380,7 +396,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                   : screenTheme.secondary,
               },
             ]}
-            onPress={() => handleButtonPress(3)}>
+            onPress={() => onSaveButton()}>
             <Text style={[styles.bottomButtonText]}>Book</Text>
           </TouchableOpacity>
         </View>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
-import {View, Text} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 
 import {useSelector} from 'react-redux';
 
@@ -52,15 +52,18 @@ const ReportScreen = () => {
             : game[0]?.gameName + ' ' + game[0]?.time
         }
       />
-      <View style={styles.container}>
-        <Text style={styles.headerStyle}>Today Bookings</Text>
-        <TableComponent tableData={bookingList} tableHeaders={TableHeaders} />
-      </View>
-      <GameListBottomUp
-        isVisible={isGameListVisible}
-        onClose={closeGameList}
-        onPressGame={onPressGame}
-      />
+
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.headerStyle}>Today Bookings</Text>
+          <TableComponent tableData={bookingList} tableHeaders={TableHeaders} />
+        </View>
+        <GameListBottomUp
+          isVisible={isGameListVisible}
+          onClose={closeGameList}
+          onPressGame={onPressGame}
+        />
+      </ScrollView>
     </SafeAreaWrapper>
   );
 };
