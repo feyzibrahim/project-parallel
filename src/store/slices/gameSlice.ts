@@ -64,7 +64,7 @@ export const saveGames = createAsyncThunk(
     const api = await getAxiosInstance();
     try {
       const response = await api.post('api/booking/insert-many/',params);
-      console.log(response);
+      console.log(response,'=========jkhgjkhgjkh');
       return response?.data;
     } catch (error: any) {
       return rejectWithValue(error?.response?.data);

@@ -22,11 +22,17 @@ const useHomeHook = () => {
   const [ticketNumber, setTicketNumber] = useState('');
   const [ticketCount, setTicketCount] = useState('');
   const [listData, setListData] = useState<Array<any>>([]);
+  const [saveAlert, setSaveAlert] = useState(false);
+  const [successModal, setsuccessModal] = useState(true);
 
   useEffect(() => {
     getAvailableGames();
     colorTheme();
   }, []);
+
+  setTimeout(() => {
+    setsuccessModal(false);
+  }, 1000);
 
   const getAvailableGames = async () => {
     const resultAction = await dispatch(getGameList(null));
@@ -113,7 +119,10 @@ const useHomeHook = () => {
   const onSaveButton = async () => {
     const resultAction = await dispatch(saveGames(listData));
     if (saveGames.fulfilled.match(resultAction)) {
+      setListData([]);
+      setSaveAlert(false);
       console.log('GAME Saved=====', resultAction?.payload);
+      setsuccessModal(true);
     } else {
       const errorResult: any = resultAction?.payload;
       console.log('GAME Saved===ERROR=====', errorResult);
@@ -150,6 +159,9 @@ const useHomeHook = () => {
     listData,
     removeTicket,
     onSaveButton,
+    setSaveAlert,
+    saveAlert,
+    successModal,
   };
 };
 export default useHomeHook;

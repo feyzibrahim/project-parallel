@@ -15,6 +15,9 @@ import HeaderComponent from '@app/components/HeaderComponent';
 import useHomeHook from './useHomeHook';
 import {useSelector} from 'react-redux';
 import TableComponent from '@app/components/TableComponent';
+import AlertBox from '@app/components/AlertComponent';
+import {Modal} from 'react-native-paper';
+import CircleCheckMark from '@app/assets/icons/Frame.svg';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -49,7 +52,10 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     setTicketNumber,
     listData,
     removeTicket,
-    onSaveButton
+    onSaveButton,
+    setSaveAlert,
+    saveAlert,
+    successModal,
   } = useHomeHook();
 
   return (
@@ -179,7 +185,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={styles.input}
                 placeholder="Number"
                 placeholderTextColor="#888"
-                keyboardType='number-pad'
+                keyboardType="number-pad"
                 maxLength={
                   selectedButton == 1 ? 1 : selectedButton == 2 ? 2 : 3
                 }
@@ -192,7 +198,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               <TextInput
                 style={styles.input}
                 placeholder="Count"
-                keyboardType='number-pad'
+                keyboardType="number-pad"
                 placeholderTextColor="#888"
                 onChangeText={value => {
                   setTicketCount(value);
@@ -396,17 +402,44 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                   : screenTheme.secondary,
               },
             ]}
-            onPress={() => onSaveButton()}>
+            onPress={() => setSaveAlert(true)}>
             <Text style={[styles.bottomButtonText]}>Book</Text>
           </TouchableOpacity>
         </View>
       </View>
+
+      <AlertBox
+        isShowAlert={saveAlert}
+        title={'Are You Sure ?'}
+        confirmText={'Ok'}
+        CancelText={'Cancel'}
+        CancelPressed={() => setSaveAlert(false)}
+        confirmPressed={() => {
+          onSaveButton();
+        }}
+      />
 
       <GameListBottomUp
         isVisible={isGameListVisible}
         onClose={closeGameList}
         onPressGame={onPressGame}
       />
+      <Modal visible={successModal}>
+        <View
+          style={{
+            backgroundColor: 'white',
+            padding: 10,
+            paddingHorizontal: 15,
+            paddingVertical: 50,
+            marginHorizontal: 30,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 20,
+          }}>
+          <CircleCheckMark style={{marginBottom: 10}} />
+          <Text style={{color: 'black'}}>Order saved successfully</Text>
+        </View>
+      </Modal>
     </SafeAreaWrapper>
   );
 };
