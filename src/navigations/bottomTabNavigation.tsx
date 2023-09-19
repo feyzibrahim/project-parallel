@@ -1,9 +1,8 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {RootStackParamList} from './types';
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Octicons';
-
 import HomeScreen from '@app/screens/HomeScreen/HomeScreen';
 import ReportScreen from '@app/screens/ReportsScreen';
 import ResultScreen from '@app/screens/ResultsScreen';
