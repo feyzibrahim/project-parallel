@@ -14,6 +14,8 @@ import Userlist from '@app/screens/UserList';
 import ResultAddScreen from '@app/screens/ResultAddScreen';
 import UserAddList from '@app/screens/UserAddList';
 import GameSettingsScreen from '@app/screens/GameSettingsScreen';
+import PackageScreen from '@app/screens/PackageScreen/PackageScreen';
+import PackageCreateScreen from '@app/screens/PackageCreateScreen';
 
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -21,7 +23,7 @@ const Navigation: React.FC = () => {
   return (
     <React.Fragment>
       <Stack.Navigator
-        initialRouteName="BottomTab"
+        initialRouteName="Login"
         screenOptions={{headerShown: false, gestureEnabled: true}}>
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="BottomTab" component={BottomTabNavigation} />
@@ -36,6 +38,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="GameSettingsScreen"
           component={GameSettingsScreen}
+        />
+        <Stack.Screen name="PackageScreen" component={PackageScreen} />
+        <Stack.Screen
+          name="PackageCreateScreen"
+          component={PackageCreateScreen}
         />
       </Stack.Navigator>
     </React.Fragment>

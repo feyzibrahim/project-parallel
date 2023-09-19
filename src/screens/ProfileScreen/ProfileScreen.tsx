@@ -45,6 +45,17 @@ const ProfileScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.middlePart}
+              onPress={() => navigation.navigate('PackageScreen')}>
+              <Text style={styles.navigationText}>Package List</Text>
+              <Icon
+                name="right"
+                size={18}
+                color={'#000'}
+                style={{marginRight: 10}}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.middlePart}
               onPress={() => navigation.navigate('GameSettingsScreen')}>
               <Text style={styles.navigationText}>Game Settings</Text>
               <Icon
