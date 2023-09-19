@@ -35,7 +35,7 @@ export const getGameList = createAsyncThunk(
     const api = await getAxiosInstance();
     try {
       const response = await api.get('api/games/');
-      console.log(response);
+      // console.log(response);
       return response?.data;
     } catch (error: any) {
       return rejectWithValue(error?.response?.data);
@@ -49,7 +49,22 @@ export const getGameBookings = createAsyncThunk(
     const api = await getAxiosInstance();
     try {
       const response = await api.get('api/booking/');
-      console.log(response);
+      // console.log(response);
+      return response?.data;
+    } catch (error: any) {
+      return rejectWithValue(error?.response?.data);
+    }
+  },
+);
+
+export const saveGames = createAsyncThunk(
+  'game/saveGames',
+  async (params: any, {rejectWithValue}) => {
+    // console.log(params,'=======PARAMS')
+    const api = await getAxiosInstance();
+    try {
+      const response = await api.post('api/booking/insert-many/',params);
+      console.log(response,'=========jkhgjkhgjkh');
       return response?.data;
     } catch (error: any) {
       return rejectWithValue(error?.response?.data);
@@ -62,8 +77,8 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     setGame: (state, action) => {
-        state.game = action?.payload;
-      },
+      state.game = action?.payload;
+    },
   },
   extraReducers: builder => {},
 });

@@ -1,59 +1,69 @@
 import React, {useState, useEffect} from 'react';
 
-import {View, Text} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 
-import {useDispatch} from 'react-redux';
-import {AppDispatch} from '@app/store/index';
+import {useSelector} from 'react-redux';
 
 import styles from './styles';
 
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
-import {COLORS} from '@app/constants/themes';
 import HeaderComponent from '@app/components/HeaderComponent';
 import GameListBottomUp from '../../components/GameListBottomUp/GameListBottomUp';
 import TableComponent from '@app/components/TableComponent';
-import {getGameBookings} from '@app/store/slices/gameSlice';
+import useReportHook from './useReportHook';
 
 const ReportScreen = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  const [isGameListVisible, setGameListVisible] = useState(false);
-  const [bookingList, setBookingList] = useState<any>([]);
+  const {game} = useSelector((state: any) => state?.game);
 
-  useEffect(() => {
-    getGameBooking();
-  }, []);
-
-  const openGameList = () => {
-    setGameListVisible(true);
-  };
-
-  const closeGameList = () => {
-    setGameListVisible(false);
-  };
-
-  const getGameBooking = async () => {
-    const resultAction = await dispatch(getGameBookings(null));
-    if (getGameBookings.fulfilled.match(resultAction)) {
-      setBookingList(resultAction?.payload);
-      console.log('Bookings Listed=====', resultAction?.payload);
-    } else {
-      const errorResult: any = resultAction?.payload;
-      console.log('Bookings Listed===ERROR=====', errorResult);
-    }
-  };
+  const {
+    isGameListVisible,
+    screenTheme,
+    gameDetail,
+    bookingList,
+    closeGameList,
+    onPressGame,
+    openGameList,
+    TableHeaders,
+  } = useReportHook();
 
   return (
-    <SafeAreaWrapper statusbar={COLORS.darkBlueShade}>
-      <HeaderComponent openGameList={openGameList} />
-      <View style={styles.container}>
-        <Text style={styles.headerStyle}>Today Bookings</Text>
-        <TableComponent tableData={bookingList} />
-      </View>
-      <GameListBottomUp
-        isVisible={isGameListVisible}
-        onClose={closeGameList}
-        onPressGame={() => {}}
+    <SafeAreaWrapper
+      statusbar={gameDetail ? gameDetail?.theme?.primary : screenTheme.primary}>
+      <HeaderComponent
+        openGameList={openGameList}
+        containerStyle={{
+          backgroundColor: gameDetail
+            ? gameDetail?.theme?.primary
+            : screenTheme.primary,
+        }}
+        buttonStyle={{
+          backgroundColor: gameDetail
+            ? gameDetail?.theme?.secondary
+            : screenTheme.secondary,
+        }}
+        headerTextStyle={{
+          color: gameDetail
+            ? gameDetail?.theme?.secondary
+            : screenTheme.secondary,
+        }}
+        user={
+          gameDetail
+            ? gameDetail?.game?.gameName + ' ' + gameDetail?.game?.time
+            : game[0]?.gameName + ' ' + game[0]?.time
+        }
       />
+
+      <ScrollView>
+        <View style={styles.container}>
+          <Text style={styles.headerStyle}>Today Bookings</Text>
+          <TableComponent tableData={bookingList} tableHeaders={TableHeaders} />
+        </View>
+        <GameListBottomUp
+          isVisible={isGameListVisible}
+          onClose={closeGameList}
+          onPressGame={onPressGame}
+        />
+      </ScrollView>
     </SafeAreaWrapper>
   );
 };

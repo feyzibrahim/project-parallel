@@ -37,7 +37,7 @@ export const getAxiosInstance = async () => {
           resolve(response);
         }),
       async error => {
-        console.log(error);
+        // console.log(error);
         if (!error.response) {
           return new Promise((resolve, reject) => {
             reject(error);

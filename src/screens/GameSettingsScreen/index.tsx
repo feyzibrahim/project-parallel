@@ -33,7 +33,7 @@ const SettingsScreen: React.FC<NavigationScreenProps> = ({navigation}) => {
   const getAvailableGames = async () => {
     const resultAction = await dispatch(getGameList(null));
     if (getGameList.fulfilled.match(resultAction)) {
-      console.log('GAME Listed=====', resultAction?.payload);
+      // console.log('GAME Listed=====', resultAction?.payload);
       setGameList(resultAction?.payload);
     } else {
       const errorResult: any = resultAction?.payload;

@@ -14,6 +14,10 @@ import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import HeaderComponent from '@app/components/HeaderComponent';
 import useHomeHook from './useHomeHook';
 import {useSelector} from 'react-redux';
+import TableComponent from '@app/components/TableComponent';
+import AlertBox from '@app/components/AlertComponent';
+import {Modal} from 'react-native-paper';
+import CircleCheckMark from '@app/assets/icons/Frame.svg';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -21,6 +25,16 @@ type HomeScreenProps = {
 
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   const {game} = useSelector((state: any) => state?.game);
+
+  const TableHeaders = [
+    '',
+    'LSK',
+    'Number',
+    '  Count',
+    '₹₹ - D',
+    '₹₹ - C',
+    '#',
+  ];
 
   const {
     isGameListVisible,
@@ -33,6 +47,15 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     handleButtonPressABC,
     onPressGame,
     openGameList,
+    setCustomer,
+    setTicketCount,
+    setTicketNumber,
+    listData,
+    removeTicket,
+    onSaveButton,
+    setSaveAlert,
+    saveAlert,
+    successModal,
   } = useHomeHook();
 
   return (
@@ -57,12 +80,14 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             : screenTheme.secondary,
         }}
         user={
-          game[0]
-            ? game[0]?.gameName + ' ' + game[0]?.time
-            : gameDetail?.game?.gameName + ' ' + gameDetail?.game?.time
+          gameDetail
+            ? gameDetail?.game?.gameName + ' ' + gameDetail?.game?.time
+            : game[0]?.gameName + ' ' + game[0]?.time
         }
       />
-      <ScrollView>
+      <ScrollView
+        keyboardShouldPersistTaps={'handled'}
+        contentContainerStyle={{paddingBottom: 100}}>
         <View style={styles.body}>
           {/* Customer Name */}
 
@@ -72,6 +97,9 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
               style={styles.input}
               placeholder="Choose Customer"
               placeholderTextColor="#888"
+              onChangeText={val => {
+                setCustomer(val);
+              }}
             />
           </View>
 
@@ -157,13 +185,24 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={styles.input}
                 placeholder="Number"
                 placeholderTextColor="#888"
+                keyboardType="number-pad"
+                maxLength={
+                  selectedButton == 1 ? 1 : selectedButton == 2 ? 2 : 3
+                }
+                onChangeText={value => {
+                  setTicketNumber(value);
+                }}
               />
             </View>
             <View style={[styles.inputContainer, styles.inputWidth50]}>
               <TextInput
                 style={styles.input}
                 placeholder="Count"
+                keyboardType="number-pad"
                 placeholderTextColor="#888"
+                onChangeText={value => {
+                  setTicketCount(value);
+                }}
               />
             </View>
           </View>
@@ -176,22 +215,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor:
-                      selectedButtonABC === 1
-                        ? gameDetail
-                          ? gameDetail?.theme?.secondary
-                          : screenTheme.secondary
-                        : gameDetail
-                        ? gameDetail?.theme?.primary
-                        : screenTheme.primary,
+                    backgroundColor: gameDetail
+                      ? gameDetail?.theme?.secondary
+                      : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(1)}>
-                <Text
-                  style={[
-                    styles.buttonText,
-                    selectedButtonABC === 1 && styles.selectedButtonText,
-                  ]}>
+                onPress={() => handleButtonPressABC({number: 1, lsk: 'A'})}>
+                <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   A
                 </Text>
               </TouchableOpacity>
@@ -199,22 +229,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor:
-                      selectedButtonABC === 2
-                        ? gameDetail
-                          ? gameDetail?.theme?.secondary
-                          : screenTheme.secondary
-                        : gameDetail
-                        ? gameDetail?.theme?.primary
-                        : screenTheme.primary,
+                    backgroundColor: gameDetail
+                      ? gameDetail?.theme?.secondary
+                      : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(2)}>
-                <Text
-                  style={[
-                    styles.buttonText,
-                    selectedButtonABC === 2 && styles.selectedButtonText,
-                  ]}>
+                onPress={() => handleButtonPressABC({number: 2, lsk: 'B'})}>
+                <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   B
                 </Text>
               </TouchableOpacity>
@@ -222,22 +243,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor:
-                      selectedButtonABC === 3
-                        ? gameDetail
-                          ? gameDetail?.theme?.secondary
-                          : screenTheme.secondary
-                        : gameDetail
-                        ? gameDetail?.theme?.primary
-                        : screenTheme.primary,
+                    backgroundColor: gameDetail
+                      ? gameDetail?.theme?.secondary
+                      : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(3)}>
-                <Text
-                  style={[
-                    styles.buttonText,
-                    selectedButtonABC === 3 && styles.selectedButtonText,
-                  ]}>
+                onPress={() => handleButtonPressABC({number: 3, lsk: 'C'})}>
+                <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   C
                 </Text>
               </TouchableOpacity>
@@ -245,22 +257,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor:
-                      selectedButtonABC === 4
-                        ? gameDetail
-                          ? gameDetail?.theme?.secondary
-                          : screenTheme.secondary
-                        : gameDetail
-                        ? gameDetail?.theme?.primary
-                        : screenTheme.primary,
+                    backgroundColor: gameDetail
+                      ? gameDetail?.theme?.secondary
+                      : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(4)}>
-                <Text
-                  style={[
-                    styles.buttonText,
-                    selectedButtonABC === 4 && styles.selectedButtonText,
-                  ]}>
+                onPress={() => handleButtonPressABC({number: 4, lsk: 'All'})}>
+                <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   All
                 </Text>
               </TouchableOpacity>
@@ -272,22 +275,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor:
-                      selectedButtonABC === 1
-                        ? gameDetail
-                          ? gameDetail?.theme?.secondary
-                          : screenTheme.secondary
-                        : gameDetail
-                        ? gameDetail?.theme?.primary
-                        : screenTheme.primary,
+                    backgroundColor: gameDetail
+                      ? gameDetail?.theme?.secondary
+                      : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(1)}>
-                <Text
-                  style={[
-                    styles.buttonText,
-                    selectedButtonABC === 1 && styles.selectedButtonText,
-                  ]}>
+                onPress={() => handleButtonPressABC({number: 1, lsk: 'AB'})}>
+                <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   AB
                 </Text>
               </TouchableOpacity>
@@ -295,22 +289,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor:
-                      selectedButtonABC === 2
-                        ? gameDetail
-                          ? gameDetail?.theme?.secondary
-                          : screenTheme.secondary
-                        : gameDetail
-                        ? gameDetail?.theme?.primary
-                        : screenTheme.primary,
+                    backgroundColor: gameDetail
+                      ? gameDetail?.theme?.secondary
+                      : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(2)}>
-                <Text
-                  style={[
-                    styles.buttonText,
-                    selectedButtonABC === 2 && styles.selectedButtonText,
-                  ]}>
+                onPress={() => handleButtonPressABC({number: 2, lsk: 'BC'})}>
+                <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   BC
                 </Text>
               </TouchableOpacity>
@@ -318,22 +303,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor:
-                      selectedButtonABC === 3
-                        ? gameDetail
-                          ? gameDetail?.theme?.secondary
-                          : screenTheme.secondary
-                        : gameDetail
-                        ? gameDetail?.theme?.primary
-                        : screenTheme.primary,
+                    backgroundColor: gameDetail
+                      ? gameDetail?.theme?.secondary
+                      : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(3)}>
-                <Text
-                  style={[
-                    styles.buttonText,
-                    selectedButtonABC === 3 && styles.selectedButtonText,
-                  ]}>
+                onPress={() => handleButtonPressABC({number: 3, lsk: 'AC'})}>
+                <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   AC
                 </Text>
               </TouchableOpacity>
@@ -341,22 +317,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor:
-                      selectedButtonABC === 4
-                        ? gameDetail
-                          ? gameDetail?.theme?.secondary
-                          : screenTheme.secondary
-                        : gameDetail
-                        ? gameDetail?.theme?.primary
-                        : screenTheme.primary,
+                    backgroundColor: gameDetail
+                      ? gameDetail?.theme?.secondary
+                      : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(4)}>
-                <Text
-                  style={[
-                    styles.buttonText,
-                    selectedButtonABC === 4 && styles.selectedButtonText,
-                  ]}>
+                onPress={() => handleButtonPressABC({number: 4, lsk: 'All'})}>
+                <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   All
                 </Text>
               </TouchableOpacity>
@@ -368,22 +335,13 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonSpecial,
                   {
-                    backgroundColor:
-                      selectedButtonABC === 1
-                        ? gameDetail
-                          ? gameDetail?.theme?.secondary
-                          : screenTheme.secondary
-                        : gameDetail
-                        ? gameDetail?.theme?.primary
-                        : screenTheme.primary,
+                    backgroundColor: gameDetail
+                      ? gameDetail?.theme?.secondary
+                      : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(1)}>
-                <Text
-                  style={[
-                    styles.buttonText,
-                    selectedButtonABC === 1 && styles.selectedButtonText,
-                  ]}>
+                onPress={() => handleButtonPressABC({number: 1, lsk: 'DEAR'})}>
+                <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   DEAR
                 </Text>
               </TouchableOpacity>
@@ -391,31 +349,26 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonSpecial,
                   {
-                    backgroundColor:
-                      selectedButtonABC === 2
-                        ? gameDetail
-                          ? gameDetail?.theme?.secondary
-                          : screenTheme.secondary
-                        : gameDetail
-                        ? gameDetail?.theme?.secondary
-                        : screenTheme.primary,
+                    backgroundColor: gameDetail
+                      ? gameDetail?.theme?.secondary
+                      : screenTheme.secondary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC(2)}>
-                <Text
-                  style={[
-                    styles.buttonText,
-                    selectedButtonABC === 2 && styles.selectedButtonText,
-                  ]}>
+                onPress={() => handleButtonPressABC({number: 1, lsk: 'BOX'})}>
+                <Text style={[styles.buttonText, styles.selectedButtonText]}>
                   BOX
                 </Text>
               </TouchableOpacity>
             </View>
           )}
-
-          {/* Count and Amount */}
+          <TableComponent
+            tableData={listData}
+            tableHeaders={TableHeaders}
+            onPressDelete={() => removeTicket(listData)}
+          />
         </View>
       </ScrollView>
+      {/* Count and Amount */}
 
       <View style={styles.bottomInputBoxes}>
         <View style={styles.horizontalRow}>
@@ -449,17 +402,44 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                   : screenTheme.secondary,
               },
             ]}
-            onPress={() => handleButtonPress(3)}>
+            onPress={() => setSaveAlert(true)}>
             <Text style={[styles.bottomButtonText]}>Book</Text>
           </TouchableOpacity>
         </View>
       </View>
+
+      <AlertBox
+        isShowAlert={saveAlert}
+        title={'Are You Sure ?'}
+        confirmText={'Ok'}
+        CancelText={'Cancel'}
+        CancelPressed={() => setSaveAlert(false)}
+        confirmPressed={() => {
+          onSaveButton();
+        }}
+      />
 
       <GameListBottomUp
         isVisible={isGameListVisible}
         onClose={closeGameList}
         onPressGame={onPressGame}
       />
+      <Modal visible={successModal}>
+        <View
+          style={{
+            backgroundColor: 'white',
+            padding: 10,
+            paddingHorizontal: 15,
+            paddingVertical: 50,
+            marginHorizontal: 30,
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 20,
+          }}>
+          <CircleCheckMark style={{marginBottom: 10}} />
+          <Text style={{color: 'black'}}>Order saved successfully</Text>
+        </View>
+      </Modal>
     </SafeAreaWrapper>
   );
 };

@@ -1,15 +1,16 @@
 import React, {useEffect, useState, useMemo} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import Modal from 'react-native-modal';
+
 import {AppDispatch} from '@app/store/index';
 import {useDispatch, useSelector} from 'react-redux';
 import {getGameList} from '@app/store/slices/gameSlice';
 import {GameThemes} from '@app/constants/constants';
 import styles from './styles';
+import ModalComponent from '../ModalComponent/Modal';
 
 type GameListBottomUpProps = {
   isVisible: boolean;
-  onClose: () => void;
+  onClose: any;
   onPressGame: Function;
 };
 
@@ -42,7 +43,7 @@ const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
   const getAvailableGames = async () => {
     const resultAction = await dispatch(getGameList(null));
     if (getGameList.fulfilled.match(resultAction)) {
-      console.log('GAME Listed=====', resultAction?.payload);
+      // console.log('GAME Listed=====', resultAction?.payload);
       setGameList(resultAction?.payload);
     } else {
       const errorResult: any = resultAction?.payload;
@@ -51,10 +52,9 @@ const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
   };
 
   return (
-    <Modal
+    <ModalComponent
       isVisible={isVisible}
-      onBackdropPress={onClose}
-      onBackButtonPress={onClose}
+      onClose={onClose}
       backdropOpacity={0.2}
       animationIn="slideInUp"
       animationOut="slideOutDown"
@@ -91,7 +91,7 @@ const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
           );
         })}
       </View>
-    </Modal>
+    </ModalComponent>
   );
 };
 

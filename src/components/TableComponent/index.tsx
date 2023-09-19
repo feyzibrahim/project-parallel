@@ -6,34 +6,29 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import styles from './styles';
 export type TableTypes = {
   tableData: any;
+  tableHeaders: Array<string>;
+  onPressDelete?: () => void;
 };
 
 const TableComponent = (props: TableTypes) => {
-  const {tableData} = props;
+  const {tableData, tableHeaders, onPressDelete} = props;
 
   return (
     <View>
       <DataTable style={styles.tableContainer}>
         <DataTable.Header style={styles.tableHeader}>
-          <DataTable.Title textStyle={styles.tableTitle}>Name</DataTable.Title>
-          <DataTable.Title textStyle={styles.tableTitle}>LSK</DataTable.Title>
-          <DataTable.Title textStyle={styles.tableTitle}>
-            Number
-          </DataTable.Title>
-          <DataTable.Title textStyle={styles.tableTitle}>Count</DataTable.Title>
-          <DataTable.Title textStyle={styles.tableTitle}>
-            ₹₹ - C
-          </DataTable.Title>
-          <DataTable.Title textStyle={styles.tableTitle}>
-            ₹₹ - D
-          </DataTable.Title>
-          <DataTable.Title style={{flex: 0.3}}>{''}</DataTable.Title>
+          {tableHeaders?.map((item: any) => (
+            <DataTable.Title textStyle={styles.tableTitle} key={item}>
+              {item}
+            </DataTable.Title>
+          ))}
         </DataTable.Header>
         <FlatList
           data={tableData}
           renderItem={(item: any) => {
+            // console.log(item, '==========');
             return (
-              <DataTable.Row>
+              <DataTable.Row style={{}}>
                 <DataTable.Cell textStyle={styles.tableTitle}>
                   {item?.item?.userId?.username}
                 </DataTable.Cell>
@@ -52,8 +47,9 @@ const TableComponent = (props: TableTypes) => {
                 <DataTable.Cell textStyle={styles.tableTitle}>
                   {item?.item?.amountD}
                 </DataTable.Cell>
-                <DataTable.Cell style={{justifyContent: 'center', flex: 0.3}}>
-                  <Pressable onPress={() => Alert.alert('PLease Try Later!!!')}>
+                <DataTable.Cell
+                  style={{justifyContent: 'flex-start', flex: 0.3}}>
+                  <Pressable onPress={onPressDelete}>
                     <Icon name="delete" size={12} color={'#000'} />
                   </Pressable>
                 </DataTable.Cell>
