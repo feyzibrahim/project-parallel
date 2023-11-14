@@ -1,12 +1,11 @@
+import AppBar from '@app/components/AppBarComponent';
 import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 
 const PrivacyPolicyScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Privacy Policy</Text>
-      </View>
+      <AppBar title="Privacy Policy" />
       <View style={styles.content}>
         <Text style={styles.title}>Privacy Policy</Text>
         <Text style={styles.subTitle}>Information We Collect</Text>
@@ -31,17 +30,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  header: {
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    alignItems: 'center',
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
   },
   content: {
     flex: 1,

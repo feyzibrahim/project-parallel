@@ -91,7 +91,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         <View style={styles.body}>
           {/* Customer Name */}
 
-          {/* <Text>Customer</Text> */}
           <View style={styles.inputContainer}>
             <TextInput
               style={styles.input}

@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {RootStackParamList} from './types';
 
-import LoginPage from '@app/screens/LoginScreen/index';
+import LoginScreen from '@app/screens/LoginScreen';
 import SettingsScreen from '@app/screens/Settings/SettingsScreen';
 import NotificationScreen from '@app/screens/SettingsOptions/NotificationScreen';
 import PrivacyPolicyScreen from '@app/screens/SettingsOptions/PrivacyPolicyScreen';
@@ -14,7 +14,7 @@ import Userlist from '@app/screens/UserList';
 import ResultAddScreen from '@app/screens/ResultAddScreen';
 import UserAddList from '@app/screens/UserAddList';
 import GameSettingsScreen from '@app/screens/GameSettingsScreen';
-import PackageScreen from '@app/screens/PackageScreen/PackageScreen';
+import PackageScreen from '@app/screens/PackageScreen';
 import PackageCreateScreen from '@app/screens/PackageCreateScreen';
 
 const Navigation: React.FC = () => {
@@ -25,7 +25,7 @@ const Navigation: React.FC = () => {
       <Stack.Navigator
         initialRouteName="Login"
         screenOptions={{headerShown: false, gestureEnabled: true}}>
-        <Stack.Screen name="Login" component={LoginPage} />
+        <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="BottomTab" component={BottomTabNavigation} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
         <Stack.Screen name="Notification" component={NotificationScreen} />

@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View} from 'react-native';
 import {AppDispatch} from '@app/store/index';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {getGameList} from '@app/store/slices/gameSlice';
 import styles from './styles';
 import {HomeScreenNavigationProp} from '../../navigations/types';
 import {GameThemes} from '@app/constants/constants';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import GameToggleButton from '@app/components/GameToggleComponent';
+import AppBar from '@app/components/AppBarComponent';
 
 type NavigationScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -48,14 +49,9 @@ const SettingsScreen: React.FC<NavigationScreenProps> = ({navigation}) => {
 
   return (
     <SafeAreaWrapper containerStyle={styles.container} statusbar={'#F2F4F5'}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.headerText}>Game Settings</Text>
-        </View>
-      </View>
+      <AppBar title="Game Settings" />
       <View style={styles.gameList}>
         {gameList?.map((item, index) => {
-          // const bgCOLOR = colorTheme(index);
           return (
             <GameToggleButton
               gameName={item.gameName}
@@ -65,31 +61,6 @@ const SettingsScreen: React.FC<NavigationScreenProps> = ({navigation}) => {
               isActive={item.isActive}
               key={index}
             />
-            // <View
-            //   key={index}
-            //   style={{...styles.card, backgroundColor: bgCOLOR?.primary}}>
-            //   <View style={styles.cardFlex}>
-            //     <View>
-            //       <View style={styles.nameFlex}>
-            //         <Text
-            //           style={{...styles.cardTitle, color: bgCOLOR?.secondary}}>
-            //           {item?.gameName}
-            //         </Text>
-            //         <Text
-            //           style={{...styles.cardTime, color: bgCOLOR?.secondary}}>
-            //           | {item?.location}
-            //         </Text>
-            //       </View>
-            //       <Text
-            //         style={{...styles.cardDetails, color: bgCOLOR?.secondary}}>
-            //         {item?.time}
-            //       </Text>
-            //     </View>
-            //     <Text style={{...styles.cardTime, color: bgCOLOR?.secondary}}>
-            //       {item?.isActive.toString()}
-            //     </Text>
-            //   </View>
-            // </View>
           );
         })}
       </View>

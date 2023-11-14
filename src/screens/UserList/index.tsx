@@ -7,7 +7,8 @@ import {AppDispatch} from '@app/store/index';
 import {userList} from '@app/store/slices/authSlice';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import {HomeScreenNavigationProp} from '@app/navigations/types';
-import Icon from 'react-native-vector-icons/AntDesign';
+import FloatingActionButton from '@app/components/FloatingButton';
+import AppBar from '@app/components/AppBarComponent';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -44,11 +45,7 @@ const Userlist: React.FC<HomeScreenProps> = ({navigation}) => {
 
   return (
     <SafeAreaWrapper statusbar={'#F2F4F5'}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.headerText}>Users</Text>
-        </View>
-      </View>
+      <AppBar title="Distributors List" />
       <View style={styles.container}>
         <FlatList
           data={user}
@@ -56,13 +53,12 @@ const Userlist: React.FC<HomeScreenProps> = ({navigation}) => {
           keyExtractor={item => item._id}
         />
       </View>
-      <TouchableOpacity
-        style={styles.floatingButton}
-        onPress={() => {
+      <FloatingActionButton
+        iconName="adduser"
+        onPressButton={() => {
           navigation.navigate('UserAddList');
-        }}>
-        <Icon name="adduser" size={18} color={'#ffffff'} />
-      </TouchableOpacity>
+        }}
+      />
     </SafeAreaWrapper>
   );
 };

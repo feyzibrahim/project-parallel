@@ -1,17 +1,12 @@
 import React, {useState} from 'react';
-import {
-  View,
-  FlatList,
-  Pressable,
-  Alert,
-  Text,
-  TouchableOpacity,
-} from 'react-native';
+import {View, FlatList, Pressable, Alert} from 'react-native';
 import {DataTable} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/AntDesign';
 import styles from './styles';
 import {HomeScreenNavigationProp} from '@app/navigations/types';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
+import FloatingActionButton from '@app/components/FloatingButton';
+import AppBar from '@app/components/AppBarComponent';
 
 type Item = {
   id: string;
@@ -22,7 +17,7 @@ type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
 
-const TablePage: React.FC<HomeScreenProps> = ({navigation}) => {
+const PackageScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const [data, setData] = useState<Item[]>([
     {id: '1', name: 'John'},
     {id: '2', name: 'Alice'},
@@ -39,11 +34,7 @@ const TablePage: React.FC<HomeScreenProps> = ({navigation}) => {
 
   return (
     <SafeAreaWrapper containerStyle={styles.container} statusbar={'#F2F4F5'}>
-      <View style={styles.profileHeader}>
-        <View>
-          <Text style={styles.headerText}>Package Manager</Text>
-        </View>
-      </View>
+      <AppBar title="Package Manager" />
       <View style={styles.container}>
         <DataTable style={styles.table}>
           <DataTable.Header>
@@ -72,15 +63,14 @@ const TablePage: React.FC<HomeScreenProps> = ({navigation}) => {
           />
         </DataTable>
       </View>
-      <TouchableOpacity
-        style={styles.floatingButton}
-        onPress={() => {
+      <FloatingActionButton
+        iconName="addfile"
+        onPressButton={() => {
           navigation.navigate('PackageCreateScreen');
-        }}>
-        <Icon name="addfile" size={18} color={'#ffffff'} />
-      </TouchableOpacity>
+        }}
+      />
     </SafeAreaWrapper>
   );
 };
 
-export default TablePage;
+export default PackageScreen;

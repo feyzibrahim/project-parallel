@@ -9,6 +9,7 @@ import User from '@app/assets/icons/user.svg';
 import styles from './styles';
 import ButtonComponent from '@app/components/ButtonComponent';
 import ToggleButton from '@app/components/ToggleButtonComponent';
+import AppBar from '@app/components/AppBarComponent';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -17,11 +18,7 @@ type HomeScreenProps = {
 const ProfileScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   return (
     <SafeAreaWrapper containerStyle={styles.container} statusbar={'#F2F4F5'}>
-      <View style={styles.profileHeader}>
-        <View>
-          <Text style={styles.headerText}>My Profile</Text>
-        </View>
-      </View>
+      <AppBar title="My Profile" />
       <ScrollView>
         <View style={styles.content}>
           <View style={styles.UpperPart}>
@@ -31,7 +28,6 @@ const ProfileScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           <View style={styles.body}>
             <ToggleButton label="Dark Mode" />
             <ToggleButton label="Sample" />
-
             <TouchableOpacity
               style={styles.middlePart}
               onPress={() => navigation.navigate('UserList')}>

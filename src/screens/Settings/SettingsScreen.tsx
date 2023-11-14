@@ -6,6 +6,7 @@ import {HomeScreenNavigationProp} from '../../navigations/types';
 import styles from './styles';
 
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
+import AppBar from '@app/components/AppBarComponent';
 
 type NavigationScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -14,11 +15,7 @@ type NavigationScreenProps = {
 const SettingsScreen: React.FC<NavigationScreenProps> = ({navigation}) => {
   return (
     <SafeAreaWrapper containerStyle={styles.container} statusbar={'#F2F4F5'}>
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.headerText}>Settings</Text>
-        </View>
-      </View>
+      <AppBar title="Settings" />
       <View style={styles.content}>
         <TouchableOpacity
           style={styles.optionButton}

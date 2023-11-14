@@ -1,16 +1,15 @@
-import React, {useState} from 'react';
+import React from 'react';
 
-import {ScrollView, TouchableOpacity} from 'react-native';
+import {ScrollView} from 'react-native';
 import styles from './styles';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
-import {COLORS} from '@app/constants/themes';
 import HeaderComponent from '@app/components/HeaderComponent';
 import GameListBottomUp from '../../components/GameListBottomUp/GameListBottomUp';
 import DateInputComponent from '@app/components/DateInputComponent';
 import {HomeScreenNavigationProp} from '@app/navigations/types';
-import Icon from 'react-native-vector-icons/Octicons';
 import useResultHook from './useResultHook';
 import {useSelector} from 'react-redux';
+import FloatingActionButton from '@app/components/FloatingButton';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -64,13 +63,12 @@ const ResultScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         onClose={closeGameList}
         onPressGame={onPressGame}
       />
-      <TouchableOpacity
-        style={styles.floatingButton}
-        onPress={() => {
+      <FloatingActionButton
+        iconName="plus"
+        onPressButton={() => {
           navigation.navigate('ResultAddScreen');
-        }}>
-        <Icon name="plus" size={18} color={'#ffffff'} />
-      </TouchableOpacity>
+        }}
+      />
     </SafeAreaWrapper>
   );
 };

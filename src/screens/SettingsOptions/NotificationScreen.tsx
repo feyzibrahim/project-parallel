@@ -1,12 +1,11 @@
+import AppBar from '@app/components/AppBarComponent';
 import React from 'react';
 import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
 
 const NotificationScreen: React.FC = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.header}>
-        <Text style={styles.headerText}>Notifications</Text>
-      </View>
+      <AppBar title="Notifications" />
       <View style={styles.content}>
         <NotificationItem
           title="New Message"
@@ -51,17 +50,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-  },
-  header: {
-    paddingVertical: 20,
-    paddingHorizontal: 15,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
-    alignItems: 'center',
-  },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
   },
   content: {
     flex: 1,
