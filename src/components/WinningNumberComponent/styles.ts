@@ -10,9 +10,13 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
+  winNumberParent: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
   winnerPlaceWrap: {
     flexDirection: 'row',
-    paddingLeft:8,
+    paddingLeft: 8,
     paddingRight: 20,
     paddingVertical: 5,
     backgroundColor: COLORS.darkBlueShade,
@@ -30,20 +34,20 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
   },
-  placmentText: {
+  placementText: {
     color: COLORS.white,
     fontSize: 15,
     padding: 2,
     flexDirection: 'row',
     alignItems: 'flex-end',
-    right:2
+    right: 2,
   },
   superScript: {
     position: 'absolute',
     top: -5,
     left: -4,
     fontSize: 12,
-    color:COLORS.white
+    color: COLORS.white,
   },
   lotteryNumber: {
     color: COLORS.primary,

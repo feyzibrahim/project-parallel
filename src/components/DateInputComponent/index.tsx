@@ -8,13 +8,23 @@ import Icon from 'react-native-vector-icons/AntDesign';
 import WonNumberComponent from '../WinningNumberComponent';
 import GuaranteeNumbers from '../GuaranteeNumberComponent';
 import ShareToWhatsapp from '../WhatsappShareComponent';
+import {getResultByDate} from '@app/store/actions/admin/resultActions';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '@app/store/index';
 
 const DateInputComponent = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
   const [date, setDate] = useState(null);
   const [calender, setCalender] = useState(false);
 
+  const dispatchFetchResult = () => {
+    dispatch(getResultByDate(null));
+  };
+
   const onDateChange = (date: any) => {
     setDate(date.toString());
+    dispatchFetchResult();
     setCalender(true);
     console.log(date);
   };

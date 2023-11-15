@@ -9,6 +9,7 @@ import {persistReducer} from 'redux-persist';
 import gameSlice from './slices/gameSlice';
 import packageSlice from './slices/packageSlice';
 import bookingSlice from './slices/bookingSlice';
+import resultSlice from './slices/resultSlice';
 
 const persistConfig = {
   key: 'root',
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   game: gameSlice,
   packages: packageSlice,
   booking: bookingSlice,
+  result: resultSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

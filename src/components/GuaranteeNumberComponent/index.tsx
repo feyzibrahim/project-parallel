@@ -2,12 +2,15 @@ import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 
 import styles from './styles';
+import {useSelector} from 'react-redux';
 
 const GuaranteeNumbers = () => {
-  const renderItem = () => {
+  const {currentBooking} = useSelector((state: any) => state?.result);
+
+  const renderItem = ({item}: any) => {
     return (
       <View style={styles.ticketNumberWrap}>
-        <Text style={styles.ticketNumberText}>123</Text>
+        <Text style={styles.ticketNumberText}>{item}</Text>
       </View>
     );
   };
@@ -16,9 +19,8 @@ const GuaranteeNumbers = () => {
       <Text style={styles.header}>Guarantee</Text>
       <View>
         <FlatList
-          data={Array(30).fill(30)}
-          renderItem={renderItem}
-          //   keyExtractor={(item: any) => item?.id}
+          data={currentBooking?.guarantee}
+          renderItem={item => renderItem(item)}
           numColumns={6}
         />
       </View>
