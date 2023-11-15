@@ -14,15 +14,7 @@ const useReportHook = () => {
   const [gameDetail, setGameDetail] = useState<any>('');
   const [bookingList, setBookingList] = useState<any>([]);
 
-  const TableHeaders = [
-    'Name',
-    'LSK',
-    'Number',
-    'Count',
-    '₹₹ - C',
-    '₹₹ - D',
-    '',
-  ];
+  const TableHeaders = ['Name', 'LSK', 'Number', 'Count', '₹₹ - C', '₹₹ - D'];
 
   useEffect(() => {
     getGameBooking();

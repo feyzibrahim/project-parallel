@@ -6,10 +6,10 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import {DetailsScreenNavigationProp} from '../../navigations/types';
+import {HomeScreenNavigationProp} from '../../navigations/types';
 
 type DetailsScreenProps = {
-  navigation: DetailsScreenNavigationProp;
+  navigation: HomeScreenNavigationProp;
 };
 
 const DetailsScreen: React.FC<DetailsScreenProps> = ({navigation}) => {

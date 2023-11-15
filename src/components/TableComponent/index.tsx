@@ -29,9 +29,11 @@ const TableComponent = (props: TableTypes) => {
             // console.log(item, '==========');
             return (
               <DataTable.Row style={{}}>
-                <DataTable.Cell textStyle={styles.tableTitle}>
-                  {item?.item?.userId?.username}
-                </DataTable.Cell>
+                {item?.item?.userId?.username && (
+                  <DataTable.Cell textStyle={styles.tableTitle}>
+                    {item?.item?.userId?.username}
+                  </DataTable.Cell>
+                )}
                 <DataTable.Cell textStyle={styles.tableTitle}>
                   {item?.item?.lsk}
                 </DataTable.Cell>

@@ -26,15 +26,7 @@ type HomeScreenProps = {
 const HomeScreen: React.FC<HomeScreenProps> = () => {
   const {game} = useSelector((state: any) => state?.game);
 
-  const TableHeaders = [
-    '',
-    'LSK',
-    'Number',
-    '  Count',
-    '₹₹ - D',
-    '₹₹ - C',
-    '#',
-  ];
+  const TableHeaders = ['LSK', 'Number', 'Count', '₹₹ - D', '₹₹ - C', '#'];
 
   const {
     isGameListVisible,

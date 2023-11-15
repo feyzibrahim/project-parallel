@@ -7,6 +7,11 @@ import {HomeScreenNavigationProp} from '@app/navigations/types';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import FloatingActionButton from '@app/components/FloatingButton';
 import AppBar from '@app/components/AppBarComponent';
+import {useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
+import {getPackages} from '@app/store/actions/user/packageActions';
+import {AppDispatch} from '@app/store/index';
+import {useEffect} from 'react';
 
 type Item = {
   id: string;
@@ -24,9 +29,19 @@ const PackageScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     {id: '3', name: 'Bob'},
     // Add more rows as needed
   ]);
+  const {packages} = useSelector((state: any) => state?.packages);
+
+  const dispatch = useDispatch<AppDispatch>();
+
+  const dispatchGetPackages = () => {
+    dispatch(getPackages(null));
+  };
+
+  useEffect(() => {
+    dispatchGetPackages();
+  }, []);
 
   const handleDelete = (id: string) => {
-    // Implement your delete logic here, e.g., remove the item from the data array
     const newData = data.filter(item => item.id !== id);
     setData(newData);
     Alert.alert('Item Deleted');
@@ -43,8 +58,8 @@ const PackageScreen: React.FC<HomeScreenProps> = ({navigation}) => {
           </DataTable.Header>
 
           <FlatList
-            data={data}
-            keyExtractor={item => item.id}
+            data={packages}
+            keyExtractor={item => item._id}
             renderItem={({item}) => (
               <DataTable.Row style={styles.row}>
                 <DataTable.Cell style={styles.cell}>{item.name}</DataTable.Cell>

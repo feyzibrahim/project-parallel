@@ -6,10 +6,10 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from 'react-native';
-import {AboutScreenNavigationProp} from '../../navigations/types';
+import {HomeScreenNavigationProp} from '../../navigations/types';
 
 type AboutScreenProps = {
-  navigation: AboutScreenNavigationProp;
+  navigation: HomeScreenNavigationProp;
 };
 
 const AboutScreen: React.FC<AboutScreenProps> = ({navigation}) => {
