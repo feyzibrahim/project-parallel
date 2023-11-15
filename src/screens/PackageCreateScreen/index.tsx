@@ -1,92 +1,199 @@
-import React, {useState} from 'react';
-import {View, Text, TextInput, Button, StyleSheet} from 'react-native';
+import React from 'react';
+import {View, Text, ScrollView} from 'react-native';
 import styles from './styles';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
+import {Formik} from 'formik';
+import InputType from '@app/components/InputType';
+import * as Yup from 'yup';
+import AppBar from '@app/components/AppBarComponent';
+import ButtonComponent from '@app/components/ButtonComponent';
+import {createPackage} from '@app/store/actions/admin/packageActions';
+import {useDispatch} from 'react-redux';
+import {AppDispatch} from '@app/store/index';
+import {PackageFormData} from '@app/types/common';
+import {useNavigation} from '@react-navigation/native';
 
-type FormData = {
-  title: string;
-  property1: string;
-  rate1: string;
-  commission1: string;
-  property2: string;
-  rate2: string;
-  commission2: string;
-  property3: string;
-  rate3: string;
-  commission3: string;
-  property4: string;
-  rate4: string;
-  commission4: string;
-};
+const PackageCreateScreen: React.FC = ({}) => {
+  // Dispatch Hook
+  const dispatch = useDispatch<AppDispatch>();
+  const navigation = useNavigation();
 
-const FormPage: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
+  // Type of the form data
+
+  // Formik Initial Value setting
+  const initialValues: PackageFormData = {
     title: '',
-    property1: '',
-    rate1: '',
-    commission1: '',
-    property2: '',
-    rate2: '',
-    commission2: '',
-    property3: '',
-    rate3: '',
-    commission3: '',
-    property4: '',
-    rate4: '',
-    commission4: '',
+    singleRate: '',
+    singleCommission: '',
+    doubleRate: '',
+    doubleCommission: '',
+    lskSuperRate: '',
+    lskSuperCommission: '',
+    boxRate: '',
+    boxCommission: '',
+  };
+
+  // Formik Schema for validation
+  const packageSchema = Yup.object().shape({
+    title: Yup.string().required('Title is required'),
+    singleRate: Yup.number()
+      .typeError('Single Rate must be a number')
+      .required('Single Rate is required'),
+    singleCommission: Yup.number()
+      .typeError('Single Commission must be a number')
+      .required('Single Commission is required'),
+    doubleRate: Yup.number()
+      .typeError('Double Rate must be a number')
+      .required('Double Rate is required'),
+    doubleCommission: Yup.number()
+      .typeError('Double Commission must be a number')
+      .required('Double Commission is required'),
+    lskSuperRate: Yup.number()
+      .typeError('LSK Super Rate must be a number')
+      .required('LSK Super Rate is required'),
+    lskSuperCommission: Yup.number()
+      .typeError('LSK Super Commission must be a number')
+      .required('LSK Super Commission is required'),
+    boxRate: Yup.number()
+      .typeError('Box Rate must be a number')
+      .required('Box Rate is required'),
+    boxCommission: Yup.number()
+      .typeError('Box Commission must be a number')
+      .required('Box Commission is required'),
   });
 
-  const handleSave = () => {
-    // Implement your save logic here, e.g., send the formData to a server or store it locally.
-    console.log('Form Data:', formData);
-    // You can reset the form or navigate to another screen after saving.
+  const handleSave = (values: PackageFormData) => {
+    // console.log('Form Data:', values);
+    const packageData = {
+      name: values.title,
+      single: {
+        rate: parseFloat(values.singleRate),
+        commission: parseFloat(values.singleCommission),
+      },
+      double: {
+        rate: parseFloat(values.doubleRate),
+        commission: parseFloat(values.doubleCommission),
+      },
+      lskSuper: {
+        rate: parseFloat(values.lskSuperRate),
+        commission: parseFloat(values.lskSuperCommission),
+      },
+      box: {
+        rate: parseFloat(values.boxRate),
+        commission: parseFloat(values.boxCommission),
+      },
+    };
+    dispatch(createPackage(packageData)).then(() => {
+      navigation.goBack();
+    });
   };
 
   return (
-    <SafeAreaWrapper containerStyle={styles.container} statusbar={'#F2F4F5'}>
-      <View style={styles.profileHeader}>
-        <View>
-          <Text style={styles.headerText}>Create Package</Text>
+    <SafeAreaWrapper statusbar={'#F2F4F5'}>
+      <AppBar title="Package Manager" />
+
+      <ScrollView>
+        <View style={styles.container}>
+          <Formik
+            initialValues={initialValues}
+            validationSchema={packageSchema}
+            onSubmit={handleSave}>
+            {({handleChange, handleBlur, handleSubmit, values}) => (
+              <View style={styles.container}>
+                <InputType
+                  name="title"
+                  label="Title"
+                  placeholder="Enter Title"
+                  onChangeText={handleChange('title')}
+                  onBlur={handleBlur('title')}
+                  value={values.title}
+                />
+                <InputType
+                  name="singleRate"
+                  label="Single Rate"
+                  placeholder="Enter Single Rate"
+                  keyboardType="numeric"
+                  onChangeText={handleChange('singleRate')}
+                  onBlur={handleBlur('singleRate')}
+                  value={values.singleRate}
+                />
+                <InputType
+                  name="singleCommission"
+                  label="Single Commission"
+                  placeholder="Enter Single Commission"
+                  keyboardType="numeric"
+                  onChangeText={handleChange('singleCommission')}
+                  onBlur={handleBlur('singleCommission')}
+                  value={values.singleCommission}
+                />
+                <InputType
+                  name="doubleRate"
+                  label="Double Rate"
+                  placeholder="Enter Double Rate"
+                  keyboardType="numeric"
+                  onChangeText={handleChange('doubleRate')}
+                  onBlur={handleBlur('doubleRate')}
+                  value={values.doubleRate}
+                />
+                <InputType
+                  name="doubleCommission"
+                  label="Double Commission"
+                  placeholder="Enter Double Commission"
+                  keyboardType="numeric"
+                  onChangeText={handleChange('doubleCommission')}
+                  onBlur={handleBlur('doubleCommission')}
+                  value={values.doubleCommission}
+                />
+                <InputType
+                  name="lskSuperRate"
+                  label="LSK Super Rate"
+                  placeholder="Enter LSK Super Rate"
+                  keyboardType="numeric"
+                  onChangeText={handleChange('lskSuperRate')}
+                  onBlur={handleBlur('lskSuperRate')}
+                  value={values.lskSuperRate}
+                />
+                <InputType
+                  name="lskSuperCommission"
+                  label="LSK Super Commission"
+                  placeholder="Enter LSK Super Commission"
+                  keyboardType="numeric"
+                  onChangeText={handleChange('lskSuperCommission')}
+                  onBlur={handleBlur('lskSuperCommission')}
+                  value={values.lskSuperCommission}
+                />
+                <InputType
+                  name="boxRate"
+                  label="Box Rate"
+                  placeholder="Enter Box Rate"
+                  keyboardType="numeric"
+                  onChangeText={handleChange('boxRate')}
+                  onBlur={handleBlur('boxRate')}
+                  value={values.boxRate}
+                />
+                <InputType
+                  name="boxCommission"
+                  label="Box Commission"
+                  placeholder="Enter Box Commission"
+                  keyboardType="numeric"
+                  onChangeText={handleChange('boxCommission')}
+                  onBlur={handleBlur('boxCommission')}
+                  value={values.boxCommission}
+                />
+                {/* <CustomButton title="Save" onPress={handleSubmit} /> */}
+                <View style={styles.container}>
+                  <ButtonComponent
+                    gotoHome={handleSubmit}
+                    buttonLabel={'Save'}
+                  />
+                </View>
+              </View>
+            )}
+          </Formik>
         </View>
-      </View>
-      <View style={styles.container}>
-        <Text style={styles.label}>Title:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={text => setFormData({...formData, title: text})}
-          value={formData.title}
-          placeholder="Enter Title"
-        />
-
-        {/* Repeat this block for each property */}
-        <Text style={styles.label}>Property 1:</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={text => setFormData({...formData, property1: text})}
-          value={formData.property1}
-          placeholder="Property Name"
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={text => setFormData({...formData, rate1: text})}
-          value={formData.rate1}
-          placeholder="Rate"
-          keyboardType="numeric"
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={text => setFormData({...formData, commission1: text})}
-          value={formData.commission1}
-          placeholder="Commission"
-          keyboardType="numeric"
-        />
-
-        {/* Repeat this block for properties 2, 3, and 4 */}
-
-        <Button title="Save" onPress={handleSave} />
-      </View>
+      </ScrollView>
     </SafeAreaWrapper>
   );
 };
 
-export default FormPage;
+export default PackageCreateScreen;

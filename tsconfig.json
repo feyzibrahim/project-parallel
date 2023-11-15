@@ -4,6 +4,7 @@
     "baseUrl": ".",
     "paths": {
       "@app/components/*": ["src/components/*"],
+      "@app/types/*": ["src/types/*"],
       "@app/constants/*": ["src/constants/*"],
       "@app/assets/*": ["src/assets/*"],
       "@app/screens/*": ["src/screens/*"],

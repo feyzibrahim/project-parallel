@@ -8,6 +8,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistReducer} from 'redux-persist';
 import gameSlice from './slices/gameSlice';
 import packageSlice from './slices/packageSlice';
+import bookingSlice from './slices/bookingSlice';
 
 const persistConfig = {
   key: 'root',
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   // [useGameSliceQuery.reducerPath]: useGameSliceQuery.reducer,
   game: gameSlice,
   packages: packageSlice,
+  booking: bookingSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

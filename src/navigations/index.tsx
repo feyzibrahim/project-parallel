@@ -39,6 +39,7 @@ const Navigation: React.FC = () => {
           name="GameSettingsScreen"
           component={GameSettingsScreen}
         />
+        {/* Package */}
         <Stack.Screen name="PackageScreen" component={PackageScreen} />
         <Stack.Screen
           name="PackageCreateScreen"

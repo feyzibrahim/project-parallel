@@ -1,5 +1,5 @@
 import {useDispatch} from 'react-redux';
-import {getPackages} from '@app/store/actions/user/packageActions';
+import {getPackages} from '@app/store/actions/admin/packageActions';
 import {AppDispatch} from '@app/store/index';
 import {useEffect} from 'react';
 

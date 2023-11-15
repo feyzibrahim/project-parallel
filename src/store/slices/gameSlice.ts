@@ -1,21 +1,4 @@
-// import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-// import { axiosBaseQuery } from 'src/api/api';
-
-// export const gameSlice = createApi({
-//   reducerPath: 'gameSlice',
-//   //   baseQuery: fetchBaseQuery({baseUrl: 'https://project-parallel.onrender.com/'}),
-//   baseQuery: axiosBaseQuery(),
-//   endpoints: builder => ({
-//     gameSlice: builder.query({
-//       query: () => ({method: 'get', url: 'api/games/'}),
-//     }),
-//   }),
-// });
-
-// export const {useGameSliceQuery} = gameSlice;
-
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import type {PayloadAction} from '@reduxjs/toolkit';
 import {getAxiosInstance} from '../../api/api';
 
 // Define a type for the slice state
@@ -35,7 +18,6 @@ export const getGameList = createAsyncThunk(
     const api = await getAxiosInstance();
     try {
       const response = await api.get('api/games/');
-      // console.log(response);
       return response?.data;
     } catch (error: any) {
       return rejectWithValue(error?.response?.data);
@@ -49,7 +31,6 @@ export const getGameBookings = createAsyncThunk(
     const api = await getAxiosInstance();
     try {
       const response = await api.get('api/booking/');
-      // console.log(response);
       return response?.data;
     } catch (error: any) {
       return rejectWithValue(error?.response?.data);
@@ -63,8 +44,7 @@ export const saveGames = createAsyncThunk(
     // console.log(params,'=======PARAMS')
     const api = await getAxiosInstance();
     try {
-      const response = await api.post('api/booking/insert-many/',params);
-      console.log(response,'=========jkhgjkhgjkh');
+      const response = await api.post('api/booking/insert-many/', params);
       return response?.data;
     } catch (error: any) {
       return rejectWithValue(error?.response?.data);

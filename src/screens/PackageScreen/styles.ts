@@ -30,6 +30,7 @@ const styles = StyleSheet.create({
   },
   actions: {
     flexDirection: 'row', // To position icons side by side
+    gap: 20,
   },
   floatingButton: {
     position: 'absolute',
