@@ -73,6 +73,17 @@ const ProfileScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 style={{marginRight: 10}}
               />
             </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.middlePart}
+              onPress={() => navigation.navigate('Test')}>
+              <Text style={styles.navigationText}>Test</Text>
+              <Icon
+                name="right"
+                size={18}
+                color={'#000'}
+                style={{marginRight: 10}}
+              />
+            </TouchableOpacity>
           </View>
           <View style={styles.footer}>
             <ButtonComponent

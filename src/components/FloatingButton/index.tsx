@@ -6,15 +6,17 @@ import styles from './style';
 type FloatingActionButtonProps = {
   iconName: string;
   onPressButton: Function;
+  style: {} | null;
 };
 
 const FloatingActionButton: React.FC<FloatingActionButtonProps> = ({
   iconName,
   onPressButton,
+  style,
 }) => {
   return (
     <TouchableOpacity
-      style={styles.floatingButton}
+      style={style || styles.floatingButton}
       onPress={() => {
         onPressButton();
       }}>

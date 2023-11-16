@@ -73,6 +73,7 @@ const PackageScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         onPressButton={() => {
           navigation.navigate('PackageCreateScreen');
         }}
+        style={null}
       />
     </SafeAreaWrapper>
   );

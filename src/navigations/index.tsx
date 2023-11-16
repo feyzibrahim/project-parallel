@@ -16,6 +16,7 @@ import UserAddList from '@app/screens/UserAddList';
 import GameSettingsScreen from '@app/screens/GameSettingsScreen';
 import PackageScreen from '@app/screens/PackageScreen';
 import PackageCreateScreen from '@app/screens/PackageCreateScreen';
+import TestScreen from '@app/screens/TestScreen';
 
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -45,6 +46,7 @@ const Navigation: React.FC = () => {
           name="PackageCreateScreen"
           component={PackageCreateScreen}
         />
+        <Stack.Screen name="Test" component={TestScreen} />
       </Stack.Navigator>
     </React.Fragment>
   );

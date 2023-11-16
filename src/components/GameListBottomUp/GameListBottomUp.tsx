@@ -1,26 +1,16 @@
-import React, {useEffect, useState, useMemo} from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-
+import React, {useEffect} from 'react';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {AppDispatch} from '@app/store/index';
 import {useDispatch, useSelector} from 'react-redux';
-import {getGameList} from '@app/store/slices/gameSlice';
 import {GameThemes} from '@app/constants/constants';
 import styles from './styles';
 import ModalComponent from '../ModalComponent/Modal';
+import {getGameList} from '@app/store/actions/admin/gameActions';
 
 type GameListBottomUpProps = {
   isVisible: boolean;
   onClose: any;
   onPressGame: Function;
-};
-
-type Competition = {
-  id: number;
-  gameName: string;
-  location: string;
-  time: string;
-  primary: string;
-  secondary: string;
 };
 
 const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
@@ -29,7 +19,7 @@ const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
   onPressGame,
 }) => {
   const dispatch = useDispatch<AppDispatch>();
-  const [gameList, setGameList] = useState<Competition[]>([]);
+  const {games} = useSelector((state: any) => state.games);
 
   useEffect(() => {
     getAvailableGames();
@@ -40,15 +30,8 @@ const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
     return primaryColors[index];
   };
 
-  const getAvailableGames = async () => {
-    const resultAction = await dispatch(getGameList(null));
-    if (getGameList.fulfilled.match(resultAction)) {
-      // console.log('GAME Listed=====', resultAction?.payload);
-      setGameList(resultAction?.payload);
-    } else {
-      const errorResult: any = resultAction?.payload;
-      console.log('GAME Listed===ERROR=====', errorResult);
-    }
+  const getAvailableGames = () => {
+    dispatch(getGameList(null));
   };
 
   return (
@@ -65,13 +48,13 @@ const GameListBottomUp: React.FC<GameListBottomUpProps> = ({
       style={styles.modal}>
       <View style={styles.content}>
         <Text style={styles.headerText}>Select Game</Text>
-        {gameList?.map((item, index) => {
+        {games?.map((item: any, index: number) => {
           const bgCOLOR = colorTheme(index);
           return (
             <TouchableOpacity
               key={index}
               style={{...styles.card, backgroundColor: bgCOLOR?.primary}}
-              onPress={() => onPressGame({game: item, theme: bgCOLOR})}>
+              onPress={() => onPressGame(item._id)}>
               <View style={styles.cardFlex}>
                 <View>
                   <Text

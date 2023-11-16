@@ -1,18 +1,21 @@
 import {useState, useEffect} from 'react';
 import {GameThemes} from '@app/constants/constants';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from '@app/store/index';
-import {getGameBookings} from '@app/store/slices/gameSlice';
+// import {getGameBookings} from '@app/store/slices/gameSlice';
+import {getBookings} from '@app/store/actions/admin/bookingActions';
 
 const useReportHook = () => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const {bookings, loading, error} = useSelector((state: any) => state.booking);
 
   const [isGameListVisible, setGameListVisible] = useState(false);
   const [selectedButton, setSelectedButton] = useState<number | null>(1);
   const [selectedButtonABC, setSelectedButtonABC] = useState<number | null>(1);
   const [screenTheme, setScreenTheme] = useState<any>('');
   const [gameDetail, setGameDetail] = useState<any>('');
-  const [bookingList, setBookingList] = useState<any>([]);
+  // const [bookingList, setBookingList] = useState<any>([]);
 
   const TableHeaders = ['Name', 'LSK', 'Number', 'Count', '₹₹ - C', '₹₹ - D'];
 
@@ -22,10 +25,10 @@ const useReportHook = () => {
   }, []);
 
   const getGameBooking = async () => {
-    const resultAction = await dispatch(getGameBookings(null));
-    if (getGameBookings.fulfilled.match(resultAction)) {
-      setBookingList(resultAction?.payload);
-      // console.log('Bookings Listed=====', resultAction?.payload);
+    const resultAction = await dispatch(getBookings(null));
+    if (getBookings.fulfilled.match(resultAction)) {
+      // setBookingList(resultAction?.payload);
+      console.log('Booking list loaded');
     } else {
       const errorResult: any = resultAction?.payload;
       console.log('Bookings Listed===ERROR=====', errorResult);
@@ -68,7 +71,7 @@ const useReportHook = () => {
     selectedButtonABC,
     screenTheme,
     gameDetail,
-    bookingList,
+    bookings,
     openGameList,
     closeGameList,
     handleButtonPress,

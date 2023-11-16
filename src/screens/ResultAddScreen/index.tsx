@@ -1,88 +1,166 @@
 import React, {useState} from 'react';
-import {View, TextInput, Button, ScrollView} from 'react-native';
+import {View, Text, ScrollView, TextInput} from 'react-native';
+import {Formik} from 'formik';
 import styles from './styles';
 import ButtonComponent from '@app/components/ButtonComponent';
+import AppBar from '@app/components/AppBarComponent';
+import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
+import * as Yup from 'yup';
+import InputType from '@app/components/InputType';
+import ButtonWithIcon from '@app/components/ButtonWithIcon';
 
 const LotteryForm: React.FC = () => {
-  const [first, setFirst] = useState('');
-  const [second, setSecond] = useState('');
-  const [third, setThird] = useState('');
-  const [fourth, setFourth] = useState('');
-  const [fifth, setFifth] = useState('');
-  const [numbersArray, setNumbersArray] = useState('');
-
-  const handleAddNumber = () => {
-    const numbers = numbersArray
-      .split(',')
-      .map(num => parseInt(num.trim(), 10));
-    setNumbersArray('');
+  const initialValues = {
+    first: '',
+    second: '',
+    third: '',
+    fourth: '',
+    fifth: '',
+    guarantee: [] as number[],
   };
 
-  const handleSubmit = () => {
-    const formData = {
-      first,
-      second,
-      third,
-      fourth,
-      fifth,
-      numbersArray,
-    };
+  const validationSchema = Yup.object().shape({
+    first: Yup.number()
+      .required('First Prize is required')
+      .integer('No point value')
+      .min(100)
+      .max(999)
+      .typeError('Only Number'),
+    second: Yup.number()
+      .required('Second Prize is required')
+      .integer('No point value')
+      .min(100)
+      .max(999)
+      .typeError('Only Number'),
+    third: Yup.number()
+      .required('Third Prize is required')
+      .integer('No point value')
+      .min(100)
+      .max(999)
+      .typeError('Only Number'),
+    fourth: Yup.number()
+      .required('Fourth Prize is required')
+      .integer('No point value')
+      .min(100)
+      .max(999)
+      .typeError('Only Number'),
+    fifth: Yup.number()
+      .required('Fifth Prize is required')
+      .integer('No point value')
+      .min(100)
+      .max(999)
+      .typeError('Only Number'),
+    guarantee: Yup.array().of(
+      Yup.number()
+        .integer('No point value')
+        .min(100)
+        .max(999)
+        .typeError('Only Number'),
+    ),
+  });
 
-    // You can now send formData to your backend API
-    setFirst('');
-    setSecond('');
-    setThird('');
-    setFourth('');
-    setFifth('');
-    setNumbersArray('');
+  const handleSave = (values: typeof initialValues) => {
+    console.log('Form Data:', values);
   };
+
+  const [tempGuaranteeInput, setTempGuaranteeInput] = useState('');
 
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <TextInput
-          style={styles.input}
-          placeholder="First Prize"
-          value={first}
-          onChangeText={setFirst}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Second Prize"
-          value={second}
-          onChangeText={setSecond}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Third Prize"
-          value={third}
-          onChangeText={setThird}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Fourth Prize"
-          value={fourth}
-          onChangeText={setFourth}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Fifth Prize"
-          value={fifth}
-          onChangeText={setFifth}
-        />
-        <View style={styles.numbersContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Add 3-digit numbers (comma separated)"
-            value={numbersArray}
-            onChangeText={setNumbersArray}
-          />
-          <Button title="Add Numbers" onPress={handleAddNumber} />
-        </View>
-        {/* <Button title="Submit" onPress={handleSubmit} /> */}
-        <ButtonComponent gotoHome={handleSubmit} buttonLabel={'Submit'} />
+    <SafeAreaWrapper statusbar={'#F2F4F5'}>
+      <AppBar title="Add Today's Result" />
+      <ScrollView keyboardShouldPersistTaps="handled">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchema}
+          onSubmit={handleSave}>
+          {({
+            values,
+            handleChange,
+            handleBlur,
+            handleSubmit,
+            setFieldValue,
+          }) => (
+            <View style={styles.container}>
+              <InputType
+                name="first"
+                label="First Prize"
+                placeholder="Enter First Prize"
+                onChangeText={handleChange('first')}
+                onBlur={handleBlur('first')}
+                value={values.first}
+                keyboardType="numeric"
+              />
+              <InputType
+                name="second"
+                label="Second Prize"
+                placeholder="Enter Second Prize"
+                onChangeText={handleChange('second')}
+                onBlur={handleBlur('second')}
+                value={values.second}
+                keyboardType="numeric"
+              />
+              <InputType
+                name="third"
+                label="Third Prize"
+                placeholder="Enter Third Prize"
+                onChangeText={handleChange('third')}
+                onBlur={handleBlur('third')}
+                value={values.third}
+                keyboardType="numeric"
+              />
+              <InputType
+                name="fourth"
+                label="Fourth Prize"
+                placeholder="Enter Fourth Prize"
+                onChangeText={handleChange('fourth')}
+                onBlur={handleBlur('fourth')}
+                value={values.fourth}
+                keyboardType="numeric"
+              />
+              <InputType
+                name="fifth"
+                label="Fifth Prize"
+                placeholder="Enter Fifth Prize"
+                onChangeText={handleChange('fifth')}
+                onBlur={handleBlur('fifth')}
+                value={values.fifth}
+                keyboardType="numeric"
+              />
+
+              {/* Display entered numbers */}
+              <View style={{paddingVertical: 10}}>
+                {values.guarantee.map((number, index) => (
+                  <Text key={index}>{number}</Text>
+                ))}
+              </View>
+
+              <View style={styles.numbersContainer}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Enter Guarantee Numbers"
+                  onChangeText={text => setTempGuaranteeInput(text)}
+                  value={tempGuaranteeInput}
+                  keyboardType="numeric"
+                />
+                <ButtonWithIcon
+                  buttonLabel={'Add'}
+                  fun={() => {
+                    if (tempGuaranteeInput !== '') {
+                      setFieldValue('guarantee', [
+                        ...values.guarantee,
+                        parseInt(tempGuaranteeInput, 10),
+                      ]);
+                      setTempGuaranteeInput('');
+                    }
+                  }}
+                />
+              </View>
+              <ButtonComponent gotoHome={handleSubmit} buttonLabel={'Submit'} />
+            </View>
+          )}
+        </Formik>
       </ScrollView>
-    </View>
+    </SafeAreaWrapper>
   );
 };
 

@@ -44,8 +44,8 @@ const LoginPage: React.FC<HomeScreenProps> = ({navigation}) => {
     password: yup.string().required('Password is required.'),
   });
   const initialValues: FormType = {
-    username: '',
-    password: '',
+    username: 'User',
+    password: 'Faiz@1234',
   };
   const formik = useFormik({
     initialValues: initialValues,

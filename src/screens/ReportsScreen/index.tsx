@@ -1,68 +1,27 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 import {View, Text, ScrollView} from 'react-native';
-
-import {useSelector} from 'react-redux';
 
 import styles from './styles';
 
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
-import HeaderComponent from '@app/components/HeaderComponent';
-import GameListBottomUp from '../../components/GameListBottomUp/GameListBottomUp';
 import TableComponent from '@app/components/TableComponent';
 import useReportHook from './useReportHook';
+import TestHeaderComponent from '@app/components/TestHeaderComponent';
 
 const ReportScreen = () => {
-  const {game} = useSelector((state: any) => state?.game);
-
-  const {
-    isGameListVisible,
-    screenTheme,
-    gameDetail,
-    bookingList,
-    closeGameList,
-    onPressGame,
-    openGameList,
-    TableHeaders,
-  } = useReportHook();
+  const {screenTheme, gameDetail, bookings, TableHeaders} = useReportHook();
 
   return (
     <SafeAreaWrapper
       statusbar={gameDetail ? gameDetail?.theme?.primary : screenTheme.primary}>
-      <HeaderComponent
-        openGameList={openGameList}
-        containerStyle={{
-          backgroundColor: gameDetail
-            ? gameDetail?.theme?.primary
-            : screenTheme.primary,
-        }}
-        buttonStyle={{
-          backgroundColor: gameDetail
-            ? gameDetail?.theme?.secondary
-            : screenTheme.secondary,
-        }}
-        headerTextStyle={{
-          color: gameDetail
-            ? gameDetail?.theme?.secondary
-            : screenTheme.secondary,
-        }}
-        user={
-          gameDetail
-            ? gameDetail?.game?.gameName + ' ' + gameDetail?.game?.time
-            : game[0]?.gameName + ' ' + game[0]?.time
-        }
-      />
+      <TestHeaderComponent />
 
       <ScrollView>
         <View style={styles.container}>
           <Text style={styles.headerStyle}>Today Bookings</Text>
-          <TableComponent tableData={bookingList} tableHeaders={TableHeaders} />
+          <TableComponent tableData={bookings} tableHeaders={TableHeaders} />
         </View>
-        <GameListBottomUp
-          isVisible={isGameListVisible}
-          onClose={closeGameList}
-          onPressGame={onPressGame}
-        />
       </ScrollView>
     </SafeAreaWrapper>
   );

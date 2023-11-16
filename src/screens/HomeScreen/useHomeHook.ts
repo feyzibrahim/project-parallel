@@ -2,8 +2,10 @@ import {useState, useEffect} from 'react';
 import {GameThemes} from '@app/constants/constants';
 import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from '@app/store/index';
-import {getGameList, saveGames, setGame} from '@app/store/slices/gameSlice';
 import {Alert} from 'react-native';
+import {createBooking} from '@app/store/actions/admin/bookingActions';
+import {updateClosestGame} from '@app/store/slices/gameTempSlice';
+import {getGameList} from '@app/store/actions/admin/gameActions';
 
 export type lskType = {
   number: number;
@@ -11,13 +13,12 @@ export type lskType = {
 };
 
 const useHomeHook = () => {
+  const {game} = useSelector((state: any) => state.games);
   const dispatch = useDispatch<AppDispatch>();
 
-  const [isGameListVisible, setGameListVisible] = useState(false);
   const [selectedButton, setSelectedButton] = useState<number | null>(1);
   const [selectedButtonABC, setSelectedButtonABC] = useState<number | null>(1);
-  const [screenTheme, setScreenTheme] = useState<any>('');
-  const [gameDetail, setGameDetail] = useState<any>('');
+  const [theme, setTheme] = useState<any>({});
   const [customer, setCustomer] = useState('');
   const [ticketNumber, setTicketNumber] = useState('');
   const [ticketCount, setTicketCount] = useState('');
@@ -25,35 +26,39 @@ const useHomeHook = () => {
   const [saveAlert, setSaveAlert] = useState(false);
   const [successModal, setsuccessModal] = useState(true);
 
+  const dispatchSelectGameBasedOnTime = () => {
+    dispatch(updateClosestGame());
+  };
+
+  const dispatchGetGameList = async () => {
+    const getGameAction = await dispatch(getGameList(null));
+
+    if (getGameList.fulfilled.match(getGameAction)) {
+      dispatchSelectGameBasedOnTime();
+    } else {
+      const errorResult: any = getGameAction?.payload;
+      console.log('Games Listed===ERROR=====', errorResult);
+    }
+  };
+
   useEffect(() => {
-    getAvailableGames();
-    colorTheme();
+    dispatchGetGameList();
   }, []);
 
   setTimeout(() => {
     setsuccessModal(false);
   }, 1000);
 
-  const getAvailableGames = async () => {
-    const resultAction = await dispatch(getGameList(null));
-    if (getGameList.fulfilled.match(resultAction)) {
-      await dispatch(setGame(resultAction?.payload));
+  const colorTheme = (index: number) => {
+    const primaryColors = GameThemes;
+    return primaryColors[index];
+  };
 
-      // console.log('GAME Listed=====', resultAction?.payload);
-    } else {
-      const errorResult: any = resultAction?.payload;
-      console.log('GAME Listed===ERROR=====', errorResult);
+  useEffect(() => {
+    if (game?.num) {
+      setTheme(colorTheme(game.num - 1));
     }
-  };
-
-  const openGameList = () => {
-    setGameListVisible(true);
-    colorTheme();
-  };
-
-  const closeGameList = () => {
-    setGameListVisible(false);
-  };
+  }, [game]);
 
   const handleButtonPress = (buttonNumber: number) => {
     setSelectedButton(buttonNumber);
@@ -117,11 +122,11 @@ const useHomeHook = () => {
   };
 
   const onSaveButton = async () => {
-    const resultAction = await dispatch(saveGames(listData));
-    if (saveGames.fulfilled.match(resultAction)) {
+    const resultAction = await dispatch(createBooking(listData));
+    if (createBooking.fulfilled.match(resultAction)) {
       setListData([]);
       setSaveAlert(false);
-      console.log('GAME Saved=====', resultAction?.payload);
+      // console.log('GAME Saved=====', resultAction?.payload);
       setsuccessModal(true);
     } else {
       const errorResult: any = resultAction?.payload;
@@ -129,30 +134,12 @@ const useHomeHook = () => {
     }
   };
 
-  const colorTheme = () => {
-    const primaryColors = GameThemes;
-    const backGroundColor =
-      primaryColors[Math.floor(Math.random() * primaryColors.length)];
-    setScreenTheme(backGroundColor);
-    // return backGroundColor;
-  };
-
-  const onPressGame = (game: any) => {
-    setGameDetail(game);
-    setGameListVisible(false);
-  };
-
   return {
-    isGameListVisible,
     selectedButton,
     selectedButtonABC,
-    screenTheme,
-    gameDetail,
-    openGameList,
-    closeGameList,
+    theme,
     handleButtonPress,
     handleButtonPressABC,
-    onPressGame,
     setCustomer,
     setTicketNumber,
     setTicketCount,

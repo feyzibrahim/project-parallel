@@ -21,7 +21,11 @@ export const getBookings = createAsyncThunk(
     try {
       const api = await getAxiosInstance();
 
-      const {data} = await api.get('api/admin/bookings');
+      const {data} = await api.get(
+        'api/admin/bookings?gameId=64e1c27a7c8bb02e14e232fb',
+      );
+
+      console.log(data);
 
       return data as Booking[];
     } catch (error: any) {
@@ -32,13 +36,14 @@ export const getBookings = createAsyncThunk(
 
 export const createBooking = createAsyncThunk(
   'booking/createBooking',
-  async (formData: BookingData, {rejectWithValue}) => {
+  async (params: any, {rejectWithValue}) => {
     try {
+      console.log('Create booking is called');
       const api = await getAxiosInstance();
 
-      const {data} = await api.post('api/admin/booking', formData);
-
-      return data as Booking;
+      const {data} = await api.post('api/booking/insert-many/', params);
+      console.log('booking created', data);
+      return data as [Booking];
     } catch (error: any) {
       return rejectWithValue(error?.response?.data);
     }

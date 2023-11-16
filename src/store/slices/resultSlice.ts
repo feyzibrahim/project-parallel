@@ -14,7 +14,7 @@ type BookingState = {
 
 const initialState: BookingState = {
   bookings: [],
-  currentBooking: {},
+  currentBooking: null,
   loading: false,
   error: null,
 };
@@ -48,7 +48,7 @@ export const bookingSlice = createSlice({
       })
       .addCase(getResultByDate.rejected, (state, {payload}) => {
         state.loading = false;
-        state.currentBooking = {};
+        state.currentBooking = null;
         state.error = payload;
       })
       .addCase(createResult.pending, state => {

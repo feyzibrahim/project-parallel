@@ -1,20 +1,5 @@
-// import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
-
-// export const authSlice = createApi({
-//   reducerPath: 'authPath',
-//   baseQuery: fetchBaseQuery({baseUrl: 'https://project-parallel.onrender.com/'}),
-//   endpoints: builder => ({
-//     login: builder.query({
-//       query: () => 'api/user/login',
-//     }),
-//   }),
-// });
-
-// export const {useLoginQuery} = authSlice;
-
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import type {PayloadAction} from '@reduxjs/toolkit';
-import { getAxiosInstance} from '../../api/api'
+import {getAxiosInstance} from '../../api/api';
 
 // Define a type for the slice state
 type AuthState = {
@@ -44,10 +29,10 @@ export const loginwithUsername = createAsyncThunk(
     const api = await getAxiosInstance();
     try {
       const response = await api.post('api/user/login', params);
-      console.log(response)
+      console.log(response);
       return response;
     } catch (error: any) {
-      console.log(error)
+      console.log(error);
       return rejectWithValue(error.response.data);
     }
   },
@@ -59,10 +44,10 @@ export const userList = createAsyncThunk(
     const api = await getAxiosInstance();
     try {
       const response = await api.get('api/admin/users');
-      console.log(response)
+      console.log(response);
       return response?.data;
     } catch (error: any) {
-      console.log(error)
+      console.log(error);
       return rejectWithValue(error.response.data);
     }
   },

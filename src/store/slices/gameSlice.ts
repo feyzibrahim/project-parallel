@@ -41,7 +41,6 @@ export const getGameBookings = createAsyncThunk(
 export const saveGames = createAsyncThunk(
   'game/saveGames',
   async (params: any, {rejectWithValue}) => {
-    // console.log(params,'=======PARAMS')
     const api = await getAxiosInstance();
     try {
       const response = await api.post('api/booking/insert-many/', params);

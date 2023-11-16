@@ -8,37 +8,30 @@ import {
 } from 'react-native';
 import {HomeScreenNavigationProp} from '../../navigations/types';
 import styles from './styles';
-
-import GameListBottomUp from '../../components/GameListBottomUp/GameListBottomUp';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
-import HeaderComponent from '@app/components/HeaderComponent';
 import useHomeHook from './useHomeHook';
 import {useSelector} from 'react-redux';
 import TableComponent from '@app/components/TableComponent';
 import AlertBox from '@app/components/AlertComponent';
 import {Modal} from 'react-native-paper';
 import CircleCheckMark from '@app/assets/icons/Frame.svg';
+import TestHeaderComponent from '@app/components/TestHeaderComponent';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
 
 const HomeScreen: React.FC<HomeScreenProps> = () => {
-  const {game} = useSelector((state: any) => state?.game);
+  const {game} = useSelector((state: any) => state.game);
 
   const TableHeaders = ['LSK', 'Number', 'Count', '₹₹ - D', '₹₹ - C', '#'];
 
   const {
-    isGameListVisible,
-    screenTheme,
+    theme,
     selectedButton,
     selectedButtonABC,
-    gameDetail,
-    closeGameList,
     handleButtonPress,
     handleButtonPressABC,
-    onPressGame,
-    openGameList,
     setCustomer,
     setTicketCount,
     setTicketNumber,
@@ -53,30 +46,9 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   return (
     <SafeAreaWrapper
       containerStyle={styles.container}
-      statusbar={gameDetail ? gameDetail?.theme?.primary : screenTheme.primary}>
-      <HeaderComponent
-        openGameList={openGameList}
-        containerStyle={{
-          backgroundColor: gameDetail
-            ? gameDetail?.theme?.primary
-            : screenTheme.primary,
-        }}
-        buttonStyle={{
-          backgroundColor: gameDetail
-            ? gameDetail?.theme?.secondary
-            : screenTheme.secondary,
-        }}
-        headerTextStyle={{
-          color: gameDetail
-            ? gameDetail?.theme?.secondary
-            : screenTheme.secondary,
-        }}
-        user={
-          gameDetail
-            ? gameDetail?.game?.gameName + ' ' + gameDetail?.game?.time
-            : game[0]?.gameName + ' ' + game[0]?.time
-        }
-      />
+      statusbar={theme.primary}>
+      {game && <TestHeaderComponent />}
+
       <ScrollView
         keyboardShouldPersistTaps={'handled'}
         contentContainerStyle={{paddingBottom: 100}}>
@@ -102,13 +74,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 styles.button,
                 {
                   backgroundColor:
-                    selectedButton === 1
-                      ? gameDetail
-                        ? gameDetail?.theme?.secondary
-                        : screenTheme.secondary
-                      : gameDetail
-                      ? gameDetail?.theme?.primary
-                      : screenTheme.primary,
+                    selectedButton === 1 ? theme.secondary : theme.primary,
                 },
               ]}
               onPress={() => handleButtonPress(1)}>
@@ -125,13 +91,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 styles.button,
                 {
                   backgroundColor:
-                    selectedButton === 2
-                      ? gameDetail
-                        ? gameDetail?.theme?.secondary
-                        : screenTheme.secondary
-                      : gameDetail
-                      ? gameDetail?.theme?.primary
-                      : screenTheme.primary,
+                    selectedButton === 2 ? theme.secondary : theme.primary,
                 },
               ]}
               onPress={() => handleButtonPress(2)}>
@@ -148,13 +108,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 styles.button,
                 {
                   backgroundColor:
-                    selectedButton === 3
-                      ? gameDetail
-                        ? gameDetail?.theme?.secondary
-                        : screenTheme.secondary
-                      : gameDetail
-                      ? gameDetail?.theme?.primary
-                      : screenTheme.primary,
+                    selectedButton === 3 ? theme.secondary : theme.primary,
                 },
               ]}
               onPress={() => handleButtonPress(3)}>
@@ -206,9 +160,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: gameDetail
-                      ? gameDetail?.theme?.secondary
-                      : screenTheme.secondary,
+                    backgroundColor: theme.secondary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 1, lsk: 'A'})}>
@@ -220,9 +172,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: gameDetail
-                      ? gameDetail?.theme?.secondary
-                      : screenTheme.secondary,
+                    backgroundColor: theme.secondary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 2, lsk: 'B'})}>
@@ -234,9 +184,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: gameDetail
-                      ? gameDetail?.theme?.secondary
-                      : screenTheme.secondary,
+                    backgroundColor: theme.secondary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 3, lsk: 'C'})}>
@@ -248,9 +196,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: gameDetail
-                      ? gameDetail?.theme?.secondary
-                      : screenTheme.secondary,
+                    backgroundColor: theme.secondary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 4, lsk: 'All'})}>
@@ -266,9 +212,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: gameDetail
-                      ? gameDetail?.theme?.secondary
-                      : screenTheme.secondary,
+                    backgroundColor: theme.primary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 1, lsk: 'AB'})}>
@@ -280,9 +224,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: gameDetail
-                      ? gameDetail?.theme?.secondary
-                      : screenTheme.secondary,
+                    backgroundColor: theme.primary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 2, lsk: 'BC'})}>
@@ -294,9 +236,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: gameDetail
-                      ? gameDetail?.theme?.secondary
-                      : screenTheme.secondary,
+                    backgroundColor: theme.primary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 3, lsk: 'AC'})}>
@@ -308,9 +248,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: gameDetail
-                      ? gameDetail?.theme?.secondary
-                      : screenTheme.secondary,
+                    backgroundColor: theme.primary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 4, lsk: 'All'})}>
@@ -326,9 +264,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonSpecial,
                   {
-                    backgroundColor: gameDetail
-                      ? gameDetail?.theme?.secondary
-                      : screenTheme.secondary,
+                    backgroundColor: theme.primary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 1, lsk: 'DEAR'})}>
@@ -340,9 +276,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonSpecial,
                   {
-                    backgroundColor: gameDetail
-                      ? gameDetail?.theme?.secondary
-                      : screenTheme.secondary,
+                    backgroundColor: theme.primary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 1, lsk: 'BOX'})}>
@@ -388,9 +322,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             style={[
               styles.buttonBottom,
               {
-                backgroundColor: gameDetail
-                  ? gameDetail?.theme?.secondary
-                  : screenTheme.secondary,
+                backgroundColor: theme.secondary,
               },
             ]}
             onPress={() => setSaveAlert(true)}>
@@ -410,11 +342,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         }}
       />
 
-      <GameListBottomUp
-        isVisible={isGameListVisible}
-        onClose={closeGameList}
-        onPressGame={onPressGame}
-      />
       <Modal visible={successModal}>
         <View
           style={{

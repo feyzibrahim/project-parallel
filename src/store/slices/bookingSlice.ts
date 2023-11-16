@@ -38,7 +38,7 @@ export const bookingSlice = createSlice({
       .addCase(createBooking.fulfilled, (state, {payload}) => {
         state.loading = false;
         state.error = null;
-        state.bookings = [...state.bookings, payload];
+        state.bookings = [...state.bookings, ...payload];
       })
       .addCase(createBooking.rejected, (state, {payload}) => {
         state.loading = false;
