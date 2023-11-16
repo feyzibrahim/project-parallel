@@ -16,7 +16,7 @@ const DateInputComponent = () => {
   const onDateChange = (date: any) => {
     setDate(date.toString());
     setCalender(true);
-    console.log(date);
+    // console.log(date);
   };
 
   const onPressDateInput = () => {

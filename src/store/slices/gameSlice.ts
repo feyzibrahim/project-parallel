@@ -72,6 +72,21 @@ export const saveGames = createAsyncThunk(
   },
 );
 
+export const getGameResults = createAsyncThunk(
+  'game/getGameResults',
+  async (params: any, {rejectWithValue}) => {
+    // console.log(params,'=======PARAMS')
+    const api = await getAxiosInstance();
+    try {
+      const response = await api.get('api/prize/',params);
+      console.log(response,'=========jkhgjkhgjkh');
+      return response?.data;
+    } catch (error: any) {
+      return rejectWithValue(error?.response?.data);
+    }
+  },
+);
+
 export const gameSlice = createSlice({
   name: 'game',
   initialState,

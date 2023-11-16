@@ -23,7 +23,7 @@ const useHomeHook = () => {
   const [ticketCount, setTicketCount] = useState('');
   const [listData, setListData] = useState<Array<any>>([]);
   const [saveAlert, setSaveAlert] = useState(false);
-  const [successModal, setsuccessModal] = useState(true);
+  const [successModal, setsuccessModal] = useState(false);
 
   useEffect(() => {
     getAvailableGames();

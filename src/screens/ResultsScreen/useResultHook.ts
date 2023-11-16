@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react';
 import {GameThemes} from '@app/constants/constants';
 import {useDispatch} from 'react-redux';
 import {AppDispatch} from '@app/store/index';
-import {getGameBookings} from '@app/store/slices/gameSlice';
+import {getGameBookings, getGameResults} from '@app/store/slices/gameSlice';
 
 const useResultHook = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -30,10 +30,10 @@ const useResultHook = () => {
   }, []);
 
   const getGameBooking = async () => {
-    const resultAction = await dispatch(getGameBookings(null));
-    if (getGameBookings.fulfilled.match(resultAction)) {
+    const resultAction = await dispatch(getGameResults(null));
+    if (getGameResults.fulfilled.match(resultAction)) {
       setBookingList(resultAction?.payload);
-      // console.log('Bookings Listed=====', resultAction?.payload);
+      console.log('Bookings Listed=====', resultAction?.payload);
     } else {
       const errorResult: any = resultAction?.payload;
       console.log('Bookings Listed===ERROR=====', errorResult);
