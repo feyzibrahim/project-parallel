@@ -1,6 +1,5 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {getAxiosInstance} from '../../../api/api';
-import {BookingData} from '@app/types/booking';
 
 interface Booking {
   _id: string;

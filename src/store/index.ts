@@ -6,6 +6,7 @@ import packageSlice from './slices/packageSlice';
 import bookingSlice from './slices/bookingSlice';
 import resultSlice from './slices/resultSlice';
 import gameSlice from './slices/gameSlice';
+import userSlice from './slices/userSlice';
 
 const persistConfig = {
   key: 'root',
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   packages: packageSlice,
   booking: bookingSlice,
   result: resultSlice,
+  users: userSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

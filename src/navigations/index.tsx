@@ -33,8 +33,8 @@ const Navigation: React.FC = () => {
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
         <Stack.Screen name="Language" component={LanguageScreen} />
         <Stack.Screen name="About" component={AboutScreen} />
-        <Stack.Screen name="UserList" component={Userlist} />
         <Stack.Screen name="ResultAddScreen" component={ResultAddScreen} />
+        <Stack.Screen name="UserList" component={Userlist} />
         <Stack.Screen name="UserAddList" component={UserAddList} />
         <Stack.Screen
           name="GameSettingsScreen"

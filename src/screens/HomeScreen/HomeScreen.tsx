@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   ScrollView,
   TextInput,
+  Pressable,
 } from 'react-native';
 import {HomeScreenNavigationProp} from '../../navigations/types';
 import styles from './styles';
@@ -21,7 +22,7 @@ type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
 
-const HomeScreen: React.FC<HomeScreenProps> = () => {
+const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const TableHeaders = ['LSK', 'Number', 'Count', '₹₹ - D', '₹₹ - C', '#'];
 
   const {
@@ -60,14 +61,11 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
             </View>
           ) : (
             <View style={styles.inputContainer}>
-              <TextInput
+              <Pressable
                 style={styles.input}
-                placeholder="Choose Customer"
-                placeholderTextColor="#888"
-                onChangeText={val => {
-                  setCustomer(val);
-                }}
-              />
+                onPress={() => navigation.navigate('UserList')}>
+                <Text style={{paddingVertical: 14}}>Choose A Customer</Text>
+              </Pressable>
             </View>
           )}
 

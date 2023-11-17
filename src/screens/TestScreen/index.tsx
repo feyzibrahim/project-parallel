@@ -1,49 +1,28 @@
-import React, {useState, useEffect} from 'react';
-import {View, Animated, StyleSheet} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import {HomeScreenNavigationProp} from '@app/navigations/types';
+import React, {useState} from 'react';
+import {View, Button} from 'react-native';
 
-const TestScreen = () => {
-  const [loadingAnimation] = useState(new Animated.Value(0));
+type NavigationScreenProps = {
+  navigation: HomeScreenNavigationProp;
+};
+const TestScreen: React.FC<NavigationScreenProps> = ({navigation}) => {
+  const [selectedName, setSelectedName] = useState<string | null>(null);
 
-  useEffect(() => {
-    Animated.loop(
-      Animated.timing(loadingAnimation, {
-        toValue: 1,
-        duration: 2000,
-        useNativeDriver: false,
-      }),
-    ).start();
-  }, [loadingAnimation]);
-
-  const translateX = loadingAnimation.interpolate({
-    inputRange: [0, 1],
-    outputRange: [-320, 320],
-  });
+  // const handleButtonPress = () => {
+  //   navigation.navigate('Details', {
+  //     onNameSelect: (name: string) => {
+  //       setSelectedName(name);
+  //       navigation.goBack();
+  //     },
+  //   });
+  // };
 
   return (
-    <View style={[styles.parent]}>
-      <Animated.View style={[{transform: [{translateX}]}]}>
-        <LinearGradient
-          colors={['#ddd', '#ccc', '#ddd']}
-          style={{height: '100%', width: '100%'}}
-          start={{x: 0, y: 0}}
-          end={{x: 1, y: 1}}
-        />
-      </Animated.View>
+    <View>
+      <Button title="Select Name" onPress={() => {}} />
+      {selectedName && <Button title={selectedName} disabled />}
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  parent: {
-    height: '100%',
-    width: '100%',
-    backgroundColor: '#ccc',
-    opacity: 0.5,
-    marginBottom: 8,
-    overflow: 'hidden',
-    borderRadius: 10,
-  },
-});
 
 export default TestScreen;
