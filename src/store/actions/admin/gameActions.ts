@@ -1,5 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {getAxiosInstance} from '../../../api/api';
+import date from 'date-and-time';
 
 export const getGameList = createAsyncThunk(
   'game/getGameList',
@@ -17,28 +18,16 @@ export const getGameList = createAsyncThunk(
 
 // Getting the game closer to the current time
 export const calculateClosestGame = (games: Array<any>) => {
-  const currentTime = new Date().getTime();
-  return games.reduce((closest, currentGame) => {
-    const [time, period] = currentGame.time.split(' ');
-    const [hours, minutes] = time.split(':');
-    let parsedHours = parseInt(hours, 10);
+  const now = new Date();
 
-    if (period === 'PM' && parsedHours < 12) {
-      parsedHours += 12;
-    } else if (period === 'AM' && parsedHours === 12) {
-      parsedHours = 0;
+  const currentTime: string = date.format(now, 'hh:mm A');
+  let less = games[0];
+
+  games.map(item => {
+    if (less.time < currentTime) {
+      less = item;
     }
+  });
 
-    const gameTime = new Date();
-    gameTime.setHours(parsedHours);
-    gameTime.setMinutes(parseInt(minutes, 10));
-    gameTime.setSeconds(0);
-
-    const timeDiff = Math.abs(gameTime.getTime() - currentTime);
-    const closestTimeDiff = closest
-      ? Math.abs(new Date(closest.time).getTime() - currentTime)
-      : Infinity;
-
-    return timeDiff < closestTimeDiff ? currentGame : closest;
-  }, null);
+  return less;
 };

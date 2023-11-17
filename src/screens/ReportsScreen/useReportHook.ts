@@ -39,6 +39,7 @@ const useReportHook = () => {
   return {
     screenTheme,
     bookings,
+    loading,
     TableHeaders,
     refreshing,
     onRefresh,

@@ -32,12 +32,15 @@ export const getResults = createAsyncThunk(
 );
 export const getResultByDate = createAsyncThunk(
   'result/getResultByDate',
-  async (formattedDate: string, {rejectWithValue}) => {
+  async (
+    {gameId, formattedDate}: {gameId: string; formattedDate: string},
+    {rejectWithValue},
+  ) => {
     try {
       const api = await getAxiosInstance();
 
       const {data} = await api.get(
-        `api/admin/result/byDate?date=${formattedDate}&gameId=64e1c27a7c8bb02e14e232fb`,
+        `api/admin/result/byDate?date=${formattedDate}&gameId=${gameId}`,
       );
 
       return data as Result;

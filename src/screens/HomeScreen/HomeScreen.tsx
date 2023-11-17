@@ -27,7 +27,6 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
   const {
     theme,
     selectedButton,
-    selectedButtonABC,
     handleButtonPress,
     handleButtonPressABC,
     setCustomer,

@@ -5,10 +5,19 @@ import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import TableComponent from '@app/components/TableComponent';
 import useReportHook from './useReportHook';
 import TestHeaderComponent from '@app/components/HeaderComponent';
+import {ActivityIndicator} from 'react-native-paper';
 
 const ReportScreen = () => {
-  const {screenTheme, bookings, TableHeaders, refreshing, onRefresh} =
+  const {screenTheme, bookings, loading, TableHeaders, refreshing, onRefresh} =
     useReportHook();
+
+  if (loading) {
+    return (
+      <View style={styles.loadingView}>
+        <ActivityIndicator />
+      </View>
+    );
+  }
 
   return (
     <SafeAreaWrapper statusbar={screenTheme.primary}>

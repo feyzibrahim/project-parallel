@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {StatusBar, StyleSheet, Text, View, ViewStyle} from 'react-native';
+import {StyleSheet, View, ViewStyle} from 'react-native';
 import {COLORS, SIZES} from '@app/constants/themes';
 import Modal from 'react-native-modal';
 
@@ -8,24 +8,24 @@ export type ModalTypes = {
   isVisible: boolean;
   onClose: any;
   backdropOpacity: number;
-  animationIn:string
-  animationOut:string
-  animationInTiming:number
-  animationOutTiming:number
-  scrollHorizontal:boolean
-  swipeDirection:Array<string>
-  style:ViewStyle
+  animationIn: string;
+  animationOut: string;
+  animationInTiming: number;
+  animationOutTiming: number;
+  scrollHorizontal: boolean;
+  swipeDirection: Array<string>;
+  style: ViewStyle;
 };
 
 const ModalComponent = (props: ModalTypes) => {
-  const {isVisible, onClose,backdropOpacity} = props;
+  const {isVisible, onClose, backdropOpacity} = props;
 
   return (
     <Modal
       isVisible={isVisible}
       onBackdropPress={onClose}
       onBackButtonPress={onClose}
-      backdropOpacity={0.2}
+      backdropOpacity={backdropOpacity}
       animationIn="slideInUp"
       animationOut="slideOutDown"
       animationInTiming={400}

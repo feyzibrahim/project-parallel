@@ -4,6 +4,7 @@ import {COLORS} from '@app/constants/themes';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    height: '100%',
     backgroundColor: COLORS.white,
     paddingHorizontal: 12,
     paddingBottom: 50,
@@ -13,6 +14,13 @@ const styles = StyleSheet.create({
     color: COLORS.black,
     fontWeight: 'bold',
     marginTop: 10,
+  },
+  loadingView: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 200,
   },
 });
 export default styles;

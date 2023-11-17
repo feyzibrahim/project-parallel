@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {COLORS} from '@app/constants/themes';
 import {View, Text, Pressable} from 'react-native';
 import styles from './styles';
@@ -19,6 +19,8 @@ type HomeScreenProps = {
 };
 
 const DateInputComponent: React.FC<HomeScreenProps> = ({navigation}) => {
+  const {game} = useSelector((state: any) => state.games);
+
   const dispatch = useDispatch<AppDispatch>();
   const {currentBooking, loading} = useSelector((state: any) => state?.result);
 
@@ -26,7 +28,7 @@ const DateInputComponent: React.FC<HomeScreenProps> = ({navigation}) => {
   const [calender, setCalender] = useState(false);
 
   const dispatchFetchResult = (formattedDate: string) => {
-    dispatch(getResultByDate(formattedDate));
+    dispatch(getResultByDate({gameId: game._id, formattedDate}));
   };
 
   const onDateChange = (date: any) => {
@@ -37,6 +39,10 @@ const DateInputComponent: React.FC<HomeScreenProps> = ({navigation}) => {
     dispatchFetchResult(formattedDate);
     setCalender(true);
   };
+
+  useEffect(() => {
+    setCalender(false);
+  }, [game]);
 
   const onPressDateInput = () => {
     if (!calender) {
@@ -55,7 +61,7 @@ const DateInputComponent: React.FC<HomeScreenProps> = ({navigation}) => {
   }
 
   return (
-    <View style={{flex: 1}}>
+    <View style={{flex: 1, paddingHorizontal: 24}}>
       <Pressable style={styles.dateInputField} onPress={onPressDateInput}>
         <View style={{marginRight: 10}}>
           <Icon name="calendar" size={22} color={COLORS.primary} />
