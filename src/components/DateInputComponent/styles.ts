@@ -2,6 +2,12 @@ import {StyleSheet} from 'react-native';
 import {COLORS} from '@app/constants/themes';
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    paddingHorizontal: 24,
+  },
+
   placeholderText: {
     color: COLORS.black,
   },

@@ -10,20 +10,18 @@ import {HomeScreenNavigationProp} from '../../navigations/types';
 import styles from './styles';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import useHomeHook from './useHomeHook';
-import {useSelector} from 'react-redux';
 import TableComponent from '@app/components/TableComponent';
 import AlertBox from '@app/components/AlertComponent';
 import {Modal} from 'react-native-paper';
 import CircleCheckMark from '@app/assets/icons/Frame.svg';
-import TestHeaderComponent from '@app/components/TestHeaderComponent';
+import HeaderComponent from '@app/components/HeaderComponent';
+import SkeltonLoading from '@app/components/SkeltonLoading';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
 
 const HomeScreen: React.FC<HomeScreenProps> = () => {
-  const {game} = useSelector((state: any) => state.game);
-
   const TableHeaders = ['LSK', 'Number', 'Count', '₹₹ - D', '₹₹ - C', '#'];
 
   const {
@@ -41,13 +39,15 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
     setSaveAlert,
     saveAlert,
     successModal,
+    game,
+    loading,
   } = useHomeHook();
 
   return (
     <SafeAreaWrapper
       containerStyle={styles.container}
       statusbar={theme.primary}>
-      {game && <TestHeaderComponent />}
+      {game && <HeaderComponent />}
 
       <ScrollView
         keyboardShouldPersistTaps={'handled'}
@@ -55,156 +55,180 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
         <View style={styles.body}>
           {/* Customer Name */}
 
-          <View style={styles.inputContainer}>
-            <TextInput
-              style={styles.input}
-              placeholder="Choose Customer"
-              placeholderTextColor="#888"
-              onChangeText={val => {
-                setCustomer(val);
-              }}
-            />
-          </View>
+          {loading ? (
+            <View style={{marginTop: 20, marginBottom: 5}}>
+              <SkeltonLoading height={40} />
+            </View>
+          ) : (
+            <View style={styles.inputContainer}>
+              <TextInput
+                style={styles.input}
+                placeholder="Choose Customer"
+                placeholderTextColor="#888"
+                onChangeText={val => {
+                  setCustomer(val);
+                }}
+              />
+            </View>
+          )}
 
           {/* 1, 2, 3 buttons */}
 
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity
-              style={[
-                styles.button,
-                {
-                  backgroundColor:
-                    selectedButton === 1 ? theme.secondary : theme.primary,
-                },
-              ]}
-              onPress={() => handleButtonPress(1)}>
-              <Text
-                style={[
-                  styles.buttonText,
-                  selectedButton === 1 && styles.selectedButtonText,
-                ]}>
-                1
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.button,
-                {
-                  backgroundColor:
-                    selectedButton === 2 ? theme.secondary : theme.primary,
-                },
-              ]}
-              onPress={() => handleButtonPress(2)}>
-              <Text
-                style={[
-                  styles.buttonText,
-                  selectedButton === 2 && styles.selectedButtonText,
-                ]}>
-                2
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[
-                styles.button,
-                {
-                  backgroundColor:
-                    selectedButton === 3 ? theme.secondary : theme.primary,
-                },
-              ]}
-              onPress={() => handleButtonPress(3)}>
-              <Text
-                style={[
-                  styles.buttonText,
-                  selectedButton === 3 && styles.selectedButtonText,
-                ]}>
-                3
-              </Text>
-            </TouchableOpacity>
-          </View>
-
-          {/* Number, Count, B Count textInputs */}
-
-          <View style={styles.horizontalRow}>
-            <View style={[styles.inputContainer, styles.inputWidth50]}>
-              <TextInput
-                style={styles.input}
-                placeholder="Number"
-                placeholderTextColor="#888"
-                keyboardType="number-pad"
-                maxLength={
-                  selectedButton == 1 ? 1 : selectedButton == 2 ? 2 : 3
-                }
-                onChangeText={value => {
-                  setTicketNumber(value);
-                }}
-              />
+          {loading ? (
+            <View style={{marginVertical: 5}}>
+              <SkeltonLoading height={40} />
             </View>
-            <View style={[styles.inputContainer, styles.inputWidth50]}>
-              <TextInput
-                style={styles.input}
-                placeholder="Count"
-                keyboardType="number-pad"
-                placeholderTextColor="#888"
-                onChangeText={value => {
-                  setTicketCount(value);
-                }}
-              />
-            </View>
-          </View>
-
-          {/* A, B, C, All buttons */}
-
-          {selectedButton === 1 && (
+          ) : (
             <View style={styles.buttonContainer}>
               <TouchableOpacity
                 style={[
-                  styles.buttonABC,
+                  styles.button,
                   {
-                    backgroundColor: theme.secondary,
+                    backgroundColor:
+                      selectedButton === 1 ? theme.secondary : theme.primary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC({number: 1, lsk: 'A'})}>
-                <Text style={[styles.buttonText, styles.selectedButtonText]}>
-                  A
+                onPress={() => handleButtonPress(1)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButton === 1 && styles.selectedButtonText,
+                  ]}>
+                  1
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[
-                  styles.buttonABC,
+                  styles.button,
                   {
-                    backgroundColor: theme.secondary,
+                    backgroundColor:
+                      selectedButton === 2 ? theme.secondary : theme.primary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC({number: 2, lsk: 'B'})}>
-                <Text style={[styles.buttonText, styles.selectedButtonText]}>
-                  B
+                onPress={() => handleButtonPress(2)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButton === 2 && styles.selectedButtonText,
+                  ]}>
+                  2
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[
-                  styles.buttonABC,
+                  styles.button,
                   {
-                    backgroundColor: theme.secondary,
+                    backgroundColor:
+                      selectedButton === 3 ? theme.secondary : theme.primary,
                   },
                 ]}
-                onPress={() => handleButtonPressABC({number: 3, lsk: 'C'})}>
-                <Text style={[styles.buttonText, styles.selectedButtonText]}>
-                  C
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[
-                  styles.buttonABC,
-                  {
-                    backgroundColor: theme.secondary,
-                  },
-                ]}
-                onPress={() => handleButtonPressABC({number: 4, lsk: 'All'})}>
-                <Text style={[styles.buttonText, styles.selectedButtonText]}>
-                  All
+                onPress={() => handleButtonPress(3)}>
+                <Text
+                  style={[
+                    styles.buttonText,
+                    selectedButton === 3 && styles.selectedButtonText,
+                  ]}>
+                  3
                 </Text>
               </TouchableOpacity>
             </View>
+          )}
+
+          {/* Number, Count, B Count textInputs */}
+
+          {loading ? (
+            <View style={{marginVertical: 5}}>
+              <SkeltonLoading height={40} />
+            </View>
+          ) : (
+            <View style={styles.horizontalRow}>
+              <View style={[styles.inputContainer, styles.inputWidth50]}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Number"
+                  placeholderTextColor="#888"
+                  keyboardType="number-pad"
+                  maxLength={
+                    selectedButton == 1 ? 1 : selectedButton == 2 ? 2 : 3
+                  }
+                  onChangeText={value => {
+                    setTicketNumber(value);
+                  }}
+                />
+              </View>
+              <View style={[styles.inputContainer, styles.inputWidth50]}>
+                <TextInput
+                  style={styles.input}
+                  placeholder="Count"
+                  keyboardType="number-pad"
+                  placeholderTextColor="#888"
+                  onChangeText={value => {
+                    setTicketCount(value);
+                  }}
+                />
+              </View>
+            </View>
+          )}
+
+          {/* A, B, C, All buttons */}
+
+          {loading ? (
+            <View style={{marginVertical: 5}}>
+              <SkeltonLoading height={40} />
+            </View>
+          ) : (
+            selectedButton === 1 && (
+              <View style={styles.buttonContainer}>
+                <TouchableOpacity
+                  style={[
+                    styles.buttonABC,
+                    {
+                      backgroundColor: theme.secondary,
+                    },
+                  ]}
+                  onPress={() => handleButtonPressABC({number: 1, lsk: 'A'})}>
+                  <Text style={[styles.buttonText, styles.selectedButtonText]}>
+                    A
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.buttonABC,
+                    {
+                      backgroundColor: theme.secondary,
+                    },
+                  ]}
+                  onPress={() => handleButtonPressABC({number: 2, lsk: 'B'})}>
+                  <Text style={[styles.buttonText, styles.selectedButtonText]}>
+                    B
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.buttonABC,
+                    {
+                      backgroundColor: theme.secondary,
+                    },
+                  ]}
+                  onPress={() => handleButtonPressABC({number: 3, lsk: 'C'})}>
+                  <Text style={[styles.buttonText, styles.selectedButtonText]}>
+                    C
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[
+                    styles.buttonABC,
+                    {
+                      backgroundColor: theme.secondary,
+                    },
+                  ]}
+                  onPress={() => handleButtonPressABC({number: 4, lsk: 'All'})}>
+                  <Text style={[styles.buttonText, styles.selectedButtonText]}>
+                    All
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )
           )}
           {selectedButton === 2 && (
             <View style={styles.buttonContainer}>
@@ -212,7 +236,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: theme.primary,
+                    backgroundColor: theme.secondary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 1, lsk: 'AB'})}>
@@ -224,7 +248,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: theme.primary,
+                    backgroundColor: theme.secondary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 2, lsk: 'BC'})}>
@@ -236,7 +260,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: theme.primary,
+                    backgroundColor: theme.secondary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 3, lsk: 'AC'})}>
@@ -248,7 +272,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonABC,
                   {
-                    backgroundColor: theme.primary,
+                    backgroundColor: theme.secondary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 4, lsk: 'All'})}>
@@ -264,7 +288,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonSpecial,
                   {
-                    backgroundColor: theme.primary,
+                    backgroundColor: theme.secondary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 1, lsk: 'DEAR'})}>
@@ -276,7 +300,7 @@ const HomeScreen: React.FC<HomeScreenProps> = () => {
                 style={[
                   styles.buttonSpecial,
                   {
-                    backgroundColor: theme.primary,
+                    backgroundColor: theme.secondary,
                   },
                 ]}
                 onPress={() => handleButtonPressABC({number: 1, lsk: 'BOX'})}>

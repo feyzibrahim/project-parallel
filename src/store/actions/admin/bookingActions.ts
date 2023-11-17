@@ -17,15 +17,11 @@ interface Booking {
 
 export const getBookings = createAsyncThunk(
   'booking/getBookings',
-  async (_: any, {rejectWithValue}) => {
+  async (gameId: string, {rejectWithValue}) => {
     try {
       const api = await getAxiosInstance();
 
-      const {data} = await api.get(
-        'api/admin/bookings?gameId=64e1c27a7c8bb02e14e232fb',
-      );
-
-      console.log(data);
+      const {data} = await api.get(`api/admin/bookings?gameId=${gameId}`);
 
       return data as Booking[];
     } catch (error: any) {
@@ -38,11 +34,9 @@ export const createBooking = createAsyncThunk(
   'booking/createBooking',
   async (params: any, {rejectWithValue}) => {
     try {
-      console.log('Create booking is called');
       const api = await getAxiosInstance();
 
       const {data} = await api.post('api/booking/insert-many/', params);
-      console.log('booking created', data);
       return data as [Booking];
     } catch (error: any) {
       return rejectWithValue(error?.response?.data);

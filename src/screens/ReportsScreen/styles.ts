@@ -6,6 +6,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
     paddingHorizontal: 12,
+    paddingBottom: 50,
   },
   headerStyle: {
     fontSize: 20,

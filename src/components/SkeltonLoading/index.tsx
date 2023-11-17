@@ -2,7 +2,12 @@ import React, {useState, useEffect} from 'react';
 import {View, Animated, StyleSheet} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-const TestScreen = () => {
+type types = {
+  height: number;
+};
+
+const SkeltonLoading = (props: types) => {
+  const {height} = props;
   const [loadingAnimation] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -21,7 +26,7 @@ const TestScreen = () => {
   });
 
   return (
-    <View style={[styles.parent]}>
+    <View style={[styles.parent, {height: height}]}>
       <Animated.View style={[{transform: [{translateX}]}]}>
         <LinearGradient
           colors={['#ddd', '#ccc', '#ddd']}
@@ -36,7 +41,6 @@ const TestScreen = () => {
 
 const styles = StyleSheet.create({
   parent: {
-    height: '100%',
     width: '100%',
     backgroundColor: '#ccc',
     opacity: 0.5,
@@ -46,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default TestScreen;
+export default SkeltonLoading;

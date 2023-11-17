@@ -2,13 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {AppDispatch} from '@app/store/index';
 import {useDispatch} from 'react-redux';
-import {getGameList} from '@app/store/slices/gameSlice';
+
 import styles from './styles';
 import {HomeScreenNavigationProp} from '../../navigations/types';
 import {GameThemes} from '@app/constants/constants';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import GameToggleButton from '@app/components/GameToggleComponent';
 import AppBar from '@app/components/AppBarComponent';
+import {getGameList} from '@app/store/actions/admin/gameActions';
 
 type NavigationScreenProps = {
   navigation: HomeScreenNavigationProp;

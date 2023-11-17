@@ -3,7 +3,7 @@ import {AppDispatch} from '@app/store/index';
 import {
   updateClosestGame,
   updateCurrentGame,
-} from '@app/store/slices/gameTempSlice';
+} from '@app/store/slices/gameSlice';
 import {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 

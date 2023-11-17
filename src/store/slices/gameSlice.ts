@@ -1,67 +1,54 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import {getAxiosInstance} from '../../api/api';
+import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import {getGameList, calculateClosestGame} from '../actions/admin/gameActions';
 
 // Define a type for the slice state
 type GameState = {
-  token: string;
-  game: Array<any>;
+  games: Array<any>;
+  loading: boolean;
+  error: any;
+  game: {} | null;
 };
 
 const initialState: GameState = {
-  token: '',
-  game: [],
+  games: [],
+  loading: false,
+  error: null,
+  game: null,
 };
 
-export const getGameList = createAsyncThunk(
-  'game/getGameList',
-  async (params: any, {rejectWithValue}) => {
-    const api = await getAxiosInstance();
-    try {
-      const response = await api.get('api/games/');
-      return response?.data;
-    } catch (error: any) {
-      return rejectWithValue(error?.response?.data);
-    }
-  },
-);
-
-export const getGameBookings = createAsyncThunk(
-  'game/getGameBookings',
-  async (params: any, {rejectWithValue}) => {
-    const api = await getAxiosInstance();
-    try {
-      const response = await api.get('api/booking/');
-      return response?.data;
-    } catch (error: any) {
-      return rejectWithValue(error?.response?.data);
-    }
-  },
-);
-
-export const saveGames = createAsyncThunk(
-  'game/saveGames',
-  async (params: any, {rejectWithValue}) => {
-    const api = await getAxiosInstance();
-    try {
-      const response = await api.post('api/booking/insert-many/', params);
-      return response?.data;
-    } catch (error: any) {
-      return rejectWithValue(error?.response?.data);
-    }
-  },
-);
-
 export const gameSlice = createSlice({
-  name: 'game',
+  name: 'games',
   initialState,
   reducers: {
-    setGame: (state, action) => {
-      state.game = action?.payload;
+    updateClosestGame: state => {
+      state.game = calculateClosestGame(state.games);
+    },
+    updateCurrentGame: (state, action: PayloadAction<string>) => {
+      const selectedGame = state.games.find(
+        game => game._id === action.payload,
+      );
+
+      state.game = selectedGame || null;
     },
   },
-  extraReducers: builder => {},
+  extraReducers: builder => {
+    builder
+      .addCase(getGameList.pending, state => {
+        state.loading = true;
+      })
+      .addCase(getGameList.fulfilled, (state, {payload}) => {
+        state.loading = false;
+        state.error = null;
+        state.games = payload;
+      })
+      .addCase(getGameList.rejected, (state, {payload}) => {
+        state.loading = false;
+        state.games = [];
+        state.error = payload;
+      });
+  },
 });
 
-export const {setGame} = gameSlice.actions;
+export const {updateClosestGame, updateCurrentGame} = gameSlice.actions;
 
 export default gameSlice.reducer;

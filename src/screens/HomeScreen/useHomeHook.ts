@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from '@app/store/index';
 import {Alert} from 'react-native';
 import {createBooking} from '@app/store/actions/admin/bookingActions';
-import {updateClosestGame} from '@app/store/slices/gameTempSlice';
+import {updateClosestGame} from '@app/store/slices/gameSlice';
 import {getGameList} from '@app/store/actions/admin/gameActions';
 
 export type lskType = {
@@ -13,7 +13,7 @@ export type lskType = {
 };
 
 const useHomeHook = () => {
-  const {game} = useSelector((state: any) => state.games);
+  const {game, loading} = useSelector((state: any) => state.games);
   const dispatch = useDispatch<AppDispatch>();
 
   const [selectedButton, setSelectedButton] = useState<number | null>(1);
@@ -74,7 +74,7 @@ const useHomeHook = () => {
     } else {
       if (buttonNumber?.number == 4 && selectedButton == 1) {
         const newData = allABC.map((item: string) => ({
-          gameId: '64e1c27a7c8bb02e14e232fb',
+          gameId: game._id,
           userId: '64e2206e8eebef3fbf473000',
           number: ticketNumber,
           count: ticketCount,
@@ -87,7 +87,7 @@ const useHomeHook = () => {
         setListData([...listData, ...newData]);
       } else if (buttonNumber?.number == 4 && selectedButton == 2) {
         const newData = allTicket.map((item: string) => ({
-          gameId: '64e1c27a7c8bb02e14e232fb',
+          gameId: game._id,
           userId: '64e2206e8eebef3fbf473000',
           number: ticketNumber,
           count: ticketCount,
@@ -102,7 +102,7 @@ const useHomeHook = () => {
         setListData([
           ...listData,
           {
-            gameId: '64e1c27a7c8bb02e14e232fb',
+            gameId: game._id,
             userId: '64e2206e8eebef3fbf473000',
             number: ticketNumber,
             count: ticketCount,
@@ -149,6 +149,8 @@ const useHomeHook = () => {
     setSaveAlert,
     saveAlert,
     successModal,
+    game,
+    loading,
   };
 };
 export default useHomeHook;

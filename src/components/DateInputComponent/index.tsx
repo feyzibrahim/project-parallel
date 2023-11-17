@@ -75,7 +75,7 @@ const DateInputComponent: React.FC<HomeScreenProps> = ({navigation}) => {
               <ShareToWhatsapp />
             </>
           ) : (
-            <Text>No Result on this date</Text>
+            <Text>Results are not published yet for {date}</Text>
           )}
         </View>
       ) : (

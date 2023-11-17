@@ -5,22 +5,18 @@ import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import DateInputComponent from '@app/components/DateInputComponent';
 import {HomeScreenNavigationProp} from '@app/navigations/types';
 import useResultHook from './useResultHook';
-import TestHeaderComponent from '@app/components/TestHeaderComponent';
+import TestHeaderComponent from '@app/components/HeaderComponent';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
 const ResultScreen: React.FC<HomeScreenProps> = ({navigation}) => {
-  const {screenTheme, gameDetail} = useResultHook();
+  const {screenTheme} = useResultHook();
 
   return (
-    <SafeAreaWrapper
-      statusbar={gameDetail ? gameDetail?.theme?.primary : screenTheme.primary}>
+    <SafeAreaWrapper statusbar={screenTheme.primary}>
       <TestHeaderComponent />
-      <ScrollView
-        style={styles.container}
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={{flex: 1}}>
+      <ScrollView style={styles.container} contentContainerStyle={{flex: 1}}>
         <DateInputComponent navigation={navigation} />
       </ScrollView>
     </SafeAreaWrapper>
