@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -18,11 +18,11 @@ import {HomeScreenNavigationProp} from '../../navigations/types';
 import Icon from 'react-native-vector-icons/Feather';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
-import {ToastAndroid} from 'react-native/Libraries/Components/ToastAndroid/ToastAndroid';
-
 import styles from './styles';
 import ButtonComponent from '@app/components/ButtonComponent';
 import {COLORS} from '@app/constants/themes';
+import {getGameList} from '@app/store/actions/admin/gameActions';
+import {updateClosestGame} from '@app/store/slices/gameSlice';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
@@ -35,6 +35,25 @@ type FormType = {
 
 const LoginPage: React.FC<HomeScreenProps> = ({navigation}) => {
   const dispatch = useDispatch<AppDispatch>();
+
+  const dispatchSelectGameBasedOnTime = () => {
+    dispatch(updateClosestGame());
+  };
+
+  const dispatchGetGameList = async () => {
+    const getGameAction = await dispatch(getGameList(null));
+
+    if (getGameList.fulfilled.match(getGameAction)) {
+      dispatchSelectGameBasedOnTime();
+    } else {
+      const errorResult: any = getGameAction?.payload;
+      console.log('Games Listed===ERROR=====', errorResult);
+    }
+  };
+
+  useEffect(() => {
+    dispatchGetGameList();
+  }, []);
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

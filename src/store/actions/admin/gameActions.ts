@@ -18,16 +18,28 @@ export const getGameList = createAsyncThunk(
 
 // Getting the game closer to the current time
 export const calculateClosestGame = (games: Array<any>) => {
-  const now = new Date();
+  const currentDate = new Date();
 
-  const currentTime: string = date.format(now, 'hh:mm A');
-  let less = games[0];
+  const currentTime: string = date.format(currentDate, 'hh:mm A');
+  const currentTimeWithDate = new Date(
+    currentDate.toDateString() + ' ' + currentTime,
+  );
+  // console.log(currentTimeWithDate);
 
-  games.map(item => {
-    if (less.time < currentTime) {
-      less = item;
-    }
-  });
+  let less = games[0]; // Initialize with a time before any game
+
+  // games.forEach(item => {
+  //   const itemTimeWithDate = new Date(
+  //     currentDate.toDateString() + ' ' + item.time,
+  //   );
+
+  //   if (
+  //     less.timeWithDate < currentTimeWithDate &&
+  //     itemTimeWithDate > currentTimeWithDate
+  //   ) {
+  //     less = {...item, timeWithDate: itemTimeWithDate};
+  //   }
+  // });
 
   return less;
 };

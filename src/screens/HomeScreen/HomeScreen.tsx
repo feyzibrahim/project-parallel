@@ -30,17 +30,20 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
     selectedButton,
     handleButtonPress,
     handleButtonPressABC,
-    setCustomer,
     setTicketCount,
     setTicketNumber,
     listData,
     removeTicket,
     onSaveButton,
-    setSaveAlert,
+    turnOnConfirmModal,
     saveAlert,
     successModal,
     game,
     loading,
+    selectedCustomer,
+    totalCount,
+    totalAmountC,
+    totalAmountD,
   } = useHomeHook();
 
   return (
@@ -63,8 +66,23 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
             <View style={styles.inputContainer}>
               <Pressable
                 style={styles.input}
-                onPress={() => navigation.navigate('UserList')}>
-                <Text style={{paddingVertical: 14}}>Choose A Customer</Text>
+                onPress={() => navigation.navigate('CustomerSelection')}>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}>
+                  {selectedCustomer !== null ? (
+                    <>
+                      <Text style={{paddingVertical: 14}}>
+                        {selectedCustomer.username}
+                      </Text>
+                      <Text style={{paddingVertical: 14}}>Change Customer</Text>
+                    </>
+                  ) : (
+                    <Text style={{paddingVertical: 14}}>Choose A Customer</Text>
+                  )}
+                </View>
               </Pressable>
             </View>
           )}
@@ -307,11 +325,17 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
               </TouchableOpacity>
             </View>
           )}
-          <TableComponent
-            tableData={listData}
-            tableHeaders={TableHeaders}
-            onPressDelete={() => removeTicket(listData)}
-          />
+          {loading ? (
+            <View style={{marginVertical: 5}}>
+              <SkeltonLoading height={40} />
+            </View>
+          ) : (
+            <TableComponent
+              tableData={listData}
+              tableHeaders={TableHeaders}
+              onPressDelete={() => removeTicket(listData)}
+            />
+          )}
         </View>
       </ScrollView>
       {/* Count and Amount */}
@@ -323,6 +347,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
               style={styles.inputBottom}
               placeholder="Count"
               placeholderTextColor="#888"
+              editable={false}
+              value={totalCount !== 0 ? totalCount.toString() : ''}
             />
           </View>
           <View style={styles.bottomContainer}>
@@ -330,6 +356,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
               style={styles.inputBottom}
               placeholder="D Amount"
               placeholderTextColor="#888"
+              value={totalAmountD !== 0 ? totalAmountD.toString() : ''}
+              editable={false}
             />
           </View>
           <View style={styles.bottomContainer}>
@@ -337,6 +365,8 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
               style={styles.inputBottom}
               placeholder="C Amount"
               placeholderTextColor="#888"
+              value={totalAmountC !== 0 ? totalAmountC.toString() : ''}
+              editable={false}
             />
           </View>
           <TouchableOpacity
@@ -346,7 +376,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
                 backgroundColor: theme.secondary,
               },
             ]}
-            onPress={() => setSaveAlert(true)}>
+            onPress={() => turnOnConfirmModal(true)}>
             <Text style={[styles.bottomButtonText]}>Book</Text>
           </TouchableOpacity>
         </View>
@@ -357,7 +387,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         title={'Are You Sure ?'}
         confirmText={'Ok'}
         CancelText={'Cancel'}
-        CancelPressed={() => setSaveAlert(false)}
+        CancelPressed={() => turnOnConfirmModal(false)}
         confirmPressed={() => {
           onSaveButton();
         }}

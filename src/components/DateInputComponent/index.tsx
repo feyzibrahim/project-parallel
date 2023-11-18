@@ -98,7 +98,7 @@ const DateInputComponent: React.FC<HomeScreenProps> = ({navigation}) => {
         onPressButton={() => {
           navigation.navigate('ResultAddScreen');
         }}
-        style={styles.floatingButton}
+        style={null}
       />
     </View>
   );

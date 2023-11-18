@@ -17,6 +17,7 @@ import GameSettingsScreen from '@app/screens/GameSettingsScreen';
 import PackageScreen from '@app/screens/PackageScreen';
 import PackageCreateScreen from '@app/screens/PackageCreateScreen';
 import TestScreen from '@app/screens/TestScreen';
+import CustomerSelectionScreen from '@app/screens/CustomerSelectionScreen';
 
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -47,6 +48,10 @@ const Navigation: React.FC = () => {
           component={PackageCreateScreen}
         />
         <Stack.Screen name="Test" component={TestScreen} />
+        <Stack.Screen
+          name="CustomerSelection"
+          component={CustomerSelectionScreen}
+        />
       </Stack.Navigator>
     </React.Fragment>
   );

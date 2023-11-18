@@ -4,8 +4,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from '@app/store/index';
 import {Alert} from 'react-native';
 import {createBooking} from '@app/store/actions/admin/bookingActions';
-import {updateClosestGame} from '@app/store/slices/gameSlice';
-import {getGameList} from '@app/store/actions/admin/gameActions';
 
 export type lskType = {
   number: number;
@@ -14,40 +12,26 @@ export type lskType = {
 
 const useHomeHook = () => {
   const {game, loading} = useSelector((state: any) => state.games);
+  const {selectedCustomer} = useSelector((state: any) => state.users);
   const dispatch = useDispatch<AppDispatch>();
 
   const [selectedButton, setSelectedButton] = useState<number | null>(1);
   const [selectedButtonABC, setSelectedButtonABC] = useState<number | null>(1);
   const [theme, setTheme] = useState<any>({});
-  const [customer, setCustomer] = useState('');
   const [ticketNumber, setTicketNumber] = useState('');
   const [ticketCount, setTicketCount] = useState('');
   const [listData, setListData] = useState<Array<any>>([]);
   const [saveAlert, setSaveAlert] = useState(false);
-  const [successModal, setsuccessModal] = useState(true);
+  const [successModal, setsuccessModal] = useState(false);
 
-  const dispatchSelectGameBasedOnTime = () => {
-    dispatch(updateClosestGame());
-  };
-
-  const dispatchGetGameList = async () => {
-    const getGameAction = await dispatch(getGameList(null));
-
-    if (getGameList.fulfilled.match(getGameAction)) {
-      dispatchSelectGameBasedOnTime();
-    } else {
-      const errorResult: any = getGameAction?.payload;
-      console.log('Games Listed===ERROR=====', errorResult);
-    }
-  };
-
-  useEffect(() => {
-    dispatchGetGameList();
-  }, []);
+  // Totals
+  let [totalCount, setTotalCount] = useState(0);
+  let [totalAmountD, setTotalAmountD] = useState(0);
+  let [totalAmountC, setTotalAmountC] = useState(0);
 
   setTimeout(() => {
     setsuccessModal(false);
-  }, 1000);
+  }, 3000);
 
   const colorTheme = (index: number) => {
     const primaryColors = GameThemes;
@@ -69,13 +53,30 @@ const useHomeHook = () => {
     const allABC = ['A', 'B', 'C'];
     const allTicket = ['AB', 'BC', 'AC'];
 
-    if (ticketNumber == '' || ticketCount == '' || customer == '') {
+    if (selectedCustomer === null) {
+      Alert.alert('Please select a customer');
+      return;
+    }
+    if (ticketNumber === '') {
+      Alert.alert('Please enter number');
+      return;
+    }
+    if (ticketCount === '') {
+      Alert.alert('Please enter count');
+      return;
+    }
+
+    if (
+      ticketNumber === '' ||
+      ticketCount === '' ||
+      selectedCustomer === null
+    ) {
       Alert.alert('Please Fill In The Blanks');
     } else {
       if (buttonNumber?.number == 4 && selectedButton == 1) {
         const newData = allABC.map((item: string) => ({
           gameId: game._id,
-          userId: '64e2206e8eebef3fbf473000',
+          userId: selectedCustomer._id,
           number: ticketNumber,
           count: ticketCount,
           lsk: item,
@@ -88,7 +89,7 @@ const useHomeHook = () => {
       } else if (buttonNumber?.number == 4 && selectedButton == 2) {
         const newData = allTicket.map((item: string) => ({
           gameId: game._id,
-          userId: '64e2206e8eebef3fbf473000',
+          userId: selectedCustomer._id,
           number: ticketNumber,
           count: ticketCount,
           lsk: item,
@@ -103,7 +104,7 @@ const useHomeHook = () => {
           ...listData,
           {
             gameId: game._id,
-            userId: '64e2206e8eebef3fbf473000',
+            userId: selectedCustomer._id,
             number: ticketNumber,
             count: ticketCount,
             lsk: buttonNumber?.lsk,
@@ -116,18 +117,63 @@ const useHomeHook = () => {
     }
   };
 
+  // Calculating total of Count, D Amount, C Amount
+  const calculateTotal = () => {
+    listData.forEach(item => {
+      const count = parseInt(item.count, 10) || 0;
+      const amountD = parseFloat(item.amountD) || 0;
+      const amountC = parseFloat(item.amountC) || 0;
+
+      setTotalCount((totalCount += count));
+      setTotalAmountC((totalAmountD += amountD));
+      setTotalAmountD((totalAmountC += amountC));
+    });
+  };
+
+  useEffect(() => {
+    calculateTotal();
+  }, [listData]);
+
   const removeTicket = (data: any) => {
-    console.log(data, '//////////');
+    console.log(listData, '//////////');
     // setListData(listData.filter(list => console.log(list, '========')));
   };
 
+  const turnOnConfirmModal = (value: boolean) => {
+    if (selectedCustomer === null) {
+      Alert.alert('Please select a customer');
+      return;
+    }
+    if (ticketNumber === '') {
+      Alert.alert('Please enter number');
+      return;
+    }
+    if (ticketCount === '') {
+      Alert.alert('Please enter count');
+      return;
+    }
+    setSaveAlert(value);
+  };
+
   const onSaveButton = async () => {
+    if (selectedCustomer === null) {
+      Alert.alert('Please select a customer');
+      return;
+    }
+    if (ticketNumber === '') {
+      Alert.alert('Please enter number');
+      return;
+    }
+    if (ticketCount === '') {
+      Alert.alert('Please enter count');
+      return;
+    }
+
     const resultAction = await dispatch(createBooking(listData));
     if (createBooking.fulfilled.match(resultAction)) {
       setListData([]);
-      setSaveAlert(false);
-      // console.log('GAME Saved=====', resultAction?.payload);
       setsuccessModal(true);
+      turnOnConfirmModal(false);
     } else {
       const errorResult: any = resultAction?.payload;
       console.log('GAME Saved===ERROR=====', errorResult);
@@ -140,17 +186,20 @@ const useHomeHook = () => {
     theme,
     handleButtonPress,
     handleButtonPressABC,
-    setCustomer,
     setTicketNumber,
     setTicketCount,
     listData,
     removeTicket,
     onSaveButton,
-    setSaveAlert,
+    turnOnConfirmModal,
     saveAlert,
     successModal,
     game,
     loading,
+    selectedCustomer,
+    totalCount,
+    totalAmountC,
+    totalAmountD,
   };
 };
 export default useHomeHook;

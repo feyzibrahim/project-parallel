@@ -7,6 +7,8 @@ type UserState = {
   loading: boolean;
   error: any;
   user: {} | null;
+  selectedCustomer: {} | null;
+  filteredUsers: Array<any>;
 };
 
 const initialState: UserState = {
@@ -14,12 +16,27 @@ const initialState: UserState = {
   loading: false,
   error: null,
   user: null,
+  selectedCustomer: null,
+  filteredUsers: [],
 };
 
 export const userSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: {},
+  reducers: {
+    selectCustomer: (state, {payload}) => {
+      state.selectedCustomer = payload;
+    },
+    searchUsers: (state, {payload}) => {
+      const searchQuery = (payload || '').toLowerCase();
+      state.filteredUsers = state.users.filter(user =>
+        user.username.toLowerCase().includes(searchQuery),
+      );
+    },
+    clearSearch: state => {
+      state.filteredUsers = [];
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(getUserList.pending, state => {
@@ -37,5 +54,7 @@ export const userSlice = createSlice({
       });
   },
 });
+
+export const {selectCustomer, searchUsers, clearSearch} = userSlice.actions;
 
 export default userSlice.reducer;

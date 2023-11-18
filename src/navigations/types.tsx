@@ -22,6 +22,7 @@ export type RootStackParamList = {
   PackageScreen: undefined;
   PackageCreateScreen: undefined;
   Test: undefined;
+  CustomerSelection: undefined;
 };
 
 // Define the screen navigation props types

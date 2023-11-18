@@ -1,4 +1,4 @@
-import {createAsyncThunk} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSelector} from '@reduxjs/toolkit';
 import {getAxiosInstance} from '../../../api/api';
 
 export const getUserList = createAsyncThunk(
@@ -7,7 +7,6 @@ export const getUserList = createAsyncThunk(
     const api = await getAxiosInstance();
     try {
       const {data} = await api.get('api/admin/users');
-      console.log(data);
 
       return data;
     } catch (error: any) {
@@ -15,3 +14,17 @@ export const getUserList = createAsyncThunk(
     }
   },
 );
+
+// export const selectFilteredUsers = createSelector(
+//   state => state.users.users,
+//   state => state.users.searchQuery,
+//   (users, searchQuery: string) => {
+//     if (searchQuery.trim() === '') {
+//       return users;
+//     } else {
+//       return (users as any[]).filter((user: any) =>
+//         user.username.toLowerCase().includes(searchQuery.toLowerCase()),
+//       );
+//     }
+//   },
+// );
