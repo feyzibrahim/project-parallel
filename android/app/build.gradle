@@ -91,7 +91,7 @@ android {
          release {
             storeFile file('key.keystore')
             storePassword 'Faiz@1234'
-            keyAlias 'your_key_alias'
+            keyAlias 'my-key-alias'
             keyPassword 'Faiz@1234'
         }
     }

@@ -21,6 +21,7 @@ export type RootStackParamList = {
   GameSettingsScreen: undefined;
   PackageScreen: undefined;
   PackageCreateScreen: undefined;
+  Calculator: undefined;
 };
 
 // Define the screen navigation props types

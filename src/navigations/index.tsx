@@ -16,6 +16,7 @@ import UserAddList from '@app/screens/UserAddList';
 import GameSettingsScreen from '@app/screens/GameSettingsScreen';
 import PackageScreen from '@app/screens/PackageScreen/PackageScreen';
 import PackageCreateScreen from '@app/screens/PackageCreateScreen';
+import CalculatorScreen from '@app/screens/CalculatorScreen';
 
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -23,8 +24,9 @@ const Navigation: React.FC = () => {
   return (
     <React.Fragment>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Calculator"
         screenOptions={{headerShown: false, gestureEnabled: true}}>
+        <Stack.Screen name="Calculator" component={CalculatorScreen} />
         <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="BottomTab" component={BottomTabNavigation} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
