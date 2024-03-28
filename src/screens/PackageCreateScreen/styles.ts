@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     paddingHorizontal: 12,
     marginBottom: 16,
+    color: '#000',
   },
   profileHeader: {
     backgroundColor: COLORS.grayShade2,

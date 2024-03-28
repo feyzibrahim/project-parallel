@@ -34,7 +34,7 @@ const DateInputComponent = () => {
           <Icon name="calendar" size={22} color={COLORS.primary} />
         </View>
         {date ? (
-          <Text>{date}</Text>
+          <Text style={styles.placeholderText}>{date}</Text>
         ) : (
           <Text style={styles.placeholderText}>Result Date</Text>
         )}

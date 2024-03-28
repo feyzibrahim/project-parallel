@@ -43,30 +43,35 @@ const LotteryForm: React.FC = () => {
         <TextInput
           style={styles.input}
           placeholder="First Prize"
+          placeholderTextColor={'#000'}
           value={first}
           onChangeText={setFirst}
         />
         <TextInput
           style={styles.input}
           placeholder="Second Prize"
+          placeholderTextColor={'#000'}
           value={second}
           onChangeText={setSecond}
         />
         <TextInput
           style={styles.input}
           placeholder="Third Prize"
+          placeholderTextColor={'#000'}
           value={third}
           onChangeText={setThird}
         />
         <TextInput
           style={styles.input}
           placeholder="Fourth Prize"
+          placeholderTextColor={'#000'}
           value={fourth}
           onChangeText={setFourth}
         />
         <TextInput
           style={styles.input}
           placeholder="Fifth Prize"
+          placeholderTextColor={'#000'}
           value={fifth}
           onChangeText={setFifth}
         />
@@ -74,6 +79,7 @@ const LotteryForm: React.FC = () => {
           <TextInput
             style={styles.input}
             placeholder="Add 3-digit numbers (comma separated)"
+            placeholderTextColor={'#000'}
             value={numbersArray}
             onChangeText={setNumbersArray}
           />

@@ -13,6 +13,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginBottom: 10,
     padding: 10,
+    color: '#000',
   },
 });
 export default styles;

@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     fontSize: 16,
+    color: '#000',
   },
   inputWidth33: {
     width: '30%',
@@ -77,6 +78,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     backgroundColor: '#ffffff',
     // width: '30%',
+    color: '#000',
   },
   buttonBottom: {
     paddingVertical: 12,

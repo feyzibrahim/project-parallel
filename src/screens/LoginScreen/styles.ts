@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   headerText: {
     fontSize: 30,
     fontWeight: 'bold',
-    color:'#000'
+    color: '#000',
   },
   inputContainer: {
     marginVertical: 10,
@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 16,
     fontSize: 16,
+    color: '#000',
   },
   passwordToggle: {
     position: 'absolute',
