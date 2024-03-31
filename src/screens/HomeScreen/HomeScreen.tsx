@@ -348,7 +348,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
               placeholder="Count"
               placeholderTextColor="#888"
               editable={false}
-              value={totalCount !== 0 ? totalCount.toString() : ''}
+              value={totalCount !== '' ? totalCount.toString() : ''}
             />
           </View>
           <View style={styles.bottomContainer}>
@@ -356,7 +356,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
               style={styles.inputBottom}
               placeholder="D Amount"
               placeholderTextColor="#888"
-              value={totalAmountD !== 0 ? totalAmountD.toString() : ''}
+              value={totalAmountD !== '' ? totalAmountD.toString() : ''}
               editable={false}
             />
           </View>
@@ -365,7 +365,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
               style={styles.inputBottom}
               placeholder="C Amount"
               placeholderTextColor="#888"
-              value={totalAmountC !== 0 ? totalAmountC.toString() : ''}
+              value={totalAmountC !== '' ? totalAmountC.toString() : ''}
               editable={false}
             />
           </View>

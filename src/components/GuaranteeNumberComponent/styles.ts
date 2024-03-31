@@ -10,14 +10,14 @@ const styles = StyleSheet.create({
   },
   ticketNumberWrap: {
     backgroundColor: COLORS.lightBlueSHade,
-    margin: 8,
+    marginBottom: 5,
     padding: 7,
     borderRadius: 5,
   },
   ticketNumberText: {
     color: COLORS.black,
     fontSize: 16,
-    fontWeight: '500'
+    fontWeight: '500',
   },
 });
 export default styles;

@@ -27,6 +27,9 @@ export const userSlice = createSlice({
     selectCustomer: (state, {payload}) => {
       state.selectedCustomer = payload;
     },
+    removeSelectedCustomer: state => {
+      state.selectedCustomer = null;
+    },
     searchUsers: (state, {payload}) => {
       const searchQuery = (payload || '').toLowerCase();
       state.filteredUsers = state.users.filter(user =>
@@ -55,6 +58,11 @@ export const userSlice = createSlice({
   },
 });
 
-export const {selectCustomer, searchUsers, clearSearch} = userSlice.actions;
+export const {
+  selectCustomer,
+  removeSelectedCustomer,
+  searchUsers,
+  clearSearch,
+} = userSlice.actions;
 
 export default userSlice.reducer;

@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const ShareToWhatsapp = () => {
   const shareToWhatsapp = () => {
-    Alert.alert('PLEASE TRY AGAIN LATER.');
+    Alert.alert('It will be shared.');
   };
 
   return (
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   wrapper: {
     flexDirection: 'row',
     alignSelf: 'center',
-    marginTop: 40,
+    marginVertical: 40,
     alignItems: 'center',
   },
   shareText: {

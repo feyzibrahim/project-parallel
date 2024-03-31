@@ -75,7 +75,6 @@ const LoginPage: React.FC<HomeScreenProps> = ({navigation}) => {
   });
 
   const gotoHome = async (values: FormType) => {
-    // navigation.navigate('BottomTab');
     setIsLoading(true);
     const params: FormType = {
       username: values?.username,
@@ -87,7 +86,6 @@ const LoginPage: React.FC<HomeScreenProps> = ({navigation}) => {
       navigation.navigate('BottomTab');
       Keyboard.dismiss();
       formik.resetForm();
-      // ToastAndroid.show('Login Success', ToastAndroid.LONG);
     } else {
       const errorResult: any = resultAction?.payload;
       Alert.alert(errorResult?.error);

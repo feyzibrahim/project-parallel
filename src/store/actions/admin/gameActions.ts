@@ -4,10 +4,12 @@ import date from 'date-and-time';
 
 export const getGameList = createAsyncThunk(
   'game/getGameList',
-  async (params: any, {rejectWithValue}) => {
+  async (_: any, {rejectWithValue}) => {
     const api = await getAxiosInstance();
     try {
       const {data} = await api.get('api/games/');
+
+      console.log('gameActions.ts | getGameList', data);
 
       return data;
     } catch (error: any) {

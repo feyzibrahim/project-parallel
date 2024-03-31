@@ -1,24 +1,25 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
-import styles from './styles';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
 import DateInputComponent from '@app/components/DateInputComponent';
 import {HomeScreenNavigationProp} from '@app/navigations/types';
-import useResultHook from './useResultHook';
 import TestHeaderComponent from '@app/components/HeaderComponent';
+import FloatingActionButton from '@app/components/FloatingButton';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
 const ResultScreen: React.FC<HomeScreenProps> = ({navigation}) => {
-  const {screenTheme} = useResultHook();
-
   return (
-    <SafeAreaWrapper statusbar={screenTheme.primary}>
+    <SafeAreaWrapper>
       <TestHeaderComponent />
-      <ScrollView style={styles.container} contentContainerStyle={{flex: 1}}>
-        <DateInputComponent navigation={navigation} />
-      </ScrollView>
+      <DateInputComponent navigation={navigation} />
+      <FloatingActionButton
+        iconName="plus"
+        onPressButton={() => {
+          navigation.navigate('ResultAddScreen');
+        }}
+        style={null}
+      />
     </SafeAreaWrapper>
   );
 };

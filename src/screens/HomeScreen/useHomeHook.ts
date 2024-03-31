@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {AppDispatch} from '@app/store/index';
 import {Alert} from 'react-native';
 import {createBooking} from '@app/store/actions/admin/bookingActions';
-
+import {removeSelectedCustomer} from '@app/store/slices/userSlice';
 export type lskType = {
   number: number;
   lsk: string;
@@ -25,9 +25,9 @@ const useHomeHook = () => {
   const [successModal, setsuccessModal] = useState(false);
 
   // Totals
-  let [totalCount, setTotalCount] = useState(0);
-  let [totalAmountD, setTotalAmountD] = useState(0);
-  let [totalAmountC, setTotalAmountC] = useState(0);
+  let [totalCount, setTotalCount] = useState('');
+  let [totalAmountD, setTotalAmountD] = useState('');
+  let [totalAmountC, setTotalAmountC] = useState('');
 
   setTimeout(() => {
     setsuccessModal(false);
@@ -174,6 +174,12 @@ const useHomeHook = () => {
       setListData([]);
       setsuccessModal(true);
       turnOnConfirmModal(false);
+      setTotalAmountC('');
+      setTotalAmountD('');
+      setTotalCount('');
+      dispatch(removeSelectedCustomer());
+      setTicketNumber('');
+      setTicketCount('');
     } else {
       const errorResult: any = resultAction?.payload;
       console.log('GAME Saved===ERROR=====', errorResult);

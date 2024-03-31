@@ -1,73 +1,28 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, ScrollView, TextInput} from 'react-native';
 import {Formik} from 'formik';
 import styles from './styles';
 import ButtonComponent from '@app/components/ButtonComponent';
-import AppBar from '@app/components/AppBarComponent';
+import CalendarPicker from 'react-native-calendar-picker';
 import SafeAreaWrapper from '@app/components/Layout/SafeAreaWrapper';
-import * as Yup from 'yup';
 import InputType from '@app/components/InputType';
 import ButtonWithIcon from '@app/components/ButtonWithIcon';
+import useResultAddHook from './useResultAddHook';
+import TestHeaderComponent from '@app/components/HeaderComponent';
 
 const LotteryForm: React.FC = () => {
-  const initialValues = {
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-    fifth: '',
-    guarantee: [] as number[],
-  };
-
-  const validationSchema = Yup.object().shape({
-    first: Yup.number()
-      .required('First Prize is required')
-      .integer('No point value')
-      .min(100)
-      .max(999)
-      .typeError('Only Number'),
-    second: Yup.number()
-      .required('Second Prize is required')
-      .integer('No point value')
-      .min(100)
-      .max(999)
-      .typeError('Only Number'),
-    third: Yup.number()
-      .required('Third Prize is required')
-      .integer('No point value')
-      .min(100)
-      .max(999)
-      .typeError('Only Number'),
-    fourth: Yup.number()
-      .required('Fourth Prize is required')
-      .integer('No point value')
-      .min(100)
-      .max(999)
-      .typeError('Only Number'),
-    fifth: Yup.number()
-      .required('Fifth Prize is required')
-      .integer('No point value')
-      .min(100)
-      .max(999)
-      .typeError('Only Number'),
-    guarantee: Yup.array().of(
-      Yup.number()
-        .integer('No point value')
-        .min(100)
-        .max(999)
-        .typeError('Only Number'),
-    ),
-  });
-
-  const handleSave = (values: typeof initialValues) => {
-    console.log('Form Data:', values);
-  };
-
-  const [tempGuaranteeInput, setTempGuaranteeInput] = useState('');
+  const {
+    validationSchema,
+    tempGuaranteeInput,
+    handleSave,
+    initialValues,
+    setTempGuaranteeInput,
+  } = useResultAddHook();
 
   return (
     <SafeAreaWrapper statusbar={'#F2F4F5'}>
-      <AppBar title="Add Today's Result" />
+      <TestHeaderComponent />
+
       <ScrollView keyboardShouldPersistTaps="handled">
         <Formik
           initialValues={initialValues}
@@ -81,6 +36,13 @@ const LotteryForm: React.FC = () => {
             setFieldValue,
           }) => (
             <View style={styles.container}>
+              <Text
+                style={{fontSize: 18, marginVertical: 10, fontWeight: 'bold'}}>
+                Publish New Result
+              </Text>
+              <CalendarPicker
+                onDateChange={date => setFieldValue('selectedDate', date)}
+              />
               <InputType
                 name="first"
                 label="First Prize"

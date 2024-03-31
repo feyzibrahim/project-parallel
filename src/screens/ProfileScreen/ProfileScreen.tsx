@@ -10,12 +10,15 @@ import styles from './styles';
 import ButtonComponent from '@app/components/ButtonComponent';
 import ToggleButton from '@app/components/ToggleButtonComponent';
 import AppBar from '@app/components/AppBarComponent';
+// import useProfileHook from './useProfileHook';
 
 type HomeScreenProps = {
   navigation: HomeScreenNavigationProp;
 };
 
 const ProfileScreen: React.FC<HomeScreenProps> = ({navigation}) => {
+  // const {user} = useProfileHook();
+
   return (
     <SafeAreaWrapper containerStyle={styles.container} statusbar={'#F2F4F5'}>
       <AppBar title="My Profile" />

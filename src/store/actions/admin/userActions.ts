@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSelector} from '@reduxjs/toolkit';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 import {getAxiosInstance} from '../../../api/api';
 
 export const getUserList = createAsyncThunk(

@@ -1,7 +1,9 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
-import authSlice from './slices/authSlice';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {persistReducer} from 'redux-persist';
+
+import authSlice from './slices/authSlice';
+import authenticationSlice from './slices/authenticationSlice';
 import packageSlice from './slices/packageSlice';
 import bookingSlice from './slices/bookingSlice';
 import resultSlice from './slices/resultSlice';
@@ -17,6 +19,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   auth: authSlice,
+  authentication: authenticationSlice,
   games: gameSlice,
   packages: packageSlice,
   booking: bookingSlice,

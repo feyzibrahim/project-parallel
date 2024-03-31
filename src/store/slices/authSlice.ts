@@ -4,10 +4,16 @@ import {getAxiosInstance} from '../../api/api';
 // Define a type for the slice state
 type AuthState = {
   token: string;
+  user: {} | null;
+  loading: boolean;
+  error: any;
 };
 
 const initialState: AuthState = {
   token: '',
+  user: null,
+  loading: false,
+  error: null,
 };
 
 export const registerUser = createAsyncThunk(
@@ -28,9 +34,9 @@ export const loginwithUsername = createAsyncThunk(
   async (params: any, {rejectWithValue}) => {
     const api = await getAxiosInstance();
     try {
-      const response = await api.post('api/user/login', params);
-      console.log('Login success');
-      return response;
+      const {data} = await api.post('api/user/login', params);
+      console.log('Login success | auth Slice', data);
+      return data;
     } catch (error: any) {
       console.log(error);
       return rejectWithValue(error.response.data);
@@ -41,14 +47,24 @@ export const loginwithUsername = createAsyncThunk(
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    // setToken: (state, action) => {
-    //   state.token = action?.payload;
-    // },
+  reducers: {},
+  extraReducers: builder => {
+    builder
+      .addCase(loginwithUsername.pending, state => {
+        state.loading = true;
+      })
+      .addCase(loginwithUsername.fulfilled, (state, {payload}) => {
+        state.loading = false;
+        state.error = null;
+        state.user = payload;
+        state.token = payload.token;
+      })
+      .addCase(loginwithUsername.rejected, (state, {payload}) => {
+        state.loading = false;
+        state.user = {};
+        state.error = payload;
+      });
   },
-  extraReducers: builder => {},
 });
-
-// export const {setToken} = authSlice.actions;
 
 export default authSlice.reducer;
