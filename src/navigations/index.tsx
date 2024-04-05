@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 import {RootStackParamList} from './types';
 
-import LoginScreen from '@app/screens/LoginScreen';
+import LoginPage from '@app/screens/LoginScreen/index';
 import SettingsScreen from '@app/screens/Settings/SettingsScreen';
 import NotificationScreen from '@app/screens/SettingsOptions/NotificationScreen';
 import PrivacyPolicyScreen from '@app/screens/SettingsOptions/PrivacyPolicyScreen';
@@ -16,8 +16,7 @@ import UserAddList from '@app/screens/UserAddList';
 import GameSettingsScreen from '@app/screens/GameSettingsScreen';
 import PackageScreen from '@app/screens/PackageScreen';
 import PackageCreateScreen from '@app/screens/PackageCreateScreen';
-import TestScreen from '@app/screens/TestScreen';
-import CustomerSelectionScreen from '@app/screens/CustomerSelectionScreen';
+import CalculatorScreen from '@app/screens/CalculatorScreen';
 
 const Navigation: React.FC = () => {
   const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -25,32 +24,27 @@ const Navigation: React.FC = () => {
   return (
     <React.Fragment>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName="Calculator"
         screenOptions={{headerShown: false, gestureEnabled: true}}>
-        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Calculator" component={CalculatorScreen} />
+        <Stack.Screen name="Login" component={LoginPage} />
         <Stack.Screen name="BottomTab" component={BottomTabNavigation} />
         <Stack.Screen name="Settings" component={SettingsScreen} />
         <Stack.Screen name="Notification" component={NotificationScreen} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
         <Stack.Screen name="Language" component={LanguageScreen} />
         <Stack.Screen name="About" component={AboutScreen} />
-        <Stack.Screen name="ResultAddScreen" component={ResultAddScreen} />
         <Stack.Screen name="UserList" component={Userlist} />
+        <Stack.Screen name="ResultAddScreen" component={ResultAddScreen} />
         <Stack.Screen name="UserAddList" component={UserAddList} />
         <Stack.Screen
           name="GameSettingsScreen"
           component={GameSettingsScreen}
         />
-        {/* Package */}
         <Stack.Screen name="PackageScreen" component={PackageScreen} />
         <Stack.Screen
           name="PackageCreateScreen"
           component={PackageCreateScreen}
-        />
-        <Stack.Screen name="Test" component={TestScreen} />
-        <Stack.Screen
-          name="CustomerSelection"
-          component={CustomerSelectionScreen}
         />
       </Stack.Navigator>
     </React.Fragment>
